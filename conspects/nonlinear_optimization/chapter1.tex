@@ -1,0 +1,182 @@
+\section{Differential equations}
+
+Consider differential equality
+\begin{equation}\label{c1:eq}
+\frac{d}{dt}x(t)=\dot x(t)=f(x(t)), \ x(0)=x_0 
+\end{equation}
+
+Where $f:D\rightarrow R^n, \ D\subset R^n$ is open, [here we should explain,
+what means open set].
+
+Solution to \ref{c1:eq} $x:I_{x_0} \rightarrow D, \ t\rightarrow x(t)$ is
+differentiable
+
+Interval existence solution
+
+Questions:
+
+\begin{itemize}[\label=#]
+\item existence of solution
+\item "how large" is $I_{x_0}$
+\item uniquence of solution
+\end{itemize}
+
+
+Usaly we will add some restrictions on $f$ functions, like continuous.
+
+\subsection{Existence of solutions}
+
+%\begin{Definition}
+Function $f:D \rightarrow R^n$ is contiuous at $x' \in D$ if for
+$\each \epsilon > 0 \ \exist \delta>0$ such that for $\each x \in D$,
+$||x-x'||<\delta => ||f(x)-f(x')|| < \epsilon$
+
+Function $f:D \rightarrow R^n$ is continuous on D if it's 
+continuous at $\each x' \in D$
+%\end{Definitions}
+
+%\begin{Theorem}[Piano]
+If $f:D \rightarrow R^n$ continuous, then for each $x_0 \in D$\ 
+$\exist x:(-\epsilon,\epsilon) \rightarrow D, \ \epsilon > 0$
+satisfying (\ref{c1:eq}).
+%\end{Theorem}
+
+Further, given a compact sed $U \subset D$, then 
+$\exist \alpha > 0$ s.t. $\forall x_0 \in U 
+\ \exist x:(-\epsilon,\epsilon) \rightarrow D$ satisfying (\ref{c1:eq}).
+
+
+%\begin{example}
+Consider equation $\dot x(t) = x(t)^2, \ \ x(0)=x_0=0$. Solution 
+$x(t)=-\frac{1}{t-c}, \ \ c=\frac{1}{x_0}$. In this example
+solution exist in interval $(-c, c)$.
+%\end{example}
+
+
+But, what about the number of solutions? Which conditions we should
+add to garanty uniquence of solution?
+
+\subsection{Uniquence of solutions}
+
+%\begin{Definitions}
+Function $f:D \rightarrow R^n$ is locally Lipshitz (continuous???) on D
+if $\forall x \in D$ there is a neighborhood $N(x) \subset D$ and
+$\exist L > 0$ s.t. 
+\begin{equations}[\label{c1:lip}]
+||f(x_1)-f(x_2)|| \le L ||x_1 - x_2|| 
+\end{equations}
+
+For all $x_1,x_2 \in N$.
+%\end{Definitions}
+
+\bigin{itemize}
+\item Lipschiz on $W \in D$ if (\ref{c1:lip}) holds $\forall x_1,x_2 \in W$ 
+(with same L)
+\item globally Lipschitz if (\ref{c1:lip}) holds $\forall x_1, x_2 \in R^n$
+(with same L)
+\end{itemize}
+
+
+We have
+\begin{itemize}[\label=#]
+ \item localy Lipschitz functions are continuous
+ \item differenciable functions are locally Lipschitz
+ \item locally Lipschitz functions are Lipschitz on each compact subset of D
+ 	(Khalil Ex 3.19)
+\end{itemize}
+
+%\begin{Lemma}[Cromwall]
+Suppose that $0 \le \phi(t) \le c + L \int^t_0 \phi(\tau) d \tau$, $c,L > 0$, $\phi$ -- 
+continuous. Then $\phi(t) \le c \exp{Lt}$.
+Proof. $c + L\int^t_0 \phi(\tau) d \tau := \psi(t)$, $\dot \psi(t) = L\phi(t) \le L \psi (t)$.
+
+Consider $\frac{d}{dt} \left(\psi(t) \exp{-LT}\right) = \exp{-Lt}
+\dot \psi(t)-L \psi(t) \left(\right) \le 0$, thus $\psi(t) \exp{-LT}$ is
+decreased, and as a result we have $\phi(t)\exp{-Lt}\le \psi(t)\exp{-Lt}\le \psi(0)=c$ 
+%\end{Lemma}
+
+%\begin{Theorem}[Picard Lindelof]
+If function $f:D \rightarrow R^n$ is localy Lipschitz then for $\forall x_0 \in D$
+\ $\exist ! x:(-\epsilon, \epsilon) \rightarrow D, \ \epsilon > 0$
+satisfying (\ref{c1:eq}).
+
+Proof:
+
+* existance from Piano theorem
+
+Proof of uniqueness
+
+Consider two solutions $x_1(.)$ and $x_2(.)$ to (\ref{c1:eq}). $\dot x_1-\dot x_2=f(x_1)-f(x_2)$,
+$x_1(0)=x_2(0)$. Then we can entegrate equality: 
+$x_1(t)-x_2(t)=\int^t_0 f(x_1(\tau))-f(x_2(\tau)) d\tau$.  
+$|x_1(t)-x_2(t)| \le \int^t_0 |f(x_1(\tau))-f(x_2(\tau))| d\tau \le 
+L \int^t_0 |f(x_1(\tau))-f(x_2(\tau))| d\tau$. Now we can apply Cromwall's lemma with $c=0$
+and $\phi(t)=|x_1(t)-x_2(t)|$, then $\phi(t)\le 0$, then $x_1(t)=x_2(t), \ \forall t 
+\in (-\epsilon,\epsilon)$
+%\end{Theorem}
+
+
+%\begin{example}
+\dot x = 
+\begin{cases} \sqrt{x}, & \mbox{if } x \ge 0 \\ 0, & \mbox{else } x<0 \end{cases}, $x_0 = 0$
+Solutions x(t) = 
+\begin{cases} \frac{1}{4}(t-c)^2, & \mbox{if } t \ge c \ge 0 \\ 0, &\mbox {else} \end{cases}
+%\end{example}
+
+
+Global existance & uniqueness
+\begin{itemize}
+ \item sufficient condition: $f$ globally Lipschitz
+ \item another sufficient condition: solution entirely lies in a coplex set
+ \item forward completeness has equivalent Lyapunov-like characterization: system is
+      forward-complete iff $\exist$ solution $V:R^n \rightarrow R \ge 0$ s.t.
+      $\frac{\partial V}{\partial x} f(x) \le V(x)$, $\forall x \in R^n$
+\end{itemize}
+
+
+\subsection{Lyapunov stability}
+
+If functions $\dot V(x) < 0$, $\forall x \in D\\ \{0\}$, then $x^*$ is
+asymptotically stable.
+
+%\begin{Definition}
+Equilibrium point $x=0$ is stable if $\forall \epsilon > 0\ \exist \delta > 0$
+s.t. from $||x_0|| < \delta$ follows $||x(t)|| \le \epsilon, \ \forall t \ge 0$.
+%\end{Definition}
+
+%\begin{Definition}
+Equilibrium point $x=0$ is asymptotikaly stable if it stable and exist $\delta>0$
+s.t. from $||x_0||<\delta$ follows 
+$\lim_{t\rightarrows \infty}x(t) \rightarrows 0$.
+%\end{Definition}
+
+
+%\begin{Theorem}[Lyapunov's direct method]
+Let $x^*=0 \in D$ be an equilibrium point of (\ref{c1:eq}), i.e., $f(0)=0.$ Let
+$f: D \rightarrow R^n$ is continious. If there exist a differetiable 
+$V:D\rightarrow R$ s.t. 
+\begin{enumerable}
+\item $V(x^*)=0$, $V(x)>0$, $\forall x \in D\\ \{0\}$
+\item $\dot V(x) = \frac{\partial V}{\partial x}f(x) \le 0$, $\forall x \in D$
+\end{enumerable}
+
+then $x^*=0$ is stable.
+
+Proof. Fix compact $U=\{x:V(x)\le c\}$ s.t. $U\in D$. By Piano: exist $\alpha > 0$
+s.t. any solution $x$ with $x_0$ \in U exists at least on the interval
+$[0,\alpha)$.
+
+TODO proof is not full
+
+%\end{Theorem}
+
+Lyapunovs direct method gives us:
+\begin{itemize}
+ \item stability
+ \item convergence (if V<0)
+ \item subset of the region of attraction (all compact $U=\{x:V(x)\le c\} \in D$)
+ \item existance of solution for all times
+\end{itemize}
+
+ 
+
