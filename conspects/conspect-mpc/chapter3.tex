@@ -1,0 +1,163 @@
+\chapter{Quasi - infinite horizon MPC}
+
+Goal: Relax (restrictive) zero-terminal zero-terminal constraint
+
+Idea: terminal region + local CLF(controller Lyapunov functiom)
+
+MPC optimization problem: At time $t$
+\begin{equation*}
+\min_{\bar u(\cdot;t)} J(x(t),\bar u(\cdot;t)) = \int_t^{t+T}L(\bar x(\tau;t), \bar u(\tau;t))d\tau + F(\bar x(t+T;t)) 
+\end{equation*}
+
+$F(\bar x(t+T;t))$ - terminal cost
+
+s.t.
+
+\begin{equation*}
+\dot{\bar x} = f(\bar x, \bar u), \bar x(t;t) = x(t)
+\end{equation*}
+\begin{equation*}
+\bar x(t;t) \in X \ \bar u(t;t) \in U \ \forall \tau \in [t,t+T]
+\end{equation*}
+\begin{equation*}
+\bar x(t+T;t) \in X^f
+\end{equation*}
+
+$X^f$ - terminal region
+
+Optimal solution: $\bar u^*(\cdot, t), \ J^*(x(t))$
+
+Assumption 1: Terminal region + terminal controller
+
+There exists an auxilary local controller $u = k^{loc}(x)$ s.t.
+\begin{enumerate}
+\item $X^f$ is positively invariant $\dot x = f(x,k^{loc}(x))$
+\item $k^{loc}(x) \in U \ \forall x \in X^f$
+\item $\dot F(x) + L(x, k^{loc}(x)) \leq 0 \ \forall x \in X^f$
+\end{enumerate}
+
+$\Rightarrow$ F is local control-Lyapunov function.
+
+Theorem.
+
+Suppose Assumption 1 holds and MPC problem is feasible at $t=0$. Then:
+\begin{itemize}
+\item recursive feasibility
+\item closed-loop is asymptotically stable
+\end{itemize}
+
+Proof.
+\begin{enumerate}
+\item Recursive feasibility by induction 
+\begin{itemize}
+\item feasible at $t=0$ by assumption
+\item assume feasibility at $t$
+\end{itemize}
+candidate 
+\begin{equation*}
+\bar u(\tau; t+\delta) =
+\left \{
+  \begin{tabular}{c}
+  $\bar u^*(\tau;t) \ \tau \in [t, t+ T]$ \\
+  $k^{loc}(\bar x(\tau;t+\delta)) \ \tau \in [t+T, t+\delta+T]$ 
+  \end{tabular}
+  \right.
+\end{equation*}
+$\Rightarrow$ this is a feasible solution at $t+\delta$
+\item asymptotic stability
+\begin{equation*}
+J^*(x(t+\delta)) - J^*(x(t)) \leq J(x(t+\delta), \bar u(\cdot;t+\delta)) - J^*(x(t)) =
+\end{equation*}
+\begin{equation*}
+\int_{t+\delta}^{t+ \delta +T} L(\bar x(\tau;t+\delta), \bar u(\tau;t+\delta)) d\tau + F(\bar x(t+\delta+ T;t+\delta)) -
+\end{equation*}
+\begin{equation*}
+- \int_{t}^{t+T}L(\bar x^*(\tau;t),\bar u^*(\tau;t))d\tau - F(\bar x^*(t+T;t)) =
+\end{equation*}
+\begin{equation*}
+= \int_{t+T}^{t+\delta+T}L(\bar x(\tau;t+\delta), k^{loc}(\bar x(\tau;t+\delta)))d\tau + F(\bar x(t+\delta+T;t+\delta)) -
+\end{equation*}
+\begin{equation*}
+- \int_t^{t+\delta}L(\bar x^*(\tau;t), \bar u^*(\tau;t))d\tau - F(\bar x^*(t+T;t)) \leq
+\end{equation*}
+As far as from Assumption 1.3 we have the sum of three terms is $\leq 0$
+\begin{equation*}
+-\int_t^{t+\delta}L(\bar x^*(\tau;t),\bar u^*(\tau;t))d\tau
+\end{equation*}
+$\Rightarrow J^*(x(\infty)) \leq J^*(x(0)) - \int_0^{\infty}L(x_{MPC}(\tau), u_{MPC}(\tau))d\tau$
+From here: some steps as in zero-terminal constraint rose. 
+\end{enumerate}
+
+How can Assumption 1 be satisfied?
+
+Assume:
+\begin{itemize}
+\item quadratic state cost $L(x,u) = x^TQx + u^TRu, \ Q,R >0$
+\item linearization at the origin is stabilizable 
+$\dot x = Ax+Bu \ A = \frac{\partial F}{\partial x}(0,0) \ B = \frac{\partial F}{\partial u}(0,0)$
+\end{itemize} 
+
+Approach: 
+\begin{itemize}
+\item Linear auxiliary controller $k^{loc}(x)=Kx$
+\item Quadratic terminal cost function $F(x) = x^TPx$, $P > 0$
+\item Terminal region $X_{\alpha}^f = \{x \in \mathbb{R}^n | x^TPx \leq \alpha\}$ for some $\alpha > 0$
+\item Determine $P,K,\alpha$ s.t. Assumption 1.1-1.3 hold:
+\end{itemize}
+For (Assumption 1.3):
+\begin{equation*}
+\frac{d}{dt}x(t)^TPx(t) \leq - x(t)^t(Q + K^TRK)x(t) = - x(t)^TQ^*x(t)
+\end{equation*}
+[$x^TQx + u^TRu = [u=Kx] = x^T(Q+K^TRK)x)$]
+\begin{equation*}
+\frac{d}{dt}x(t)^TPx(t) = f(x,Kx)^TPx + x^TPf(x,Kx)
+\end{equation*}
+[$f(x,Kx) = (A+BK)x+\phi(x), A+BK = A_K$, $K$ is chosen s.t. $A_BK$ is Hurwitz]
+
+Upper bound for $x^TP\phi(x)$:
+$L_{\phi} := sup\{ \frac{|\phi(x)|}{|x|}, x \in X_{\alpha}^{f}, x \neq 0\}$
+\begin{equation}\label{nonlinearity_inequality}
+x^TP\phi(x) \leq |x^TP| |\phi(x)| \leq \| P\| L_{\phi} |x|^2 \leq \frac{\|P\|L_{\phi}}{\lambda_{min}(P)}x^TPx
+\end{equation}
+
+We choose $\alpha$ small enough s.t. 
+\begin{equation}\label{alpha_choice}
+L_{\phi} \leq \frac{k \lambda_{min}(P)}{\|P\|} 
+\end{equation}
+for some $k > 0$. Plug this into (\ref{nonlinearity_inequality}): $x^TP\phi(x) \leq kx^TPx$. Insert this into $\frac{d}{dt}x^TPx \leq x^T(A_KP + PA_K)x + 2kx^TPx$
+\begin{equation*}
+= x^T((A_K + kI)^TP + P(A_K+kI))x
+\end{equation*}
+ensure that it $\leq - x^TQ^*x$
+
+$\Rightarrow$ Lyapunov equation which can be solved if any only if $A_K + kI$ is Hurwitz 
+\begin{equation}\label{k_choice_inequality}
+\Leftrightarrow k < - max\ Re \{ \lambda(A_K)\}
+\end{equation}
+
+\begin{equation}\label{lyapunov_equation}
+\Rightarrow\ (A_K + kI)^TP + P(A_K + kI) = - Q^*
+\end{equation}
+
+Design procedure 
+\begin{enumerate}
+\item Compute $K$ s.t. $(A+BK)$ is Hurwitz 
+\item Choose $k > 0$ s.t. (\ref{k_choice_inequality}) and solve (\ref{lyapunov_equation})
+\item Find largest possible $\alpha_1$ s.t. $Kx \in U, \ \forall x \in X^f_{\alpha}$ 
+\item Find the largest $\alpha \in (0,\alpha_1]$ s.t. (\ref{alpha_choice}) holds
+\end{enumerate}
+
+Alternative to the (4) step
+
+Solve optimization problem 
+\begin{equation}
+\max_{x} x^TP\phi(x) - kx^TPx s.t. \ x^TPx \leq \alpha
+\end{equation}
+
+Iterate this by reducing $\alpha$ from $\alpha_1$ until optimal value of (4) is nonpositive
+
+Degrees of freedom in design
+\begin{itemize}
+\item calculation of $K$
+\item choice of $k$ - tradeoff between "large" terminal region and "large" $P$
+\end{itemize}

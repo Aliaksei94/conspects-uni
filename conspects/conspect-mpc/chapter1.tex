@@ -1,0 +1,41 @@
+\chapter{MPC}
+Formulation of control problem
+\begin{equation}
+\left \{
+  \begin{tabular}{c}
+  $\dot x = f(x,u)$ \\
+  $x(0) = x_0$ \\
+  $y = h(x)$
+  \end{tabular}
+  \right. 
+\end{equation}
+Objective of MPC:
+
+Find stabilizing control strategy that:
+\begin{itemize}
+\item minimize objective function: $J = \int_{t}^{\infty}F(x(\tau),u(\tau))d\tau$
+\item satisfies constraints:
+$u(\tau) \in U \  x(\tau) \in X$
+\end{itemize}
+
+Closed-loop optimal control vs Open-loop optimal control
+
+Closed-loop:
+
+Feedback $u=k(x)$ 
+\begin{itemize}
+\item + Feedback present
+\item + suit for uncertainty disturbances
+\item - Finding closed solution hardly possible
+\end{itemize}
+
+Open-loop optimal control:
+
+Input trajectory $u = u(t, x_0)$
+\begin{itemize}
+\item + Computation often feasible
+\item - No feedback
+\item - Don't know much about system
+\end{itemize}
+
+MPC - repeated open-loop optima; control in feedback fashion.

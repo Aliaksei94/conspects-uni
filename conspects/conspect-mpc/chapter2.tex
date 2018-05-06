@@ -1,0 +1,153 @@
+\chapter{Zero-terminal constraint MPC}
+
+Mathematical formulation of NMPC problem:
+
+System dynamics: $\dot x = f(x,u) \ x(0) = x_0 \ x,u \in \mathbb{R}^n$
+
+Constraints: $x(t) \in X \ u \in U \ \forall t \geq 0$
+
+Assumptions:
+\begin{itemize}
+\item $f(0,0) \Rightarrow x_1=0 $- equilibrium point for $u_1 = 0$
+\item $f: \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^n$ - twice continuously differentiable
+\item $U$ is a compact set (closed and bounded)
+\item $X$ is a connected and closed set
+\item $(0,0) \in int(X \times U)$ 
+\end{itemize}
+
+MPC optimization problem:
+
+At time $t$, given initial state $x(t)$
+\begin{equation*}
+\min_{\bar u(\cdot,t)} J(x(t),\bar u(\cdot ;t))
+\end{equation*}
+with $J(x(t),\bar u(\cdot;t)) = \int_{t}^{t+T}L(\bar x(\tau;t),\bar u(\tau;t))d\tau$
+
+s.t.
+
+\begin{equation*}
+\dot{\bar x} = f(x,u), \bar x(t;t) = x(t)
+\end{equation*}
+\begin{equation*}
+\bar u(\tau;t) \in U, \bar x(\tau;t) \in X, \  \forall \tau \in [t, t +T] 
+\end{equation*}
+\begin{equation*}
+\bar x(t+T;t) = 0
+\end{equation*}
+
+Optimal open-loop solution: 
+\begin{equation*}
+\bar u^* (\cdot;t) = arg min_{\bar u(\cdot;t)} J(x(t), \bar u(\cdot; t))
+\end{equation*}
+
+Notation:
+\begin{itemize}
+\item Quantities without bar: real system trajectories
+\item Quantities with bar: predicted trajectories
+\item $L$-stage cost
+\item $(\cdot;t)$ - predicted at time $t$
+\item $T$ - prediction horizon
+\item Optimal value function $J^*(x(t)) = J(x(t), \bar u^*(t))$
+\end{itemize}
+
+Real trajectories deviate from predicted one!
+
+Assumptions:
+\begin{itemize}
+\item $L: \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}$ is continuous and 
+\begin{equation}
+\left \{
+  \begin{tabular}{c}
+  $L(0,0)=0$ \\
+  $L(x,u) > 0$ \\
+  $\forall (x,u) \neq (0,0)$
+  \end{tabular}
+ \right.
+\end{equation}
+\item $J^*(x)$ is continuous at $x=0$
+\end{itemize}
+
+MPC algorithm:
+\begin{enumerate}
+\item At sampling time $t$, measure $x(t)$ and solve MPC optimization problem 
+\item Apply $u_{MPC}(\tau) = \bar u^*(\tau, t) \forall t \in [t, t+\delta)$ with sampling time $\delta$
+\item Set $t := t + \delta $ and go to step 1
+\end{enumerate}
+
+Feasibilty: The MPC problem is feasible at time $t$ if there exists at least one $\bar u(\cdot; t)$ s.t. constraints satisfied.
+
+Theorem:
+
+Suppose that 
+\begin{itemize}
+\item (i) assumptions are satisfied 
+\item (ii) and that zero-terminal constraint MPC problem is feasible at $t = 0$
+\end{itemize}
+Then: 
+\begin{itemize}
+\item MPC problem is recursively feasible 
+\item resulting closed-loop system is asymptotically stable 
+\end{itemize}
+
+Let $D \subset \mathbb{R}^n$ be the et of all points for whih (ii) holds. The $D$ is a region of attraction for the closed loop.
+
+Proof.
+\begin{enumerate}
+\item recursive feasibility: by induction
+\item 
+\begin{itemize}
+\item feasible at $t=0$ by assumption
+\item assume: feasibility at $t$. Consider the candidate solution:
+\begin{equation*}
+\bar u(\tau; t+\delta) =
+\left \{
+  \begin{tabular}{c}
+  $\bar u^*(\tau;t) \ \tau \in [t+\delta, t+ T]$ \\
+  $0 \ \tau \in [t+T, t+\delta+T]$ 
+  \end{tabular}
+  \right.
+\end{equation*}
+\end{itemize}
+\item asymptotic stability
+
+Idea: use $J^*(x(t))$ as "Lyapunov function"
+
+Consider: 
+\begin{equation*}
+J(x(t+\delta), \bar u(\cdot;t+\delta)) = \int_{t+\delta}^{t+\delta + T} L(\bar x(\tau;t+\delta), \bar u(\tau; t+\delta))d\tau=
+\end{equation*} 
+\begin{equation*}
+= \int_{t+\delta}^{t+T}L(\bar x^*(\tau;t), \bar u^*(\tau;t))d\tau + \int_{t+T}^{t+\delta+T}L(0,0)d\tau (=0) = 
+\end{equation*}
+\begin{equation*}
+= J^*(x(t)) - \int_{t}^{t+\delta} L(\bar x^*(\tau;t), \bar u^*(\tau;t))d\tau
+\end{equation*}
+by optimality 
+\begin{equation*}
+J^*(x(t+\delta)) \leq J(x(t+\delta), \bar u(\cdot;t+\delta)) \leq J^*(x(t)) - \int_{t}^{t+\delta} L(\bar x^*(\tau;t), \bar u^*(\tau;t))d \tau
+\end{equation*}
+by induction
+\begin{equation*}
+J^*(x(\infty)) (\geq 0) \leq J^*(x(0)) (finite) - \int_0^{\infty}L(x_{MPC}(\tau), u_{MPC}(\tau))d\tau
+\end{equation*}
+\end{enumerate}
+
+Barbalat's lemma:
+
+$\phi$ uniformly continuous $\phi: \mathbb{R} \to \mathbb{R}_{\geq 0}$
+\begin{equation*}
+\lim_{t \to \infty} \int_0^t \phi(\tau)d\tau < \infty \Rightarrow \phi(t)\to 0, t \to \infty
+\end{equation*}
+From Barbalat's lemma
+$L \to 0 $ when $t \to \infty \Rightarrow $ L pos.def. $\|x_{MPC}(t)\| \to 0$ when $t \to \infty \Rightarrow$ convergence
+
+Lyapunov stability: using standard arguments ($J^*$ is continuous at $x=0$)
+
+Lessons learned:
+\begin{itemize}
+\item feasibility $\Rightarrow$ stability
+\item value function is Lyapunov function
+\item have to prove recursive feasibility
+\item suboptimal solution is sufficient for stability  
+\end{itemize}
+

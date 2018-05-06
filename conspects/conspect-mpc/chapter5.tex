@@ -1,0 +1,130 @@
+\chapter{Robust MPC}
+
+Consider linear (discrete-time) sytem:
+$x(t+1) = Ax(t) + Bu(t) + w(t)$
+in short $x^+=Ax+Bu+w$
+
+Constraints: $x(t) \in X, u(t) \in U, \forall t = 0,1...$
+
+Bound on $w$:
+$W$ is a compact,convex set which contains $0$. $w(t) \in W \forall t =0,1,...$
+
+Main idea:
+Use additional error feeedback s.t. real systems state contained in a "tube" around some nominal system state.
+
+Repetition of QI-MPC in discrete time:
+Nominal system:
+\begin{equation*}
+z^+ = Az+Bv
+\end{equation*}
+
+At time $t$, given $z(t)$, solve 
+\begin{equation*}
+\min_{v(\cdot | t)} \hat J(z(t),v(\cdot|t)) = \sum_{i=t}^{t+N-1}L(z(i|t),v(i|t)) + F(z(t+N|t))
+\end{equation*} 
+
+s.t. 
+\begin{equation*}
+z(i+1|t) = Az(i|t)+Bv(i|t), z(t|t) = z(t)
+\end{equation*}
+\begin{equation*}
+z(i|t) \in Z, v(i|t) \in V, t \leq i \leq t+N-1
+\end{equation*}
+\begin{equation*}
+z(t+N|t) \in Z^f \subseteq Z
+\end{equation*}
+
+$\Rightarrow$ optimizer $V^*(\cdot|t)$, optimal value function $\hat J^*(z(t))$
+
+Assumption 1:
+\begin{itemize}
+\item Cost is quadratic $L(z,v) = z^TQz + v^tRv, Q,R > 0$
+\item There exists a local auxiliary controller $k^{loc} = Kx$ s.t.
+\begin{enumerate}
+\item $Z^f$ is invariant with $Z^+=(A+BK)z$, $A_k = A+BK$, i.e. $A_kZ^f \subseteq Z^f$
+\item $Kz \in V \forall z \in Z^f$
+\item $F(A_kz)-F(z) \leq - L(z,Kz) \forall z \ in Z^f$
+\end{enumerate}
+\end{itemize}
+
+From Assumption 1 it follows (as in continuous time) that 
+
+\begin{equation*}
+\hat J^*(z(t+1)) - \hat J^*(z(t)) \leq - L(z(t), v_{MPC}(t))
+\end{equation*}
+Since $L$ is quadratic, there exists constants $c_2 > c_1 > 0$ s.t. $\forall z \in Z_N $ - feasible set
+\begin{enumerate}
+\item $c_1|z|^2 \leq \hat J^*(z)$
+\item $\hat J^*(z^+) - \hat J^*(z) \leq - c_1 |z|^2$
+\item $\hat J^*(z) \leq c_2|z|^2$
+\end{enumerate}
+
+Why is (3) true?
+
+From Assumption 1.3 $\forall z \in Z^f$
+\begin{equation*}
+\hat J^*(z) \leq \hat J(z,Kz(\cdot)) = \sum_{i=1}^{N-1}L(z(i),Kz(i)) + F(z(N)) \leq 
+\end{equation*}
+N times apply Assumption 1.3
+\begin{equation*}
+\leq F(z) = z^TPz \leq \lambda_{max}(P)|z|^2
+\end{equation*}
+
+Influence of disturbance:
+Definition.
+
+Mainkowski set addition: 
+\begin{equation*}
+A,B \subseteq \mathbb{R}^n A \oplus B = \{ a+b | a \in A, b\in B\}
+\end{equation*}
+
+Pontryagin set difference:
+\begin{equation*}
+A, B \subseteq \mathbb{R}^n A \ominus B = \{ a \in \mathbb{R}^n| a+b \in A, \forall b \in B\}
+\end{equation*}
+\begin{equation*}
+(A \ominus B) \oplus B \subseteq A
+\end{equation*}
+\begin{equation*}
+A \subseteq (A \oplus B) \ominus B
+\end{equation*}
+
+Definition.
+Robust positively invariant set (RPI set):
+
+$S$ is RPI set for $x^+=Ax+w$ if $AS \oplus W \subseteq S$ (or equivalently $Ax+w \in S \forall x \in S, \forall w \in W$)
+
+Example:
+
+$x^+ = 0.5x + w$. $w \in [-5,5]$. So RPI set: $S = [-20, 20]$, minimal RPI set: $S = [-10,10]$
+
+Minimal RPI set:
+\begin{equation*}
+S_{\infty} = \sum_{i = 0}^{\infty} A^iw
+\end{equation*}
+(Minkowski set addition), min. RPI set exists and is bounded if $A$ is Schour table.
+
+Why?
+
+Current state at time $t$ is $x$,
+
+possible states at time $t+1$: $Ax \oplus W$
+                        
+$t+2$: $A(Ax \oplus W) \oplus W = A^2x \oplus AW + w$
+  
+       ........
+        
+$t+j$: $A^jx \oplus \sum_{k=0}^{j-1}A^kw$
+
+$\Rightarrow$ by choosing $j$ large enough we can reach any state in $S_{\infty}$
+
+$\Rightarrow$ any RPI set must satisfy $S_{\infty} \subseteq S$
+
+Remains to show: $S_{\infty}$ is an RPI set
+\begin{equation*}
+AS_{\infty} \oplus W = A\sum_{i=0}^{\infty}A^iw \oplus W = \sum_{i=1}^{\infty}A^iw \oplus W = S_{\infty} 
+\end{equation*}
+
+$S_{\infty}$ in  general is difficult to compute 
+
+$\Rightarrow$ can compute invariant outer approximations of $S_{\infty}$ (with bounded complexity)
