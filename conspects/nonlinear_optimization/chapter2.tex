@@ -4,7 +4,7 @@ In this section we consider function $f:R\times D\rightarrow R^n$,
 where $D \subseteq R^n$, and $D$ is open.
 
 \begin{equation}\label{c2:eq}
- \dot x(t)=f(t,x(t)), \ \ t\ge \t_0\ge 0,\ \ x(t_0)=x_0
+ \dot x(t)=f(t,x(t)), \ \ t \ge t_0 \ge 0,\ \ x(t_0)=x_0
 \end{equation} 
 
 The origin $x^* \in D$ is an equilinrium point for (\ref{c2:eq}),
@@ -16,9 +16,9 @@ solution.
 Suppose $\overline{y}$ is a solution of $\dot y = g(t, y)$.
 
 Change of coordinates: $x(t)=y(t)-\overline{y}(t)$, then
-$\dot x(t) = \dot y(t)-\dot\overline{y}(t)=
-g(t, x(t)+\overline{y}(t)) - \dot\overline{y}(t):=f(t,x(t))$.
-Since $\dot\overline{y}(t)=g*t,\overline{y}(t))$, then
+$\dot x(t) = \dot y(t)-\dot{\overline{y}}(t)=
+g(t, x(t)+\overline{y}(t)) - \dot{\overline{y}}(t):=f(t,x(t))$.
+Since $\dot{\overline{y}}(t)=g*t,\overline{y}(t))$, then
 $f(t,0)=0,\ \forall t \ge 0$.
 
 Existance and uniquence of solution to (\ref{c2:eq}):
@@ -82,21 +82,21 @@ Consider next equation:
  Point $x^*=0$ is globaly uniformly asymptotically stable if it is uniformly stable
  with $\delta \to \infty$ for $\epsilon \to \infty$ and $\forall c,\eta\ \ $ 
  $\exists T>0$ such that $\forall t_0\ge0$ from $||x_0||<c$ follows 
- $||x(t)||<\eta$, $\forallt \ge t_0 + T$.
+ $\|x(t)\|<\eta$, $\forall t \ge t_0 + T$.
 %\end{Definition}
 
 
 \subsection{Lyapunov's direct method}
 
 Consider some function $V:[0,\infty)\times D\to R$, $(t,x)\to V(t,x)$ such that
-$\dot V(t,x)=\frac{\partion}{\partion t}V(t,x)+\frac{\partion}{\partion x}V(t,x) f(t,x)$.
+$\dot V(t,x)=\frac{\partial}{\partial t}V(t,x)+\frac{\partial}{\partial x}V(t,x) f(t,x)$.
 
 %\begin{Theorem}[Lyapunov's direct method]
  Let $f:[0,\infty)\times D\to R^n$ is continuous and let $x^*=0$ be equilibrium point.
  If there is a differentiable function $V:[0,\infty)\times D\to R$ with:
  \begin{itemize}
   \item $W_1(x) \le V(t,x) \le W_2(x)$, $\forall t\ge0,\ x\in D$
-  \item $\dot V(t,x)\le 0$, $\forall t\ge0,\ x\in D$
+  \item $\dot V(t,x)\le 0$, $\forall t \ge0,\ x\in D$
  \end{itemize}
  where $W_1,W_2:D \to R$ continuous and positive definite, then $x^*=0$ is uniformly stable.
 
@@ -120,15 +120,15 @@ $\dot V(t,x)=\frac{\partion}{\partion t}V(t,x)+\frac{\partion}{\partion x}V(t,x)
 
 %\begin{Definition}
  Point $X^*=0$ is an exponentially stable EP of (\ref{c2:eq}) if $\exists \lambda,c,k>0$
- s.t. $t \ge t_0 \ge 0$ and all $||x_0||<c$ follows
- $||x(t)||\le K||x(t_0)||\exp{\lambda(t-t_0)}$.
+ s.t. $t \ge t_0 \ge 0$ and all $\|x_0\|<c$ follows
+ $\|x(t)\|\le K\|x(t_0)\|e^{\lambda(t-t_0)}$.
 %\end{Definition}
 
 Remark: from exponential stability follows uniformly asymptoticaly stability.
 
 %\begin{Lemma}[Auxilarity result]
  Let $\dot x(t)=f(t,x(t))$, f scalar and $\dot \xi(t)\le f(t, \xi(t)$ with 
- $\xi(t_0)\le x(t_0)$. Then $\xi(t)\lex(t)\ \ \forall t\ge t_0$.
+ $\xi (t_0)\le x(t_0)$. Then $\xi (t) \le x(t)\ \ \forall t\ge t_0$.
 %\end{Lemma}
 
 %\begin{Theorem}
@@ -137,13 +137,13 @@ Remark: from exponential stability follows uniformly asymptoticaly stability.
  If there is a differentiable function $V:[0,\infty)\times D \to R$ and constants
  $k_1,k_2,k_3,a > 0$ s.t.
  \begin{enumerate}
-  \item $k_1||x||^a \le V(t,x) \le k_2||x||^a$, $\forall t\ge 0, \ x\in D$
-  \item \dot V(t,x) \le -k_3||x||^a
+  \item $k_1||x||^a \le V(t,x) \le k_2\|x\|^a$, $\forall t\ge 0, \ x\in D$
+  \item $\dot V(t,x) \le -k_3\|x\|^a$
  \end{enumerate}
 
  then $x^*=0$ is exponentially stable.
 
- If $D=R^n$, then $X^*$ is globally exponentiall stable.
+ If $D=R^n$, then $X^*$ is globally exponential stable.
 
  Proof. For $c>0$ small enough, trajectories initialized in $\{x:k_2||x||^a<c\}$
  remain bounded and in D. From 1) and 2) we can conclude 
@@ -221,9 +221,9 @@ Now we conseider comparsion funcctions and stability definitions.
  $\exists \beta\in KL$ and $c>0$ s.t. $\forall t \ge t_0$,
  $\forall ||x(t_0)||<c$ and $||x(t)|| \le \beta(||x(t_0)||, t-t_0).$ 
 
- Proof. (only sufficiency) Let $||x(t_0)||<c$. Then 
- $||x(t)|| \le \beta(||x(t_0)||, t-t_0) < \beta(c,t-t_0)$. This mean uniform convergence.
- $||x(t)||\le\beta(||x(t_0)||, t-t_0)<\beta(||x_t_0||, 0)$. This gives us uniform
+ Proof. (only sufficiency) Let $\|x(t_0)\|<c$. Then 
+ $\|x(t)\| \le \beta(\|x(t_0)\|, t-t_0) < \beta(c,t-t_0)$. This mean uniform convergence.
+ $\|x(t)\| \le \beta(\|x(t_0)\|, t-t_0)<\beta(\|x_{t_0}\|, 0)$. This gives us uniform
  stability.
 %\end{Lemma}
 
@@ -235,7 +235,7 @@ Now we conseider comparsion funcctions and stability definitions.
 
  Proof. (only sufficiency) Let $||x(t_0)||<c$. Then 
  $||x(t)|| \le \beta(||x(t_0)||, t-t_0) < \beta(c,t-t_0)$. This mean uniform convergence.
- $||x(t)||\le\beta(||x(t_0)||, t-t_0)<\beta(||x_t_0||, 0)$. This gives us uniform
+ $||x(t)||\le\beta(||x(t_0)||, t-t_0)<\beta(||x_{t_0}||, 0)$. This gives us uniform
  stability.
 %\end{Lemma}
 
@@ -246,8 +246,8 @@ Now we conseider comparsion funcctions and stability definitions.
 
 Now consider comparsion functios and Lyapunov functions
 
-If $W:R^n \ro R$ is continuous and positive definite, then $\forall r>0\ $
-$\exists \alpha_1, \alpha_2 \in K$ s.t. $\alpha_1(||x||) \le W(x)\le\alpha_2(|x||)$ for 
+If $W:R^n \to R$ is continuous and positive definite, then $\forall r>0\ $
+$\exists \alpha_1, \alpha_2 \in K$ s.t. $\alpha_1(||x||) \le W(x)\le \alpha_2(|x||)$ for 
 all $x\in B_r(0)=\{x|||x||\le r\}$.
 
 If $W$ is radially unbounded, then $\exists \alpha_1,\alpha_2\in K_\infty$ s.t.
@@ -259,11 +259,13 @@ $\alpha_1(||x||) \le W(x)\le\alpha_2(|x||)$ for all $x\in R^n$.
 %\end{Lemma}
 
 Sketch of proof of Lyapunov's direct method:
-
+\begin{equation*}
 \begin{cases}
  W_1(x)\le V(t,x) \le W_2(x) \\
  \dot V \le -W_3(x)
 \end{cases}
+\end{equation*}
+
 
 Where $W_1, W_2, W_3$ -- continuous and positive defined.
 
@@ -290,7 +292,7 @@ $\bar{\beta}\in KL$.
 \subsection{Converse theorems}
 
 %\begin{Theorem}
- Let $X^*=0$ be an EP of $\dot x(t)=f(t,x(t))$ with $f:[o,\infty)\timesR^n\to R^n$
+ Let $X^*=0$ be an EP of $\dot x(t)=f(t,x(t))$ with $f:[0,\infty)\times R^n \to R^n$
  continously differentiable and $\frac{\partial f}{\partial x}$ bounded in $R^n$,
  uniformly in t ($||\frac{\partial f}{\partial x}(t,x)||\le L$ for all 
  $x\in R^n,\ t\ge 0,\ L>0$.
