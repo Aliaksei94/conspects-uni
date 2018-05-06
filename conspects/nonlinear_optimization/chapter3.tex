@@ -1,0 +1,87 @@
+\section{System with inputs}
+
+Consider equation:
+
+\begin{equation}\label{c3:eq}
+ \dot x(t)=f(x(t),u(t)), \ \ x(0)=x_0
+\end{equation}
+
+where $f:R^n\to R^n$.
+
+Assumption: $f$ in localy Lipschitz.
+
+Exageneous signa $u:R\to R^n$.
+
+Input can be "bad" (disturbance) or "good" (control).
+
+\subsection{Input-to-state stability}
+
+Motivation: LTI system $\dot x=Ax+Bu, \ \ x(0)=x_0$.
+
+Solution: $x(t)=e^{At}x_0+\int_0^t e^{A(t-\tau)}Bu(\tau) d\tau$.
+If A is Hurwitz, then $||e^{At}||\le c e^{-\lambda t}$ for some $c,\lambda>0$.
+
+How large can x grow for some bounded $u$? 
+$||x(t)||\le$
+$||e^{At}|| ||x_0||+\int_0^t||e^{A(t-\tau)}|| ||B|| ||u(\tau)|| d\tau\le$
+$e^{-\lambda t}c||x_0||+\int_0^t e^{-\lambda(t-\tau)}c||B|| ||u(\tau)|| d\tau =$
+$c e^{-\lambda t}||x_0||+(1-e^{-\lambda t})$
+$\frac{c}{\lambda}||B||\sup_{\tau\in[0,t]} ||u(\tau)||$.
+
+\begin{itemize}
+ \item $c e^{-\lambda t}||x_0||$ class $KL$ in $(||x_0||,t)$
+ \item $(1-e^{-\lambda t})$ less than $1$
+ \item $\frac{c}{\lambda}||B||\sup ||u(\tau)||$ class $K$ 
+\end{itemize}
+
+If $\sup_{\tau\in[0,t]} ||u(\tau)||$ is bounded than $\dot x$ remains bounded.
+Even more: the smaller $\sup_{\tau\in[0,t]} ||u(\tau)||$, the smaller $||x(t)||$.
+
+%\begin{Definition}
+ System (\ref{c3:eq}) is input-to-state stable (ISS) if $\exists \beta\in KL$,
+ $\gamma\in K$ s.t. $\forall x_0\in R^n$, $\forall t \ge 0$ follows 
+ $||x(t)||\le\beta(||x_0||, t)+\gamma(\sup_{\tau\in[0,t]} ||u(\tau)||)$.
+%\end{Definition}
+
+Remarks:
+
+\begin{itemize}
+ \item From ISS follows O-GAS (global assymptotical stability of $x=0$ for
+   $\dot x=f(x,0)$
+ \item $\gamma$ can be interpreted as "gain" w.r.t. $u$
+ \item if $\lim_{t\to\infty} u(t)=0$ then $\lim_{t \to\infty}x(t)=0$
+\end{itemize}
+
+%\begin{Example}
+ Consider equation $\dot x = -x+xu$. System is O-GASS, not ISS (for example
+ $u\equiv\alpha \Rightarrow \dot x = x$ all solution diverge).
+%\end{Example}
+
+%\begin{Example}
+ Consider equation $\dot x =-3x+(1+2x^2)u$. System is O-GASS, not ISS (for example 
+ $u\equiv1$, $x_0=2$, $x(t)=\frac{3-e^{t}}{3-2e^{t}}$ has a finite escape time.
+%\end{Example}
+
+%\begin{Theorem}
+ Suppose that there exists a continuously differentiable function 
+ $V:R^n\to R$ and $\alpha_1,\alpha_2\in K_\infty$ and $\alpha_3, \rho \in K$
+ such that $\alpha_1(||x||)\le V(x)\le\alpha_2(||x||)$, $\forall x\in R^n$ and
+ $\frac{\partial V}{\partial x}f(x,u)\le-\alpha_3(||x||)$,
+ $\forall x: ||x||\ge\rho(||x||)$. Then (\ref{c3:eq}) is ISS with 
+ $\gamma = \alpha_1^{-1} \circ \alpha_2\circ\rho$
+
+ Proof. Idea: same as Lyapunovs direct method when $x$ is "outside" of ball
+ $\{x | ||x||\le\rho(||x||)\}$
+
+ TODO Picture
+%\end{Theorem}
+
+
+%\begin{Example}
+ Consider equality $\dot x = -x^3+u$. Let $V(x)=\frac{1}{2}x^2$, then
+ $\dot V = -x^4+xu=[0<\Theta<1]=-(1-\Theta)x^4-\Theta x^4+xu\le$
+ $-(1-\Theta)x^4$ for all $x: ||x||\ge\left(\frac{||u||}{\Theta}\right)^\frac{1}{3}$.
+ Thus, system is ISS with 
+ $\gamma(v)=\rho(v)=\left(\frac{V}{\Theta}\right)^\frac{1}{3}$.
+%\end{Example}
+
