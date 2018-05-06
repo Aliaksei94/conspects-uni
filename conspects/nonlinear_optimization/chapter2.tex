@@ -31,43 +31,43 @@ Existance and uniquence of solution to (\ref{c2:eq}):
 
 Now we need new stability definitions.
 
-%\begin{Definition}
+\begin{Definition}
  Point $x^*=0$ is stable if $\forall \epsilon > 0$ and 
  $\forall t_0 \ge 0,\ \exists \delta>0$ s.t. from $||x_0||<\delta$
  follows $||x(t)|| < \epsilon$, $\forall t  \ge t_0$.
-%\end{Definition}
+\end{Definition}
 
-%\begin{Definition}
+\begin{Definition}
  Point $x^*=0$ is uniformly stable if $\forall \epsilon > 0\ $  
  $\exists \delta>0$, s.t $\forall t_0 \ge 0,$ from $||x_0||<\delta$
  follows $||x(t)|| < \epsilon$, $\forall t  \ge t_0$.
-%\end{Definition}
+\end{Definition}
 
-%\begin{Definition}
+\begin{Definition}
  Point $x^*=0$ asymptoticaly stable if it is stable and $\forall t_0 \ge 0\ $  
  $\exists c>0$, s.t from $||x_0||<c$
  follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
-%\end{Definition}
+\end{Definition}
 
-%\begin{Definition}
+\begin{Definition}
  Point $x^*=0$ uniformly asymptoticaly stable if it is uniformly stable and 
  $\exists c>0$, s.t $\forall t_0 \ge 0\ $ from $||x_0||<c$
  follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
-%\end{Definition}
+\end{Definition}
 
 
-%\begin{Definnition}
+\begin{Definition}
  Convergence: $\forall \eta > 0 \ \ \forall t_0 \ge 0$, $\exists T>0$ such
  that $\forall t \ge t_0+T$ follows $||x(t)||<\eta$.
-%\end{Definition}
+\end{Definition}
 
-%\begin{Definnition}
+\begin{Definition}
  Uniform convergence: $\forall \eta > 0 \ \ \exists T>0$ such
  that $\forall t_0 \ge 0$ and $\forall t \ge t_0+T$ follows $||x(t)||<\eta$.
-%\end{Definition}
+\end{Definition}
 
 
-%\begin{Example}
+\begin{Example}
 Consider next equation:
  \begin{equation}
    \dot x(t) = -\frac{x(t)}{1+t}, \ \ t_0\ge 0
@@ -76,14 +76,14 @@ Consider next equation:
  Solution $x(t)=x(t_0)\frac{1+t_0}{1+t}$. It is uniformly stable,
  because we can choose $\delta = \epsilon$. But does $x(t)$ convergence
  uniformly? Answer is no. 
-%\end{Example}
+\end{Example}
 
-%\begin{Definition}
+\begin{Definition}
  Point $x^*=0$ is globaly uniformly asymptotically stable if it is uniformly stable
  with $\delta \to \infty$ for $\epsilon \to \infty$ and $\forall c,\eta\ \ $ 
  $\exists T>0$ such that $\forall t_0\ge0$ from $||x_0||<c$ follows 
  $\|x(t)\|<\eta$, $\forall t \ge t_0 + T$.
-%\end{Definition}
+\end{Definition}
 
 
 \subsection{Lyapunov's direct method}
@@ -91,7 +91,7 @@ Consider next equation:
 Consider some function $V:[0,\infty)\times D\to R$, $(t,x)\to V(t,x)$ such that
 $\dot V(t,x)=\frac{\partial}{\partial t}V(t,x)+\frac{\partial}{\partial x}V(t,x) f(t,x)$.
 
-%\begin{Theorem}[Lyapunov's direct method]
+\begin{Theorem}[Lyapunov's direct method]
  Let $f:[0,\infty)\times D\to R^n$ is continuous and let $x^*=0$ be equilibrium point.
  If there is a differentiable function $V:[0,\infty)\times D\to R$ with:
  \begin{itemize}
@@ -105,33 +105,33 @@ $\dot V(t,x)=\frac{\partial}{\partial t}V(t,x)+\frac{\partial}{\partial x}V(t,x)
 
  If $D=R^n$ and $W_1$ is radialy unbounded then $X^*=0$ is globally uniformly
  asymptotically stable.
-%\end{Theorem}
+\end{Theorem}
 
-%\begin{Example}
+\begin{Example}
  Consider the equation $\dot x(t) = -(1+t)x(t)$.
 
  Check function $V(t,x)=\frac{1}{2}x^2$ as candidat for Lyapunov's function. Then
  $W_1(x)=W_2(x)=\frac{1}{2}x^2$ and $\dot V(t,x)=-(1+t)x^2 \le -x^2(t)=: W_3(x)$.
  Then from theorem we have, that $X^*=0$  is globally uniformly asymptotically stable.
-%\end{Example}
+\end{Example}
 
 
 \subsection{Exponential stability}
 
-%\begin{Definition}
+\begin{Definition}
  Point $X^*=0$ is an exponentially stable EP of (\ref{c2:eq}) if $\exists \lambda,c,k>0$
  s.t. $t \ge t_0 \ge 0$ and all $\|x_0\|<c$ follows
  $\|x(t)\|\le K\|x(t_0)\|e^{\lambda(t-t_0)}$.
-%\end{Definition}
+\end{Definition}
 
 Remark: from exponential stability follows uniformly asymptoticaly stability.
 
-%\begin{Lemma}[Auxilarity result]
+\begin{Lemma}[Auxilarity result]
  Let $\dot x(t)=f(t,x(t))$, f scalar and $\dot \xi(t)\le f(t, \xi(t)$ with 
  $\xi (t_0)\le x(t_0)$. Then $\xi (t) \le x(t)\ \ \forall t\ge t_0$.
-%\end{Lemma}
+\end{Lemma}
 
-%\begin{Theorem}
+\begin{Theorem}
  Let $f:[0, \infty)\times D \to R^n$ be continuous and $x^*=0 \in D$ be an EP.
 
  If there is a differentiable function $V:[0,\infty)\times D \to R$ and constants
@@ -145,51 +145,53 @@ Remark: from exponential stability follows uniformly asymptoticaly stability.
 
  If $D=R^n$, then $X^*$ is globally exponential stable.
 
- Proof. For $c>0$ small enough, trajectories initialized in $\{x:k_2||x||^a<c\}$
+ \begin{proof}
+ For $c>0$ small enough, trajectories initialized in $\{x:k_2||x||^a<c\}$
  remain bounded and in D. From 1) and 2) we can conclude 
  $\dot V \le -\frac{k_3}{k_2}V$. Then from previous Lemma 
- $V(t,x(t)) \le V(t_0,x(t_0))\exp{-\frac{k_3}{k_2}(t-t_0)}$. Then
+ $V(t,x(t)) \le V(t_0,x(t_0))e^{-\frac{k_3}{k_2}(t-t_0)}$. Then
  $||x(t)|| \le [from 1)] \le \left( \frac{V(t,x(t))}{k_1}\right)^{\frac{1}{a}} \le$
- $\left(\frac{V(t_0,x(t_0))\exp{-\frac{k_3}{k_2}(t-t_0)}}{k_1}\right)^{\frac{1}{a}} \le$ 
- $\left(\frac{k_2||x(t_0)||^a\exp{-\frac{k_3}{k_2}(t-t_0)}}{k_1}\right)^{\frac{1}{a}} =$
- $\left( \frac{k_2}{k_1}\right)^{\frac{1}{a}} ||x(t_0)||\exp{-\frac{k_3}{k_2a}(t-t_0)}$
-%\end{Theorem}
+ $\left(\frac{V(t_0,x(t_0))e^{-\frac{k_3}{k_2}(t-t_0)}}{k_1}\right)^{\frac{1}{a}} \le$ 
+ $\left(\frac{k_2||x(t_0)||^a e^{-\frac{k_3}{k_2}(t-t_0)}}{k_1}\right)^{\frac{1}{a}} =$
+ $\left( \frac{k_2}{k_1}\right)^{\frac{1}{a}} ||x(t_0)||e^{-\frac{k_3}{k_2a}(t-t_0)}$
+ \end{proof}
+\end{Theorem}
 
-%\begin{Example}
+\begin{Example}
  Consider the equation $\dot x(t) = -(1+t)x(t)$.
 
  Here $V(t,x)=\frac{1}{2}x^2$ then $X^*$  is exponentially stable.
-%\end{Example}
+\end{Example}
 
 
 \subsection{Comparsion function}
 
-%\begin{Definition}
+\begin{Definition}
  A function $\alpha:[0,\delta)\to [0, \infty)$ is (of) "klass $K$" if it is continous,
  strictly increasing, and $\alpha(0)=0$.
-%\end{Definition}
+\end{Definition}
 
-%\begin{Definition}
+\begin{Definition}
  A function $\alpha:[0,\delta)\to [0, \infty)$ is "class $K_\infty$ if $\alpha in K$
  and $\lim_{r\to\infty} \to\infty$.
-%\end{Definition}
+\end{Definition}
 
 
-%\begin{Example}
+\begin{Example}
  Function $\alpha(r)=\tan^{-1}(r)$ -- class $K$
 
  Function $\alpha(r)=r^k$ -- class $K_\infty$
-%\end{Example}
+\end{Example}
 
-%\begin{Definition}
+\begin{Definition}
  A function $\beta:[0,\delta)\times[0,\delta)\to [0, \infty)$ is "class $KL$ if it is continuous
  , $\beta(\cdot, s) \in K$ for all fixed $s$, and for each fixed $r$, $\beta(r, \cdot)$ is
  strictly decreasing: $\lim_{s\to\infty}\beta(r,s)=0$
-%\end{Definition}
+\end{Definition}
 
-%\begin{Example}
- Function $\beta(x,s)=max(r,r^2)\exp{s}$ belong class $KL$.
-%\end{Example}
+\begin{Example}
+ Function $\beta(x,s)=max(r,r^2)e^{s}$ belong class $KL$.
+\end{Example}
 
 Properties of compasion functions:
 
@@ -205,44 +207,49 @@ Properties of compasion functions:
 
 Now we conseider comparsion funcctions and stability definitions.
 
-%\begin{Lemma}
+\begin{Lemma}
  The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly stable iff
  $\exists \alpha\in K$ and $c>0$ s.t.  $\forall t \ge t_0$,
  $\forall ||x(t_0)||<c$ and $||x(t)|| \le \alpha(||x(t_0)||).$ 
 
- Proof. (only sufficiency) Given $\epsilon>0$ choose 
+ 
+ \begin{proof}[(only sufficiency)]
+  Given $\epsilon>0$ choose 
  $\delta<\min(c, \alpha^{-1}(\epsilon))$. Then from $||x(t_0)||<\delta$
  follows $||x(t)||\le\alpha(||x(t_0)||)<\alpha(\alpha^{-1}(\epsilon))=\epsilon$.
-%\end{Lemma}
+ \end{proof}
+\end{Lemma}
 
 
-%\begin{Lemma}
+\begin{Lemma}
  The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly asymptotically stable iff
  $\exists \beta\in KL$ and $c>0$ s.t. $\forall t \ge t_0$,
  $\forall ||x(t_0)||<c$ and $||x(t)|| \le \beta(||x(t_0)||, t-t_0).$ 
 
- Proof. (only sufficiency) Let $\|x(t_0)\|<c$. Then 
+ \begin{proof}[(only sufficiency)] Let $\|x(t_0)\|<c$. Then 
  $\|x(t)\| \le \beta(\|x(t_0)\|, t-t_0) < \beta(c,t-t_0)$. This mean uniform convergence.
  $\|x(t)\| \le \beta(\|x(t_0)\|, t-t_0)<\beta(\|x_{t_0}\|, 0)$. This gives us uniform
  stability.
-%\end{Lemma}
+ \end{proof}
+\end{Lemma}
 
 
-%\begin{Lemma}
+\begin{Lemma}
  The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly asymptotically stable iff
  $\exists \beta\in KL$ and $c>0$ s.t. $\forall t \ge t_0$,
  $\forall ||x(t_0)||<c$ and $||x(t)|| \le \beta(||x(t_0)||, t-t_0).$ 
 
- Proof. (only sufficiency) Let $||x(t_0)||<c$. Then 
+ \begin{proof}[(only sufficiency)] Let $||x(t_0)||<c$. Then 
  $||x(t)|| \le \beta(||x(t_0)||, t-t_0) < \beta(c,t-t_0)$. This mean uniform convergence.
  $||x(t)||\le\beta(||x(t_0)||, t-t_0)<\beta(||x_{t_0}||, 0)$. This gives us uniform
  stability.
-%\end{Lemma}
+ \end{proof}
+\end{Lemma}
 
-%\begin{Lemma}
+\begin{Lemma}
  The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is globally uniformly asymptotically 
  stable iff previous lemma holds for all $x_0\in R^n$.
-%\end{Lemma}
+\end{Lemma}
 
 Now consider comparsion functios and Lyapunov functions
 
@@ -253,10 +260,10 @@ all $x\in B_r(0)=\{x|||x||\le r\}$.
 If $W$ is radially unbounded, then $\exists \alpha_1,\alpha_2\in K_\infty$ s.t.
 $\alpha_1(||x||) \le W(x)\le\alpha_2(|x||)$ for all $x\in R^n$.
 
-%\begin{Lemma}[Auxility]
+\begin{Lemma}[Auxility]
  Consider $\dot y=\alpha(y),\ \ y(t_0)=y_0>0, \ \alpha\in K$. Then 
  $\exists \beta\in KL$ s.t. $y(t)=\beta(y_0, t-t_0)$.
-%\end{Lemma}
+\end{Lemma}
 
 Sketch of proof of Lyapunov's direct method:
 \begin{equation*}
@@ -291,7 +298,7 @@ $\bar{\beta}\in KL$.
 
 \subsection{Converse theorems}
 
-%\begin{Theorem}
+\begin{Theorem}
  Let $X^*=0$ be an EP of $\dot x(t)=f(t,x(t))$ with $f:[0,\infty)\times R^n \to R^n$
  continously differentiable and $\frac{\partial f}{\partial x}$ bounded in $R^n$,
  uniformly in t ($||\frac{\partial f}{\partial x}(t,x)||\le L$ for all 
@@ -302,20 +309,22 @@ $\bar{\beta}\in KL$.
  $c_1||x||^2\le V(t,x)\le c_2||x||^2$, $\dot V(t,x)\le -c_3||x||^2$ and
  $\left\Vert \frac{\partial V}{\partial x}\right\Vert \le c_4||x||$.
 
-Proof. Let $\Phi(\tau;t,x)$ -- solution to $\dot x(t)=f(t, x(t))$ which static
+\begin{proof}
+Let $\Phi(\tau;t,x)$ -- solution to $\dot x(t)=f(t, x(t))$ which static
 at $(t,x)$.
 
 $V(t,x)=\int_t^{t+\delta}\Phi^T(\tau;t,x)\Phi(\tau;t,x) d\tau, \ \ \delta>0$.
 Upper bound: $V(t,x)=\int_t^{t+\delta}||\Phi(\tau;t,x)||_2^2 d\tau\le$
 $[exponential\ stability]\le$
-$\int_t^{t+\delta}k^2\exp{-2\lambda(\tau-t)}d\tau ||x||_2^2 =$
-$\frac{k^2}{2\lambda}(1-\exp{-2\lambda\delta})||x||_2^2$.
+$\int_t^{t+\delta}k^2 e^{-2\lambda(\tau-t)}d\tau ||x||_2^2 =$
+$\frac{k^2}{2\lambda}(1-e^{-2\lambda\delta})||x||_2^2$.
 
 Lower bound: since $\left\Vert \frac{\partial V}{\partial x}\right\Vert \le L$, then
 $||f(t,x)||_2\le L||x||_2$. Thus by comparation lemma 
-$||\Phi(\tau;t,x)||_2^2\ge ||x||_2^2\exp{-2L(\tau-t)}$. Set it in 
-$V(t,x)\ge \int_t^{t+\delta}\exp{-2L(\tau-t)} d\tau ||x||_2^2=$
-$\frac{1}{2L}(1-\exp{-2L\delta})||x||_2^2$.
+$||\Phi(\tau;t,x)||_2^2\ge ||x||_2^2 e^{-2L(\tau-t)}$. Set it in 
+$V(t,x)\ge \int_t^{t+\delta} e^{-2L(\tau-t)} d\tau ||x||_2^2=$
+$\frac{1}{2L}(1-e^{-2L\delta})||x||_2^2$.
 
-Decrease conditions: $\dot V(t,x)=\dots\le-(1-k^2\exp{-2\lambda\delta})||x||_2^2$.
-%\end{Theorem}
+Decrease conditions: $\dot V(t,x)=\dots\le-(1-k^2 e^{-2\lambda\delta})||x||_2^2$.
+\end{proof}
+\end{Theorem}

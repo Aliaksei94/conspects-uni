@@ -27,31 +27,31 @@ Usaly we will add some restrictions on $f$ functions, like continuous.
 
 \subsection{Existence of solutions}
 
-%\begin{Definition}
+\begin{Definition}
 Function $f:D \rightarrow R^n$ is contiuous at $x' \in D$ if for
 $\forall \epsilon > 0 \ \exists \delta>0$ such that for $\forall x \in D$,
 $\|x-x'\|<\delta => \|f(x)-f(x')\| < \epsilon$
 
 Function $f:D \rightarrow R^n$ is continuous on D if it's 
 continuous at $\forall x' \in D$
-%\end{Definitions}
+\end{Definition}
 
-%\begin{Theorem}[Piano]
+\begin{Theorem}[Piano]
 If $f:D \rightarrow R^n$ continuous, then for each $x_0 \in D$\ 
 $\exists x:(-\epsilon,\epsilon) \rightarrow D, \ \epsilon > 0$
 satisfying (\ref{c1:eq}).
-%\end{Theorem}
+\end{Theorem}
 
 Further, given a compact sed $U \subset D$, then 
 $\exists \alpha > 0$ s.t. $\forall x_0 \in U 
 \ \exists x:(-\epsilon,\epsilon) \rightarrow D$ satisfying (\ref{c1:eq}).
 
 
-%\begin{example}
+\begin{Example}
 Consider equation $\dot x(t) = x(t)^2, \ \ x(0)=x_0=0$. Solution 
 $x(t)=-\frac{1}{t-c}, \ \ c=\frac{1}{x_0}$. In this example
 solution exist in interval $(-c, c)$.
-%\end{example}
+\end{Example}
 
 
 But, what about the number of solutions? Which conditions we should
@@ -60,7 +60,7 @@ add to garanty uniquence of solution?
 
 \subsection{Uniquence of solutions}
 
-%\begin{Definitions}
+\begin{Definition}
 Function $f:D \rightarrow R^n$ is locally Lipshitz (continuous???) on D
 if $\forall x \in D$ there is a neighborhood $N(x) \subset D$ and
 $\exists L > 0$ s.t. 
@@ -69,7 +69,7 @@ $\exists L > 0$ s.t.
 \end{equation}
 
 For all $x_1,x_2 \in N$.
-%\end{Definitions}
+\end{Definition}
 
 \begin{itemize}
 \item Lipschiz on $W \in D$ if (\ref{c1:lip}) holds $\forall x_1,x_2 \in W$ 
@@ -87,22 +87,25 @@ We have
  	(Khalil Ex 3.19)
 \end{itemize}
 
-%\begin{Lemma}[Cromwall]
+\begin{Lemma}[Cromwall]
 Suppose that $0 \le \phi(t) \le c + L \int^t_0 \phi(\tau) d \tau$, $c,L > 0$, $\phi$ -- 
-continuous. Then $\phi(t) \le c \exp{Lt}$.
-Proof. $c + L\int^t_0 \phi(\tau) d \tau := \psi(t)$, $\dot \psi(t) = L\phi(t) \le L \psi (t)$.
+continuous. Then $\phi(t) \le c e^{Lt}$.
+\begin{proof}
+$c + L\int^t_0 \phi(\tau) d \tau := \psi(t)$, $\dot \psi(t) = L\phi(t) \le L \psi (t)$.
 
-Consider $\frac{d}{dt} \left(\psi(t) \exp{-LT}\right) = \exp{-Lt}
-\dot \psi(t)-L \psi(t) \left(\right) \le 0$, thus $\psi(t) \exp{-LT}$ is
-decreased, and as a result we have $\phi(t)\exp{-Lt}\le \psi(t)\exp{-Lt}\le \psi(0)=c$ 
-%\end{Lemma}
+Consider $\frac{d}{dt} \left(\psi(t) e^{-LT}\right) = e^{-Lt}
+\dot \psi(t)-L \psi(t) \left(\right) \le 0$, thus $\psi(t) e^{-LT}$ is
+decreased, and as a result we have $\phi(t)e^{-Lt}\le \psi(t)e^{-Lt}\le \psi(0)=c$ 
 
-%\begin{Theorem}[Picard Lindelof]
+\end{proof}
+\end{Lemma}
+
+\begin{Theorem}[Picard Lindelof]
 If function $f:D \rightarrow R^n$ is localy Lipschitz then for $\forall x_0 \in D$
 \ $\exists ! x:(-\epsilon, \epsilon) \rightarrow D, \ \epsilon > 0$
 satisfying (\ref{c1:eq}).
 
-Proof:
+\begin{proof}
 
 * existence from Piano theorem
 
@@ -115,9 +118,10 @@ $|x_1(t)-x_2(t)| \le \int^t_0 |f(x_1(\tau))-f(x_2(\tau))| d\tau \le
 L \int^t_0 |f(x_1(\tau))-f(x_2(\tau))| d\tau$. Now we can apply Cromwall's lemma with $c=0$
 and $\phi(t)=|x_1(t)-x_2(t)|$, then $\phi(t)\le 0$, then $x_1(t)=x_2(t), \ \forall t 
 \in (-\epsilon,\epsilon)$
-%\end{Theorem}
+\end{proof}
+\end{Theorem}
 
-%\begin{example}
+\begin{Example}
 \begin{equation*}
     \dot x = 
     \begin{cases}
@@ -133,7 +137,7 @@ and $\phi(t)=|x_1(t)-x_2(t)|$, then $\phi(t)\le 0$, then $x_1(t)=x_2(t), \ \fora
       0, &\mbox {else} 
     \end{cases}
 \end{equation*}
-%\end{example}
+\end{Example}
 
 Global existance $\&$ uniqueness
 \begin{itemize}
@@ -150,19 +154,19 @@ Global existance $\&$ uniqueness
 If functions $\dot V(x) < 0$, $\forall x \in D\\ \{0\}$, then $x^*$ is
 asymptotically stable.
 
-%\begin{Definition}
+\begin{Definition}
 Equilibrium point $x=0$ is stable if $\forall \epsilon > 0\ \exists \delta > 0$
 s.t. from $\|x_0\| < \delta$ follows $\|x(t)\| \le \epsilon, \ \forall t \ge 0$.
-%\end{Definition}
+\end{Definition}
 
-%\begin{Definition}
+\begin{Definition}
 Equilibrium point $x=0$ is asymptotikaly stable if it stable and exist $\delta>0$
 s.t. from $\|x_0\|<\delta$ follows 
 $\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
-%\end{Definition}
+\end{Definition}
 
 
-%\begin{Theorem}[Lyapunov's direct method]
+\begin{Theorem}[Lyapunov's direct method]
 Let $x^*=0 \in D$ be an equilibrium point of (\ref{c1:eq}), i.e., $f(0)=0.$ Let
 $f: D \rightarrow R^n$ is continious. If there exist a differetiable 
 $V:D\rightarrow R$ s.t. 
@@ -173,13 +177,14 @@ $V:D\rightarrow R$ s.t.
 
 then $x^*=0$ is stable.
 
-Proof. Fix compact $U=\{x:V(x)\le c\}$ s.t. $U\in D$. By Piano: exist $\alpha > 0$
+\begin{proof}
+ Fix compact $U=\{x:V(x)\le c\}$ s.t. $U\in D$. By Piano: exist $\alpha > 0$
 s.t. any solution $x$ with $x_0 \in U$ exists at least on the interval
 $[0,\alpha)$.
 
 TODO proof is not full
-
-%\end{Theorem}
+\end{proof}
+\end{Theorem}
 
 Lyapunovs direct method gives us:
 \begin{itemize}

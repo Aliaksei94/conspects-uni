@@ -30,20 +30,28 @@
 \newtheorem{reg}{Rule}
 \newtheorem{exer}{Exercise}
 \newtheorem{note}{Note}
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+\newtheorem{Lemma}{Lemma}
+\newtheorem*{Definition}{Definition}
+\newtheorem*{Example}{Example}
 \usepackage{accents}
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
+\usepackage[english]{babel}
 \newcommand*\underdot[1]{%
   \underaccent{\dot}{#1}}
 
 \begin{document}
 
-\include{intro}
+\input{intro}
 
-\include{chapter1}
+\input{chapter1}
 
-\include{chapter2}
+\input{chapter2}
+
+\input{chapter3}
+
 
 \end{document}
               
