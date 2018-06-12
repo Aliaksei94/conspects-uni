@@ -20,13 +20,15 @@ $J_{\infty}(x(t), \bar{u}(\cdot; t)) = \int_{0}^{\infty}L(\bar x(\tau;t), \bar u
 Infinite-horizon performance resulting from application of MPC controller:
 $J_{\infty}^{MPC}(x_0) = \int_{0}^{\infty}L(\bar x_{MPC}(\tau), \bar u_{MPC}(\tau))d\tau$
 
-Definition. Suboptimality index $\alpha$:
+\begin{Definition}
+Suboptimality index $\alpha$:
 $\alpha J_{\infty}^{MPC}(x_0) \leq J_{\infty}^{*}(x_0) \forall x_0$
 
 \begin{itemize}
 \item $\alpha \leq 1$ by optimality of $J^{*}_{\infty}$
 \item $\alpha > 0$ implies closed-loop stability (Barb.lemma)
 \end{itemize}
+\end{Definition}
 
 Proposition 1: Relaxed dynamic programming
  
@@ -41,7 +43,7 @@ Then the estimate
 
 holds for all $x \in \mathbb{R}^n$
 
-Proof
+\begin{proof}
 \begin{itemize}
 \item 1 and 3 inequalities follow from optimality (by definition)
 \item 2 inequality follows from summing up (*) over all sampling instances
@@ -52,6 +54,7 @@ J^*_T(x(N\delta)) \leq J_T^*(x_0) - \alpha \int_0^{N\delta}L(x_{MPC}(t), u_{MPC}
 N \to \infty : J_T^*(x_0) \geq \alpha J_{\infty}^{MPC}(x_0) 
 \end{equation}
 \end{itemize}
+\end{proof}
 
 Central idea (image to be inserted)
 
@@ -64,11 +67,11 @@ $L^*(t;t) = L(\bar x^*(\tau;t), \bar u^*(\tau;t))$
 (b): \int_{t+\delta}^{t+T}L^*(\tau;t)d\tau \leq \gamma \int_{t}^{t+\delta}L^*(\tau;t)d\tau :(a)
 \end{equation} 
 
-Theorem 1:
+\begin{Theorem}
 
 Assume $\exists c \in (0;1]$ and $\gamma > 0$ s.t. \ref{c_b_inequality} - \ref{b_a_inequality} holds. Then (*) holds with $\alpha =1 - \gamma \frac{1-\epsilon}{\epsilon}$
 
-Proof.
+\begin{proof}
 \begin{equation*}
 J_T^*(x(t+\delta)) - J_T^*(x(t)) = J_T^*(x(t+\delta)) - \int_{t}^{t+T}L^*(\tau;t)d\tau \leq^{(1)}
 \end{equation*}
@@ -79,6 +82,8 @@ J_T^*(x(t+\delta)) - J_T^*(x(t)) = J_T^*(x(t+\delta)) - \int_{t}^{t+T}L^*(\tau;t
 \leq (\gamma \frac{1-\epsilon}{\epsilon} - 1) \int_t^{t+\delta}L^*(\tau;t)d\tau
 \end{equation*} 
 $-\alpha := \gamma \frac{1-\epsilon}{\epsilon} - 1$ 
+\end{proof}
+\end{Theorem}
 
 Assumption 1: Asymptotic Controlability
 
@@ -95,7 +100,8 @@ $B(t) = \int_0^t\beta(\tau)d\tau$
 Typical example: (image to be inserted)
 
 How to compute $\epsilon$ and $\gamma$:
-Lemma 1: Let Assumption 1 hold. Then the inequality 
+\begin{Lemma} 
+Let Assumption 1 hold. Then the inequality 
 \begin{equation}\label{lemma_1_inequality}
 J_T^*(x(t+\delta)) \leq \int_{t+\delta}^{t+t'}L^*(\tau;t)d\tau + B(T+\delta - t')L^*(t+t';t)
 \end{equation}
@@ -103,7 +109,8 @@ holds for all $t' \in [\delta,T]$
 
 (image to be inserted)
 
-Proof.
+
+\begin{proof}
 
 Consider 
 \begin{equation*}
@@ -128,6 +135,8 @@ as far as $B(t) = \int_0^t\beta(\tau)d\tau$
 \begin{equation*}
 \leq \int_{t+\delta}^{t+t'}L^*(\tau;t)d\tau + B(T+\delta-t')L^*(t+t';t)
 \end{equation*}
+\end{proof}
+\end{Lemma}
 
 Calculation of $\epsilon$ from (\ref{lemma_1_inequality}):
 \begin{equation*}
@@ -144,13 +153,14 @@ minimum is less or equal that the average
 \end{equation*}
 $(1+\frac{B(T)}{T-\delta}) = \frac{1}{\epsilon}$
 
-Lemma 2:
+\begin{Lemma}
 
 \begin{equation*}
 \int_{t+t'}^{t+T}L^*(\tau;t)d\tau \leq B(T-t')L^*(t+t';t) \forall t' \in [0;T]
 \end{equation*}
 
-Proof. Analogues to lemma 1.
+\begin{proof}
+Analogues to lemma 1.
 
 Calculation of $\gamma$:
 
@@ -163,6 +173,8 @@ Calculation of $\gamma$:
 \begin{equation*}
 \leq B(T)\min_{\hat t \in [0,\delta]}L^*(t+\hat t;t) \leq \frac{B(T)}{\delta}\int_{t}^{t+\delta}L^*(\tau;t)d\tau
 \end{equation*}
+\end{proof}
+\end{Lemma}
 
 Denote $\gamma = \frac{B(T)}{\delta}$
 
@@ -216,7 +228,7 @@ Have to show: $\bar L_t$ is a minimizer of (\ref{minimizer_eps})
 \end{equation*}
 for all feasible $L_t$
 
-Proof.
+\begin{proof}
 
 Assume $\exists L_t$ s.t. 
 \begin{equation*}
@@ -230,6 +242,7 @@ But then
 \end{equation}
 
 the sign equality from (\ref{minimizer_eps}) with equality.
+\end{proof}
 
 Contradiction:
 

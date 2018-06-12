@@ -71,8 +71,7 @@ N times apply Assumption 1.3
 \end{equation*}
 
 Influence of disturbance:
-Definition.
-
+\begin{Definition}
 Mainkowski set addition: 
 \begin{equation*}
 A,B \subseteq \mathbb{R}^n A \oplus B = \{ a+b | a \in A, b\in B\}
@@ -88,15 +87,17 @@ A, B \subseteq \mathbb{R}^n A \ominus B = \{ a \in \mathbb{R}^n| a+b \in A, \for
 \begin{equation*}
 A \subseteq (A \oplus B) \ominus B
 \end{equation*}
+\end{Definition}
+\begin{Definition}
 
-Definition.
 Robust positively invariant set (RPI set):
 
 $S$ is RPI set for $x^+=Ax+w$ if $AS \oplus W \subseteq S$ (or equivalently $Ax+w \in S \forall x \in S, \forall w \in W$)
-
-Example:
+\end{Definition}
+\begin{Example}
 
 $x^+ = 0.5x + w$. $w \in [-5,5]$. So RPI set: $S = [-20, 20]$, minimal RPI set: $S = [-10,10]$
+\end{Example}
 
 Minimal RPI set:
 \begin{equation*}
@@ -129,7 +130,7 @@ $S_{\infty}$ in  general is difficult to compute
 
 $\Rightarrow$ can compute invariant outer approximations of $S_{\infty}$ (with bounded complexity)
 
-Example. 
+\begin{Example} 
 
 Calculate RPI 
 \begin{equation*}
@@ -142,6 +143,7 @@ x^+=\frac{1}{2}x + w, \ w \in [-5,5]
 \begin{equation*}
 S_{\infty} = \sum_{i=0}^{\infty}(\frac{1}{2})^i [-5,5] = [-10, 10]
 \end{equation*}
+\end{Example}
 
 Central idea in tube-based MPC
 
@@ -156,7 +158,7 @@ Let $x^+ = Ax + Bu + w$ and $z^+ = Az + Bv$. If $ x \in Z \oplus S$ and $ u = v 
 
 image to be inserted
 
-Proof:
+\begin{proof}
 
 Let $e(t) := x(t) - x(t) \rightarrow$
 \begin{equation*}
@@ -165,6 +167,8 @@ e^+ = x^+ - z^+ = Ax + B(v + K(x-z)) + w - Az - Bv = (A+BK)e + w
 As $S$ is RPI for $e^+ = A_ke + w$, we obtain $e \in S \Rightarrow e \ in S \forall w \in W$
 
 Hence $x \in Z \oplus S \Rightarrow x^+ \in Z^+ \oplus S \forall w \in W$
+
+\end{proof}
 
 Robust MPC scheme 
 
@@ -211,7 +215,7 @@ $\Rightarrow J^*(x) = 0$ and $z^*(X) = 0$
 
 "$S$ serves an origin for the disturbed system"
 
-Theorem: Suppose that Assumption 1 holds and the robust MPC problem is feasible at $t = 0$.
+\begin{Theorem}Suppose that Assumption 1 holds and the robust MPC problem is feasible at $t = 0$.
 
 Then: 
 \begin{enumerate}[label=(\roman*)]
@@ -220,7 +224,7 @@ Then:
 \item closed-loop system satisfies input/state constraints, i.e. $x(t) \in X$, $u(t) \in U \ \forall t = 0,1 ...$
 \end{enumerate} 
 
-Proof: 
+\begin{proof}
 
 i) Consider candidate solution at time $t+1$ 
 \begin{equation*}
@@ -289,6 +293,8 @@ Recall: $x(i) \in z^*(x(i)) \oplus S \Rightarrow$
 \begin{equation*}
 |x(i)|_S \leq |z^*(x(i))| \leq \sqrt{\frac{c_2}{c_1}}\sqrt{\gamma}^i|z^*(x(0))|
 \end{equation*}
+\end{proof}
+\end{Theorem}
 
 $|x(i)|_S$ - point-to-set distance
 
@@ -338,7 +344,7 @@ Define $S_k := \sum_{i=0}^{k-1}A^iw \ k \geq 1$
 
 In general, $S_k$ for a finite $k$ are not RPI sets (this is the case if only if $A$ is nilpotent)
 
-Theorem:
+\begin{Theorem}
 
 If $0 \in int(W)$ and $A$ is Schur, then there exists an integer $k > 0$ and $\alpha \in [0,1)$ s.t.
 \begin{equation}\label{RPI_set_subset_with_alpha}
@@ -351,7 +357,7 @@ S(\alpha,k) := (1-\alpha)^{-1}S_k
 \end{equation*}
 is an RPI set for the system $x^+ = Ax + w$
 
-Proof:
+\begin{proof}
 
 i)(\ref{RPI_set_subset_with_alpha}) is a direct consequence of our assumptions
 ii) want to show that $AS(\alpha,k) \oplus W \subseteq S(\alpha,k)$
@@ -374,6 +380,8 @@ Then we get
 \begin{equation*}
 = (1-\alpha)^{-1}\sum_{i=0}^{k-1}A^iW = S(\alpha,k)
 \end{equation*}
+\end{proof}
+\end{Theorem}
 
 Remark:
 \begin{itemize}

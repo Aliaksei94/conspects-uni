@@ -29,16 +29,16 @@ Optimal solution: $\bar u^*(\cdot, t), \ J^*(x(t))$
 
 Assumption 1: Terminal region + terminal controller
 
-There exists an auxilary local controller $u = k^{loc}(x)$ s.t.
+There exists an auxillary local controller $u = k^{loc}(x)$ s.t.
 \begin{enumerate}
 \item $X^f$ is positively invariant $\dot x = f(x,k^{loc}(x))$
 \item $k^{loc}(x) \in U \ \forall x \in X^f$
 \item $\dot F(x) + L(x, k^{loc}(x)) \leq 0 \ \forall x \in X^f$
 \end{enumerate}
 
-$\Rightarrow$ F is local control-Lyapunov function.
+$\Rightarrow$ F is a local control-Lyapunov function.
 
-Theorem.
+\begin{Theorem}
 
 Suppose Assumption 1 holds and MPC problem is feasible at $t=0$. Then:
 \begin{itemize}
@@ -46,7 +46,7 @@ Suppose Assumption 1 holds and MPC problem is feasible at $t=0$. Then:
 \item closed-loop is asymptotically stable
 \end{itemize}
 
-Proof.
+\begin{proof}
 \begin{enumerate}
 \item Recursive feasibility by induction 
 \begin{itemize}
@@ -87,6 +87,8 @@ As far as from Assumption 1.3 we have the sum of three terms is $\leq 0$
 $\Rightarrow J^*(x(\infty)) \leq J^*(x(0)) - \int_0^{\infty}L(x_{MPC}(\tau), u_{MPC}(\tau))d\tau$
 From here: some steps as in zero-terminal constraint rose. 
 \end{enumerate}
+\end{proof}
+\end{Theorem}
 
 How can Assumption 1 be satisfied?
 
