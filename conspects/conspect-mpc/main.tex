@@ -1,8 +1,46 @@
-\documentclass[14pt,a4paper]{extreport}
-\usepackage[cp1251]{inputenc}
-\usepackage{../BSUStyle}
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{lastpage}
 \usepackage{enumitem}
-%\usepackage{refcheck}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{cancel}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage{xcolor}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+\newtheorem{Lemma}{Lemma}
+\newtheorem*{Definition}{Definition}
+\newtheorem*{Example}{Example}
+\usepackage{accents}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\newcommand*\underdot[1]{%
+  \underaccent{\dot}{#1}}
 
 
 \begin{document}
@@ -11,16 +49,16 @@
 %   ТИТУЛЬНЫЙ ЛИСТ \\ не трогаем знаки конца строки, название и фамилия CAPS!
 % ***************************************************************************
 
-\title{Lectures on MPC}
+%\title{Lectures on MPC}
 
-\author{Paulavets Maryia}
+%\author{Paulavets Maryia}
 
 % ************************************************************************
 %   ОГЛАВЛЕНИЕ
 % ************************************************************************
 
-\addtocontents{toc}{~\hfill{C.}\par}
-\tableofcontents
+%\addtocontents{toc}{~\hfill{C.}\par}
+%\tableofcontents
 
 % ************************************************************************
 %   ОСНОВНАЯ ЧАСТЬ

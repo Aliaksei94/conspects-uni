@@ -1,6 +1,6 @@
-\chapter{MPC}
+\section{MPC}
 Formulation of control problem
-\begin{equation}
+\begin{equation*}
 \left \{
   \begin{tabular}{c}
   $\dot x = f(x,u)$ \\
@@ -8,34 +8,29 @@ Formulation of control problem
   $y = h(x)$
   \end{tabular}
   \right. 
-\end{equation}
-Objective of MPC:
-
-Find stabilizing control strategy that:
+\end{equation*}
+Objective of MPC: Find stabilizing control strategy that:
 \begin{itemize}
 \item minimize objective function: $J = \int_{t}^{\infty}F(x(\tau),u(\tau))d\tau$
 \item satisfies constraints:
-$u(\tau) \in U \  x(\tau) \in X$
+$u(\tau) \in U ,\  x(\tau) \in X$
 \end{itemize}
 
-Closed-loop optimal control vs Open-loop optimal control
+\textbf{Closed-loop optimal control vs Open-loop optimal control}
+\newline
 
-Closed-loop:
-
-Feedback $u=k(x)$ 
+Closed-loop: Feedback $u=k(x)$ 
 \begin{itemize}
 \item + Feedback present
 \item + suit for uncertainty disturbances
 \item - Finding closed solution hardly possible
 \end{itemize}
 
-Open-loop optimal control:
-
-Input trajectory $u = u(t, x_0)$
+Open-loop optimal control: Input trajectory $u = u(t, x_0)$
 \begin{itemize}
 \item + Computation often feasible
 \item - No feedback
 \item - Don't know much about system
 \end{itemize}
 
-MPC - repeated open-loop optima; control in feedback fashion.
+MPC - repeated open-loop optimal control in feedback fashion.
