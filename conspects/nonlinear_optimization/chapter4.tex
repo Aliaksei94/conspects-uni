@@ -1,0 +1,156 @@
+\section{Backstepping}
+
+These remarks from the last lecture, so should be added to the last chapter
+
+\begin{equation*}
+\forall x \neq 0: \ \inf_{u} \frac{\partial V}{\partial x} f(x,u) < 0 \ \dot{x} = f(x) + G(x)u
+\end{equation*}
+So this leads to
+\begin{equation*}
+\forall x \neq 0 L_G V(x) = 0 \Rightarrow L_fV(x) \neq 0
+\end{equation*}
+Remark: The last formula is "optimal" if minimize:
+\begin{equation*}
+\int_{0}^{\infty}\frac{1}{2}p(x)b(x)^Tb(x) + \frac{1}{2p(x)}u^Tudt
+\end{equation*}
+$b(x) := (L_GV(x))^T$
+
+where $c > 0$
+
+\begin{equation*}
+p(x) = \left \{ 
+\begin{tabular}{cc} 
+$c + \frac{a(x) + \sqrt{a(x)^2 + (b(x)^Tb(x))^2}}{b(x)^Tb(x)}$ & $b(x) \neq 0$ \\ 
+$c$ & $b(x) = 0$ 
+\end{tabular} 
+\right.
+\end{equation*}
+
+It still works if $u = \lambda h(x)$ with $\lambda \in [\frac{1}{2}; \infty)$ is applied (large "gain margin")
+
+This is Backstepping
+
+Integrator backstepping 
+\begin{equation}\label{system_backstepping}
+\dot x_1 = f_1(x_1) + g_1(x_1)x_2 
+\end{equation}
+\begin{equation*}
+\dot x_2 = u
+\end{equation*}
+
+where $x_1 \in \mathbb{R}^m, \ x_2, \ u \in \mathbb{R}$ (single input)
+
+image to be inserted
+
+Assumption: we know (smooth) "feedback" $\alpha_1: \mathbb{R}^n \to \mathbb{R}$, and positive definite, differentiable $v_1: \mathbb{R}^m \to \mathbb{R}$
+
+s.t. $L_{f_1 + g_1\alpha_1}V_1(x)$ is negative definite $\Rightarrow$ origin of $\dot{x_1} = f_1(x_1) + g_1(x_1)\alpha_1(x_1)$ is asymptotically stable
+
+Goal: Compute feedback $u = k(x)$ which stabilises (\ref{system_backstepping}). Backstepping constructs $u = \alpha_2(x_1, x_2)$ s.t. $(e_1, e_2) = (x_1 - 0, x_2 - \alpha_1(x_1))=0$ error coordinates
+
+Rewrite (\ref{system_backstepping}) :
+\begin{equation*}
+\dot x_1 = f_1(x_1) + g_1\alpha_1(x_1) + g_1(x_1)(x_2 - \alpha_1(x_1))
+\end{equation*}  
+\begin{equation*}
+\dot x_2 = u
+\end{equation*}
+
+image to be inserted
+
+In error coordinates
+
+\begin{equation}\label{error_coordinates_rewriting}
+\dot e_1 = f_1(e_1) + g_1(e_1)\alpha_1(e_1) +g_1(e_1)e_2
+\end{equation}
+\begin{equation*}
+\dot e_2 = u - \dot{\alpha_1} = u - \frac{\partial \alpha_1}{\partial e_1}\dot{e_1} = u - \frac{\partial \alpha_1}{\partial e_1}
+\end{equation*}
+
+"backstepping" $\alpha_1$ through the integrator
+
+Define $V_2(e_2):= \frac{1}{2} e_2^2$, and 
+\begin{equation*}
+V(e_1, e_2) = V_1(e_1) + V_2(e_2)
+\end{equation*}  
+\begin{equation*}
+\dot V(e_1, e_2) = \frac{\partial V_1}{\partial e_1}(f_1(e_1) + g_1(e_1)\alpha_1(e_1)) + \frac{\partial V_1}{\partial e_1}g_1(e_1)e_2 + \frac{\partial V_2}{\partial e_2}(u - \dot{\alpha_1})
+\end{equation*}
+
+as far as $L_{f_1 + g_1\alpha_1}V_1$ -negative definite and $\frac{\partial V_2}{\partial e_2} \rightarrow e_2$
+
+Choose 
+\begin{equation}\label{u_choice}
+u = (- \frac{\partial V_1}{\partial e_1}g_1(e_1) + \dot{\alpha_1})("canaling\ terms") - k_2e_2 ("stabilizing\ term") k_2 > 0
+\end{equation}
+
+$\Rightarrow$ Then $\dot{V}(e_1, e_2) = L_{f_1 + g_1\alpha_1}V_1(e_1) - k_2e_2^2 < 0, \ \forall (e_1, e_2) \neq 0$
+
+$\Rightarrow$ Then $\dot V (e_1, e_2) = L_{f_1 + g_1\alpha_1}V_1(e_1) - k_2e_2^2 < 0 \ \forall (e_1, e_2) \neq 0$
+
+$\Rightarrow (e_1, e_2) = (0,0)$ is an asymptotically stable EP for (\ref{error_coordinates_rewriting}) with $u$ as in (\ref{u_choice}) 
+
+Remark: $(e_1, e_2) \to (0,0)$ doesnot necessarily imply that $(x_1, x_2) \to 0$ for $u = \alpha_2(x_1, x_2) = - \frac{\partial V_1}{\partial x_1}g_1(x_1) + \dot{\alpha_1} - k_2(x_2 - \alpha_1(x_1))$
+
+where $u \leftarrow$ (\ref{u_choice}) the original coordinates and $\dot{\alpha_1} \leftarrow \frac{\partial \alpha_1}{\partial x_1}(f_1(x_1) + g_1(x_1)x_2)$
+
+But $(x_1, x_2) = (0,0)$ is asymptotically stable if $\alpha_1(0) = 0$ why? $(e_1,e_2) \to 0 \Rightarrow x_1 \to 0 \ x_2 \to \alpha_1(0) = 0$
+
+\begin{Example}
+\begin{equation*}
+\dot{x_1} = x_1x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = u
+\end{equation*}
+
+Choose $\alpha_1(x_1) = -k$ ($k > 0$) $\rightarrow \dot{x_1} = -k x_1 \Rightarrow V_1(x_1) = \frac{1}{2}x_1^2$
+
+Then: 
+\begin{equation*}
+e_1 = x_1 - 0 \ \dot{e_1} = e_1(e_2 - k)
+\end{equation*}
+\begin{equation*}
+e_2 = x_2 + k \ e_2 = u
+\end{equation*}
+
+Backstepping yields: $u = - e_1^2 - k_2e_2 \ k_2 > 0 \Rightarrow (e_1,e_2) = (0,0)$ is asymptotically stabilized
+
+$(x_1, x_2) = (0,-k)$ is asymptotically stabilized
+
+Can we choose different $\alpha_1$ s.t. $(x_1, x_2) = (0,0)$ is stabilized?
+
+Yes, e.g.
+\begin{equation*}
+\alpha_1(x_1) = -x_1^2 \Rightarrow \dot{x_1} = - x_1^3 \ V_1(x_1) = \frac{1}{2}x_1^2
+\end{equation*}
+
+So we have equations
+
+\begin{equation*}
+e_1 = x_1 - 0 \ \dot{e_1}  = e_1(e_2 - e_1^2) 
+\end{equation*}
+\begin{equation*}
+e_2 = x_2 + x_1^2 \ \dot{e_2} = u + 2e_1^2(e_2 - e_1^2)
+\end{equation*}
+
+Backstepping results in 
+\begin{equation*}
+u = -e_1^2 - 2e_1^2(e_2 - e_1^2) - k_2e_2, \ k_2 > 0 \Rightarrow (e_1,e_2) \to (0,0), \ (x_1, x_2) \to (0,0)
+\end{equation*}
+\end{Example}
+
+Generalization-1
+
+\begin{equation*}
+\dot{x_1} = f_1(x_1) + g_1(x_1)x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = f_2(x_1, x_2) + g_2(x_1,x_2)u
+\end{equation*}
+
+Assumption: $g_2(x_1, x_2) \neq 0 \forall x_1, x_2 \Rightarrow $ Input transformation: $u = \frac{1}{g_2(x_1, x_2)}(V - f_2(x_1, x_2)) \Rightarrow \dot{x_1} = f_1(x_1) + g_1(x_1)x_2 \ \dot{x_2} = V \Rightarrow $ can apply integrator backstepping to determine $V$ results in 
+
+\begin{equation*}
+u = \alpha_2(x_1, x_2) = \frac{1}{g_2(x_1,x_2)}(-\frac{\partial V_1}{\partial x_1}g_1(x_1) + \dot{\alpha_1} - k_2(x_2 - \alpha_1(x_1)) - f_2(x_1, x_2))
+\end{equation*} 
