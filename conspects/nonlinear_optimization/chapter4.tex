@@ -154,3 +154,166 @@ Assumption: $g_2(x_1, x_2) \neq 0 \forall x_1, x_2 \Rightarrow $ Input transform
 \begin{equation*}
 u = \alpha_2(x_1, x_2) = \frac{1}{g_2(x_1,x_2)}(-\frac{\partial V_1}{\partial x_1}g_1(x_1) + \dot{\alpha_1} - k_2(x_2 - \alpha_1(x_1)) - f_2(x_1, x_2))
 \end{equation*} 
+
+\section{Practice Exercise 3}
+
+Motivation: Lyapunov Theory
+
+\begin{equation*}
+\dot{x} = f(x,u)
+\end{equation*}
+$f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^n$
+
+\begin{Definition}
+(CLF) A function $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF if it is continuous differentiable, positive definite, radially unbounded and $ \forall x \neq 0 \ \inf_{u}< \triangledown V(x), f(x,u) > < 0$ 
+\end{Definition}
+
+In order to find CLFs, we restrict our analysis to input -affine systems
+\begin{equation*}
+\dot{x} = f(x) + G(x)u
+\end{equation*}
+where $f: \mathbb{R}^n \to \mathbb{R}^n, \ G: \mathbb{R}^n \to \mathbb{R}^{n \times m}$
+
+Proposition: A continuous, differentiable, positive definite and radially unbounded. $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF iff 
+\begin{equation*}
+\forall x \neq 0 \ L_GV(x) = 0 \Rightarrow L_fV(x) < 0
+\end{equation*}
+
+Image to be inserted
+
+Problem 1
+
+Consider $\dot{x} = cos(x) + (1+e^x)u$ where $f(x) = cos(x)$- drift and $g(x) = 1+e^x$
+
+Let $V: \mathbb{R} \to \mathbb{R}, \ x \mapsto \frac{1}{2}x^2$. Clearly, continuous differentiable, positive definite and radially unbounded. Moreover, for any nonzero $x$, we have $L_GV(x) \neq 0$. 
+
+Thus, for any $x \neq 0$, there exists a control that readers $<\triangledown V(x), f(x) + g(x)u>$ negative. 
+Givn this CLF, there exists a state feedback $u = u(x)$, e.g. 
+\begin{equation*}
+u(x) = - \frac{kx+cos(x)}{1+e^x}, \ k > 0
+\end{equation*}
+
+Problem
+
+Consider 
+\begin{equation*}
+\dot{x_1} = -x_1^3 + x_2e^{x_1}cos(x_2)
+\end{equation*}  
+\begin{equation*}
+\dot{x_2} = x_1^5sin(x_2) + u
+\end{equation*}
+
+Take $V: \mathbb{R}^2 \to \mathbb{R}, \ (x_1, x_2) \mapsto \frac{1}{2}(x_1^2 + x_2^2)$
+
+For any $x \neq 0$, we have 
+\begin{equation*}
+\inf_{u \in \mathbb{R}}(L_fV(x) + L_GV(x)u) = 
+\left \{ 
+\begin{tabular}{cc} 
+$L_fV(x), \ $ & $if\ L_GV(x) = 0$ \\ 
+$- \infty$ & $else$ 
+\end{tabular} 
+\right.
+\end{equation*}
+
+In particular,
+\begin{equation*}
+L_fV(x) = \dots = x_1(-x_1^3 + x_2e^x_1 cos(x_2)) + x_2x_1^5sin(x_2)
+\end{equation*}
+\begin{equation*}
+L_GV(x) = \dots = x_2
+\end{equation*}
+
+However, 
+\begin{equation*}
+L_fV(x)|_{x_2 = 0} = -x_1^4 < 0 \ \forall x_1 \neq 0
+\end{equation*}
+
+Image to be inserted
+
+Concluding that $V$ is a CLF.
+
+Problem 2:
+
+$\dot{x} = Ax + Bu$, input defined system where $(A,B)$ is stabilizable, there exists $K \in \mathbb{R}^{m \times n}$ s.t. $A+BK$ is Hurwitz (cf. KRT).The latter is equivalent to the existance $P = P^T > 0$ s.t. $P(A+BK) + (A+BK)^TP < 0$ (cf. Khalil theorem 4,6)
+
+Let $V: \mathbb{R}^n \to \mathbb{R}, x \mapsto <x, Px>$. Moreover, $\forall x \neq 0 \exists u = Kx$ s.t. $<\triangledown V(x), Ax+Bu> < 0$, since 
+\begin{equation*}
+<\triangledown V(x), Ax+Bu> =^{u = Kx} <x, (P(A+BK)+ (A+BK)^TP)x> < 0
+\end{equation*} 
+
+In addition,
+\begin{equation*}
+\forall \epsilon > 0 \exists \delta = \frac{\epsilon}{\|K\| } > 0 \ \forall x \neq 0, \ \|x\| < \delta \ \exists u = Kx \ \|u\| < \epsilon 
+\end{equation*}
+s.t. $L_fV(x) + L_GV(x)u < 0$ since $\|u\| = \|Kx\| \leq \|K\|\|x\| < \|K\|\delta = \epsilon$
+
+Problem 3
+
+Let $P: \mathbb{R}^2 \to \mathbb{R}$ be continuous, differentiable consider 
+\begin{equation*}
+m\dot{v}  = - g \triangledown P(q) + F, \ m,g >0
+\end{equation*} 
+a) Hamiltonian form. Let $x:=(q,v)$. Then $\dot{x} = (-\frac{g}{m}\triangledown P(q) + \frac{1}{m}F)= \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix}\begin{bmatrix}
+ \frac{g}{m}\triangledown P(q) \\
+ V 
+\end{bmatrix} + \begin{bmatrix}
+  \\
+ \frac{1}{m}I
+\end{bmatrix}F = \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)$ given $H(x) = \frac{1}{2}\|\nu\|^2 + \frac{g}{m}P(q)$
+
+b) "CLF". Take $H$ as a CLF candidate. Then, for any $x$ 
+\begin{equation*}
+<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)F> = <\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x)> + <\triangledown H(x), G(x)F> = [<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x)> = L_fH(x) = 0] = \frac{1}{m} <\nu, F>
+\end{equation*}
+
+Strictly speaking, $H$ is no CLF, but it reveals how to choose $F$ s.t. the origin is GAS.
+
+For any point $x$ for which there exists no control $F$ s.t. $<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)F> < 0$
+
+Choose $F = 0$. Why? Using the Krasovsky-Lasallle inv. principle, we conclude that the origin is GAS, since any solution in $\{ x| \dot{H}(x) = 0 \}$ verifies $v(t) \equiv 0$, implying $\dot{v}(t) \equiv 0$ s.t. 
+\begin{equation*}
+0 = - \frac{g}{m} \triangledown P(q(t)) + \frac{1}{m} P(t)
+\end{equation*}
+The last part equals 0.  Since $F = 0$ (by choice) and $\triangledown P(q) = 0$ iff $q = 0$ we conclude that $\dot{H}(x) = 0$ can only be "maintained" at the origin.
+
+Problem 4
+
+Consider 
+
+\begin{equation*}
+\dot{x_1} = x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = - ux_2 + u^3
+\end{equation*}
+
+show that $V(x) = \frac{1}{2} x_1^2 + \frac{1}{2}(x_1 +x_2)^2$ is CLF and let $V: \mathbb{R}^n \to \mathbb{R}$ be defined by
+
+\begin{equation*}
+\ddot{x} + u\dot{x} - u^3 = 0
+\end{equation*}
+
+For any $x$ and $u$, we have $<\triangledown V(x), f(x,u)> = \dots = x_1(2x_2 -ux_2 + u^3) + x_2(x_2 - ux_2 + u^3) = x_1h_1 + x_2h_2$
+
+Image to be inserted
+
+Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,u)> < 0$.
