@@ -1,0 +1,185 @@
+\section{Explicit MPC}
+
+Idea: Compute an "explicit MPC control law" by solving the optimization problem for all x.
+
+Linear discrete-time systems $x^+=Ax+Bu$
+
+Polytopic inout+state constraints $C_xx \leq d_x, \ С_u \leq d_u$
+
+MPC problem. At time $t$, given $x(t)$, solve
+\begin{equation*}
+\min_{u(\cdot|t)} = \sum_{k=t}^{t+N-1}L(x(k|t),u(k|t)) + F(x(t+N|t))
+\end{equation*}
+s.t.
+\begin{equation*}
+x(k+1|t) = Ax(k|t) + Bu(k|t)
+\end{equation*}
+\begin{equation*}
+x(t|t) = x(t)
+\end{equation*}
+\begin{equation*}
+C_xx(k|t) \leq d_x
+\end{equation*}
+\begin{equation*}
+C_uu(k|t) \leq d_u
+\end{equation*}
+for $ t \leq k \leq t+N-1$ and with terminal constraint
+\begin{equation*}
+C^fx(t+N|t) \leq d^f
+\end{equation*}
+with $L(x,u) = x^TQx + u^TRu, \ Q,R > 0, \ F(x) = x^TPx$
+
+$\Rightarrow$ optimizer: $u^*(\cdot|t)$
+
+Define: 
+\begin{equation}
+X:= [x^T(t+1|t), \dots, x^T(t+N|t)]^T
+\end{equation}
+\begin{equation}
+U:= [u^T(t+1|t), \dots, u^T(t+N-1|t)]^T
+\end{equation}
+\begin{itemize}
+\item rewrite cost function
+\begin{equation}\label{cost_function}
+F(x(t),U) = x^T(t)Qx(t) + x^T\tilde{Q}x + u^T\tilde{R}u
+\end{equation}
+with $\tilde{Q} = 
+\begin{bmatrix}
+    Q  & \  & \ \\
+    \  &\ddots & \\
+     \  & \ & Q_P     
+\end{bmatrix} $, 
+$\tilde{R} = 
+\begin{bmatrix}
+    R  & \  & \ \\
+    \  &\ddots & \\
+     \  & \ & R     
+\end{bmatrix} $
+\item rewrite predicted states: $x(t+k|t) = A^kx(t) + \sum_{j=0}^{k-1}A^jBu(t+k-j-1|t), \ k=1,..,N$
+\begin{equation}\label{rewritten_state_input}
+\Rightarrow X=\begin{bmatrix}
+   A \\
+   A^2 \\
+   \vdots \\
+   A^N   
+\end{bmatrix}x(t) +\begin{bmatrix}
+    B  & 0 & \dots &  & 0 \\
+    AB & B & 0 & \dots & 0\\
+    \hdots & & & & \\
+    A^{N-1}B  & A^{N-2}B & \dots & \dots & B     
+\end{bmatrix}U
+\end{equation}
+where $\Omega = \begin{bmatrix}
+   A \\
+   A^2 \\
+   \vdots \\
+   A^N   
+\end{bmatrix}$ and $\Gamma = \begin{bmatrix}
+    B  & 0 & \dots &  & 0 \\
+    AB & B & 0 & \dots & 0\\
+    \hdots & & & & \\
+    A^{N-1}B  & A^{N-2}B & \dots & \dots & B     
+\end{bmatrix}$
+
+Plugging (\ref{rewritten_state_input}) in (\ref{cost_function}) : $J(x(t),U) = \frac{1}{2}x^T(t)Yx(t) + \frac{1}{2}U^THU + x^T(t)FU$
+with
+\begin{equation*}
+Y = 2(Q + \Omega^T \tilde{Q} \Omega)
+\end{equation*}
+\begin{equation*}
+H = 2(\Gamma^T\tilde{Q}\Gamma + \tilde{R})
+\end{equation*}
+\begin{equation*}
+F = 2\Omega^T \tilde{Q} \Gamma
+\end{equation*}
+
+\item rewrite constraints: using (\ref{rewritten_state_input})
+\begin{equation*}
+\begin{bmatrix}
+    C_x  & \  & \ \\
+    \  &\ddots & \\
+     \  & \ & C_x     
+\end{bmatrix} (\Omega_x(t) + \Gamma U) \leq \begin{bmatrix}
+   d_x \\
+   \vdots \\
+   d_x   
+\end{bmatrix}
+\end{equation*}
+$\Rightarrow$ constraints in total
+\begin{equation*}
+GU \leq W + Ex(t)
+\end{equation*}
+\end{itemize}
+
+\begin{equation*}
+\min_U \frac{1}{2} U^THU + x^TFU + \frac{1}{2}x^TYx
+\end{equation*}
+s.t. $GU \leq W + Ex$
+
+multiparametric quadratic program (MPQP)
+
+Last step: definite $z:=U+H^{-1}F^Tx$, $H^{-1}$ - pos.definite 
+
+\begin{equation}\label{rewritten_problem}
+\min_{z} \frac{1}{2}z^THz + \frac{1}{2}x^T \tilde{Y}x
+\end{equation}
+s.t. $GZ \leq W + Sx$
+\begin{equation*}
+\tilde{Y} := Y - FH^{-1}F^T
+\end{equation*}
+\begin{equation*}
+S := E + GH^{-1}F^T
+\end{equation*}
+
+This is a (strictly) convex optimization problem with (by assumption) feasible set with non-empty interior $\leadsto$ Slater's condition satisfied
+
+$\Rightarrow$ Optimal solution (unique!) is characterized by following KKT conditions
+
+\begin{equation}\label{condition_a}
+Hz + G^T\lambda = 0, \ \lambda \in \mathbb{R}^q
+\end{equation}
+
+$\triangledown$(cost + $\lambda^T$constraints) = 0, complementary slackness condition below
+\begin{equation}\label{condition_b}
+\lambda^i(G^iz - W^i-S^ix) = 0 \ i=1, ...q
+\end{equation}
+
+$i$ - th component of vector $\lambda$ or $G$
+
+\begin{equation}\label{condition_c}
+\lambda \geq 0
+\end{equation}
+\begin{equation}\label{condition_d}
+Gz \leq W + Sx
+\end{equation}
+
+image to be inserted
+
+\begin{Definition}
+optimal active set $z^*(x) \dots$ optimal solution to (\ref{rewritten_problem}) for a given $x$
+\begin{equation*}
+A(x) := \{ i \in \{1, \dots q\} | G^iz^*(x) = W^i + S^ix \}
+\end{equation*}
+
+$\leadsto G^A, \ W^A, \ S^A \dots$ matricies containing rows of $G, \ U, \ S$ associated to indices in $A$ 
+\end{Definition}
+
+Assumption: Linear independence constraint qualification (LICQ) $G^A$ has full row rank ("gradient of active constraints are linearly independent")
+
+From (\ref{condition_a}) 
+\begin{equation}\label{active_constraint}
+\leadsto z^*(x) = -H^{-1}G^T\lambda = -H^{-1}(G^A)^T\lambda^A
+\end{equation}
+
+For all active constraints, we have $G^Az^(x) = W^A + S^Ax \to^{(\ref{active_constraint})} - G^AH^-1(G^A)^T\lambda^A = W^A+S^Ax$
+
+\begin{equation}\label{lambda_equation}
+\lambda^A = - (G^AH^(-1)(G^A)^T)^(-1)(W^A+S^Ax)
+\end{equation} 
+
+Plug (\ref{lambda_equation}) into (\ref{active_constraint}):
+\begin{equation}\label{optimal_z}
+z^*(x) = H^(-1)(G^A)^T(G^AH^(-1)(G^A)^T)^(-1)(W^A + S^Ax)
+\end{equation}
+
+For a given active constraint set, optimal solution is an affine function of $x$.
