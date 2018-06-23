@@ -111,9 +111,9 @@ GU \leq W + Ex(t)
 \end{equation*}
 \end{itemize}
 
-\begin{equation*}
+\begin{equation}\label{standard_problem}
 \min_U \frac{1}{2} U^THU + x^TFU + \frac{1}{2}x^TYx
-\end{equation*}
+\end{equation}
 s.t. $GU \leq W + Ex$
 
 multiparametric quadratic program (MPQP)
@@ -183,3 +183,66 @@ z^*(x) = H^(-1)(G^A)^T(G^AH^(-1)(G^A)^T)^(-1)(W^A + S^Ax)
 \end{equation}
 
 For a given active constraint set, optimal solution is an affine function of $x$.
+
+Characterization of the set where $A$ is an optimal active set (critical region $CR^A$)
+
+Use (\ref{condition_c}), (\ref{condition_d}): Plug (\ref{optimal_z}) into (\ref{condition_d})
+\begin{equation}\label{inequality_with_z}
+GH^(-1)(G^A)^T(G^AH^{-1}(G^A)^T)^{-1}(W^A+S^Ax) \leq W + Sx
+\end{equation}
+
+Plug (\ref{lambda_equation}) into (\ref{condition_c})
+\begin{equation}\label{c_condition_with_lambda}
+-(G^AH^{-1}(G^A)^T)^{-1}(W^A+S^Ax) \geq 0
+\end{equation}
+
+(\ref{inequality_with_z}) + (\ref{rewritten_problem}) describe critical region $CR^A$, on which the optimal solution is given by (\ref{lambda_equation}) -(\ref{optimal_z})
+
+image to be inserted
+
+Algorithm:
+\begin{itemize}
+\item Take some $x_0 \in X$ (e.g., $x_0 = 0$)
+\item Solve (\ref{rewritten_problem}) with $x = x_0 \leadsto z*(x_0)$
+\item Identify active constraints $\leadsto G^A, W^A, S^A$
+\item Calculate the corresponding critical region $CR^A$ via (\ref{inequality_with_z}) and (\ref{c_condition_with_lambda})
+$\Rightarrow$ inside this critical region, solution to (\ref{rewritten_problem}) is given by (\ref{optimal_z})
+\item Step over all facets of this first critical region, take new $x_0$ go to (\ref{rewritten_state_input})
+\end{itemize}  
+
+What happens if more than two critical regions are adjacent to a critical region?
+
+Procedure needs to be suitably adapted in case of degenerate problems (LICQ assumption cost satisfied)
+
+Can merge critical regions if union is convex and the resulting control la is the same
+
+Main bottleneck: number of regions can grow very quickly
+\begin{itemize}
+\item online point-location problem becomes complex
+\end{itemize}
+
+\begin{Theorem}
+For linear MPC (linear system, linear constraints, quadratic cost), the resulting MPC positive definite controller $u_{MPC}(x)$ is continuous and piecewise affine over polyhedral regions. The optimal value function to (\ref{standard_problem}), $F^*(x)$, is continuous, convex and piecewise quadratic.
+\begin{proof}
+\begin{itemize}
+\item $u_{MPC}(x)$ is affine by (\ref{optimal_z})
+\item since solution is unique and a point on the boundary of two regions belongs to both regions, the two control laws must be equal on the boundary $\Rightarrow u_{MPC}$ - continuous
+\item optimal value function of (\ref{rewritten_problem})
+\begin{equation*}
+J_z^*(x) = \frac{1}{2}z^*(x)^THz^*(x) 
+\end{equation*} 
+continuous and piecewise quadratic
+$\leadsto$ can show that it is convex (by standard arguments) $\leadsto u^*(x) = z^*(x) - H^{-1}F^Tx$
+\begin{equation*}
+J^*(x) = \frac{1}{2}U^*(x)^THU^*(x) + x^TFU^*(x) + \frac{1}{2}x^TYx = \dots = J_z^*(x) + \frac{1}{2}x^T(Y-FH^{-1}F^T)x
+\end{equation*}
+First term is convex, continuous piecewise quadratic, the second term is continuous quadratic + convex.
+
+Why convex?
+$\begin{bmatrix}
+Y & F^T \\
+F & H
+\end{bmatrix} \geq 0$ as $J(x,u(\cdot)) \geq 0 \leadsto$ Schur complement implies $Y-FH^{-1}F^T \geq 0$ 
+\end{itemize}
+\end{proof}
+\end{Theorem}
