@@ -1,0 +1,499 @@
+\section{Exercises}
+
+\subsection{Exercise 1}
+
+Problem 1:
+\begin{proof}
+    For any $t \ge 0$, we have
+    $$\frac{d}{dt}V(x(t)) = \frac{d}{dt}(V \circ x)(t) = \langle \nabla V(x(t)), \frac{d}{dt}x(t) \rangle = \langle \nabla V(x(t)),f(x(t)) \rangle = L_fV(x(t))$$
+\end{proof}
+
+Problem 2:
+\begin{proof}
+    \begin{Lemma}
+        Given the assumptions in Problem 2, if there exists a solution $x: [ 0,+\infty ] \to R^n, t \to x(t)$, of $\dot x = f(x)$ s.t. $x(t) \in K$ for any $t \ge 0$, where $k \subset R^n$ is a compact with $O \in K$ (O - origin), then $x(t) \xrightarrow{t \to + \infty} 0.$
+    \end{Lemma}
+    
+    Clearly, for any $c > 0, lev_{\le c}V$ is positive invariant w.r.t $\dot x = f(x)$. Given $c > 0$, let $x_0 \in lev_{\le c}V$, i.e., $V(x_0) \le c$. Then, for any $t \ge 0$
+    $$V(x(t)) = V(x_0) + \int_0^t \frac{d}{dt}V(xx(\tau))d\tau < V(x_0) \le c,$$
+    i.e. $x(t) \in lev_{\le c}V$ for any $t \ge 0$. \\
+    Then, for any $x_0 \in lev_{\le c}V$ there exists a solution $x: [ 0,+\infty ] \to R^n$ of $\dot x = f(x)$ s.t. $x(t) \in lev_{\le c}V$ for all $t \ge 0$.
+    Clearly, $O \in lev_{\le c}V$. We conclude by using the above Lemma $(K = lev_{\le c}V)$.
+\end{proof}
+
+Problem 3:
+\begin{proof}
+    Let $r > 0$. By assumption, there exists $c > 0$ s.t. $\overline{B(0,r)} \subset lev_{\le c}V$. \\
+    Since any bounded set $lev_{\le c}V$ is a subset of the region of attraction, and since the sublevel sets are arbitrary large, $R^n$ is also the region of attraction. \\
+    A condition that ensures that for any $c > 0, lev_{\le c}V$ is bounded is $V(x) \xrightarrow{||x|| \to + \infty} + \infty$.
+\end{proof}
+
+Problem 4:
+\begin{proof}
+    Let $P:R^2 \to R^2$ be continuously differentiable. Consider
+    $$m \dot v = -g \nabla P(q).$$
+    Consider $x=(q,v), \dot q = v, \dot v = - \frac{g}{m} \nabla P(q)$. Let $H:R^2 \to R$ be defined by
+    $$H(q,r) = \frac{1}{2}||v||^2+\frac{g}{m}P(q).$$
+    We have
+    $$\begin{pmatrix}
+        \dot q \\
+        \dot r
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \space & I \\
+        -I & \space
+    \end{pmatrix}
+    \nabla H(q,r)$$
+    Since $P$ is positive definite, then $H$ is positive definite. \\
+    Then
+    $$L_{\begin{pmatrix} \space & I \\ -I & \space \end{pmatrix} \nabla H}H(q,r) = \langle \nabla H(q,r), \begin{pmatrix} \space & I \\ -I & \space \end{pmatrix} \nabla H(q,r) \rangle = 0 \ \ \forall (q,r) \in R^2 \times R^2$$
+    $\implies$ the origin is stable.
+\end{proof}
+
+Problem 5:
+\begin{proof}
+    For any $t \ge 0$, we have \\
+    $\frac{d}{dt}V(t,x(t)) = \frac{d}{dt}(V \circ (id_R,x))(t) = [id_R: R \to R, t->t] = \langle \begin{pmatrix}
+            \frac{\partial}{\partial t}V(t,x(t)) \\
+            \frac{\partial}{\partial x}V(t,x(t))
+            \end{pmatrix},
+    \frac{d}{dt}(id_R(t),x(t)) \rangle = 
+    \langle \begin{pmatrix}
+            \frac{\partial}{\partial t}V(t,x(t)) \\
+            \frac{\partial}{\partial x}V(t,x(t))
+            \end{pmatrix},
+            \begin{pmatrix}
+            1 \\
+            f(t,x(t))
+            \end{pmatrix} = 
+            \frac{\partial}{\partial t}V(t,x(t)) + \langle \frac{\partial}{\partial t}V(t,x(t)), f(t,x(t)) \rangle = L_{\begin{pmatrix} 1 \\ f \end{pmatrix}}V(x(t)).$
+            
+            $g(t,x(t)) :=   \begin{pmatrix}
+                            1 \\
+                            f(t,x(t))
+                            \end{pmatrix}$
+\end{proof}
+
+Problem 6:
+\begin{proof}
+    Consider $\dot x = a \sin(\omega t), \ \ x(0)=x_0 \in R \ \ a, \omega >0.$ \\
+    This is solved by $x(t) = - \frac{a}{\omega} \cos (\omega t) + \frac{a}{\omega} + x_0.$ \\
+    % TODO Picture
+    Clearly, $x$ is bounded on $[0, +\infty]$ since $x(t) \ge x_0$, and $x(t) \le x_0+2 \frac{a}{\omega}$ for any $t \ge 0$. \\
+    Choose $\varepsilon = \frac{a}{\omega}$ and $t_0=0$. Then $\forall \delta > 0 \ \ \exists x_0 \in B(0, \delta)$, namely $x_0$, s.t. $\exists t \ge t_0$, namely $t=\frac{\pi}{\omega}$, with $x(t) \notin B(0, \varepsilon) \ \ (x(\frac{\pi}{\omega})=2\frac{a}{\omega} > \varepsilon).$
+\end{proof}
+
+Short notes: \\
+
+Problem 7: \\
+Take $V(t,x)=\frac{1}{2}x^2$.\\
+
+Problem 8: \\
+Take $V(t,x)=x_1^2+(1+e^{-2t})x_2^2.$
+
+
+\subsection{Exercise 2}
+
+Problem 1:
+\begin{proof}
+    a) Since $\alpha_1$ is continuous and strictly increasing:
+    $$\forall x,y \in [0,\delta), x<y \ \ \alpha_1(x)<\alpha_1(y)$$
+    $\implies \alpha_1$ is injective, i.e.
+    $$\forall x,y \in [0, \delta), x \neq y \implies \alpha_1(x) \neq \alpha_1(y).$$
+    Clearly, $\alpha_1:[0,\delta) \rightarrow \alpha_1([0,\delta))$ is surjective, i.e.
+    $$\forall y \in \alpha_1([0,\delta)) \ \ \exists x \in [0,\delta): \ \ \alpha_1(x)=y$$
+    Thus $\alpha_1$ is bijective.\\
+    Define $\alpha_1^{-1}:[0,\alpha_1(\delta)) \rightarrow [0,\delta)$ by $\alpha_1^{-1}(\alpha_1(x))=x$.
+    
+    b) From a) we have $\alpha_3^{-1} \in K$. Since $\alpha_3 \in K_{\infty}, \alpha_3{-1}$ is defined om $[0,+\infty)$ and $\alpha_3^{-1}(r) \xrightarrow[]{r \rightarrow \infty}\infty$
+    
+    c) Let $\alpha=\alpha_1 \circ \alpha_2$. Then we have $\alpha(0)=\alpha_1(\alpha_2(0))=0$ and $\alpha(r)>0$ whenever $r>0$. Moreover, for any $x,y$:
+    $$x<y \implies \alpha_2(x) < \alpha_2(y) \implies \alpha(x)=\alpha_1(\alpha_2(x))<\alpha_1(\alpha_2(y))=\alpha(y)$$
+    It is continuous (as composition of continuous functions).
+    
+    d) From c) we have $\alpha:=\alpha_3 \circ \alpha_4 \in K, \alpha$ is defined on $[0,+\infty)$ since $\alpha_3, \alpha_4 \in K_{\infty}$ and
+    $$r \rightarrow +\infty \implies \alpha_4(r) \rightarrow +\infty \implies \alpha(r) \rightarrow +\infty$$
+    
+    e) For each $s, r \mapsto \beta(\alpha_2(r),s)$ is of class $K$.\\
+    Thus $r \mapsto \alpha_1(\beta(\alpha_2(r),s)) \in K$.\\
+    For each $r, s \mapsto \beta(\alpha_2(r),s)$ decreases.\\ 
+    Hence, $s \mapsto \alpha_1(\beta(\alpha_2(r),s))$ decreases.\\
+    Moreover,
+    $$\alpha_1(\beta(\alpha_2(r),s)) \xrightarrow{s \rightarrow +\infty} 0$$
+\end{proof}
+
+Problem 3:
+\begin{proof}
+    For $u=0$ the origin is UGAS. Consider $V:[0,+\infty) \times R \rightarrow R, \ \ (t,x) \mapsto \frac{1}{2}x^2$. \\
+    We have
+    $$\frac{\partial}{\partial t}V(t,x) + \frac{\partial}{\partial x}V(t,x)f(t,x,u) = (\sin(t)-2)x^2+xu \le -x^2+|x||u| = -(1-\theta)x^2-\theta x^2+|x||u|, \ \ \theta \in (0,1)$$
+    Hence, whenever $|x| \ge \frac{|u|}{\theta}$, the system is ISS with $\gamma=\frac{r}{\theta}$.
+\end{proof}
+
+Problem 4:
+\begin{proof}
+    \begin{equation} \label{ex:2:4:a}
+        \dot x = -x + (x^2+1)d
+    \end{equation}
+        \begin{equation} \label{ex:2:4:b}
+        \dot x = -2x -x^3 + (x^2+1)d
+    \end{equation}
+    
+    System (\ref{ex:2:4:a}): Clearly, the system is 0-GAS. However, for $d=1$ and $x>1$ we have $x^2+1>x$.
+    $$f(x,1) = -x+(x^2+1)>0$$
+    and thus $\dot x>0$. Hence, if $x(0)=x_0>1$, the solution diverges (in finite time).\\
+    $\implies$ System (\ref{ex:2:4:a}) isn't ISS.
+    
+    System (\ref{ex:2:4:b}): It is 0-GAS. Moreover, for any finite $d$ there exists a "large" $x$ s.t.
+    $$2x+x^3>(x^2+1)d$$
+    $$\implies f(x,d) = -2x-x^3+(x^2+1)d<0$$
+    and $\dot x<0 \implies$ System \ref{ex:2:4:b} is ISS.\\
+    Consider $V:R \rightarrow R, x \mapsto \frac{1}{2}x^2$ s.t
+    $$V'(x)f(x,d)=-2x^2-x^4+x(x^2+1)d \le -x^2-x^2(x^2+1)+(x^2+1)|x||d|$$
+    Hence, whenever $|x| \ge |d|$,
+    $$V'(x)f(x,d) \le -x^2$$
+    s.t. system (\ref{ex:2:4:b}) is ISS with $\gamma (r) = r$.
+    \end{proof}
+    
+    Problem 5:
+    \begin{proof}
+        $$\langle \nabla V(x),-\nabla V(x)+\delta u\rangle \le -||\nabla V(x)||^2+|\langle \nabla V(x), \delta u \rangle| \le [YI] \le -||\nabla V(x)||^2+\frac{1}{2}||\nabla V(x)||^2+\frac{\delta^2}{2}||u||^2$$
+        
+        Young's inequality: \\
+        $$\forall x,y: \ \ |\langle x,y \rangle| \le \varepsilon \frac{||x||^p}{p}+\frac{||y||^q}{\varepsilon q}, \ \ p,q>1, \frac{1}{p}+\frac{1}{q}=1, \varepsilon>0$$
+        
+        Hence, whenever $||x||>\frac{\delta}{\sqrt{c}}||u||, t \mapsto ||x(t)||$ is decreasing. \\
+        Moreover whenever $||x|| \ge \frac{\delta}{\sqrt{c\theta}}||u||, \theta \in (0,1)$, we have $\langle \nabla V(x),-\nabla V(x)+\delta u\rangle \le -\frac{c}{2}(1-\theta)||x||^2 \implies$ ISS. 
+    \end{proof}
+    
+    \subsection{Exercise 4}
+    
+    Consider
+    \begin{equation} \label{ex:4:theory:1}
+    \left\{\begin{array}{ll}
+        \dot x_1 = f_1(x_1)+g_1(x_1)x_2 \\
+        \dot x_2 = f_2(x_1)+g_2(x_1,x_2)u
+    \end{array} \right.
+    \end{equation}
+    Using the "preliminary control"
+    \begin{equation} \label{ex:4:theory:2}
+    \left\{\begin{array}{ll}
+        \dot x_1 = f_1(x_1)+g_1(x_1)x_2 \\
+        \dot x_2 = \check u
+    \end{array} \right.
+    \end{equation}
+    $$u=\frac{1}{g_2(x_1,x_2)}(\check u - f_2(x_1,x_2))$$
+    Idea: Look at the upper(-most) system only and consider $x_2$ as a "virtual control". \\
+    
+    Assumptions: Suppose \\
+    \begin{itemize}
+        \item $\exists$ CLF $V_1$;
+        \item $\exists$ (smooth) feedback $\alpha_1$ s.t. $L_{f_1+g_1\alpha_1}V_1 < 0$.
+    \end{itemize}
+    Now, add and subtract $g_1\alpha_1$ in \ref{ex:4:theory:2} s.t.
+    \begin{equation} \label{ex:4:theory:3}
+    \left\{\begin{array}{ll}
+        \dot x_1 = f_1(x_1)+g_1(x_1)\alpha_1(x_1)+g_1(x_1)(x_2-\alpha_1(x_1)) \\
+        \dot x_2 = \check u
+    \end{array} \right.
+    \end{equation}
+    Next, introduce $(e_1,e_2):=(x_1-0,x_2-\alpha_1(x_1))$ s.t.
+     \begin{equation} \label{ex:4:theory:4}
+    \left\{\begin{array}{ll}
+        \dot e_1 = f_1(e_1)+g_1(e_1)\alpha_1(e_1)+g_1(e_1)e_2 \\
+        \dot e_2 = \check u - \dot \alpha_1(e_1)
+    \end{array} \right.
+    \end{equation}
+    
+    Problem 1:
+    $$\begin{pmatrix}
+        \dot x_1 \\
+        \dot x_2
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 1 \\
+        0 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_1 \\
+        x_2
+    \end{pmatrix} + 
+    \begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix} u$$
+    
+    \begin{proof}
+        \begin{enumerate}
+            \item Choose "virtual control":\\
+            $$x_2 = -(k+1)x_1 =: \alpha_1(x_1), \ \ k>0$$
+            The origin of $\dot x_1 = -kx_1$ is GAS. \\
+            (Take $V_1: R \rightarrow R, \ \ x_1 \mapsto \frac{1}{2}x_1^2$ s.t. $\dot V_1(x_1) = -kx_1^2 < 0$ for all $x_1 \neq 0$)
+            \item Error coordinates:\\
+            Let $(e_1,e_2):=(x_1-0,x_2-\alpha_1(x_1))$ s.t.
+            $$\dot e_1 = -ke_1+e_2$$
+            $$\dot e_2 = u+(k+1)(-ke_1+e_2)$$
+            \item "Composite CLF":\\
+            Define $V:R \times R \rightarrow R, \ \ (e_1,e_2) \mapsto V_1(e_1)+\frac{1}{2}e_2^2$ s.t.
+            $$\dot V (e_1,e_2) = -ke_1^2 + e_2(u+(k+1)(-ke_1+e_2)+e_1)$$
+            \item Choose control:\\
+            Let $u = -e_1-(k+1)(e_2-ke_1)-ke_2$ \\
+            s.t. $\dot V(e_1,e_2) = -ke_1^2-ke_2^2 < 0$ for all $(e_1,e_2) \neq (0,0)$
+        \end{enumerate} 
+        
+        Remark: The closed-loop system reads:
+        $$\begin{pmatrix}
+        \dot e_1 \\
+        \dot e_2
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            -k & 1 \\
+            -1 & -k
+        \end{pmatrix}
+        \begin{pmatrix}
+            e_1 \\
+            e_2
+        \end{pmatrix}$$
+    \end{proof}
+    
+    Problem 2:
+    $$\dot x_1 = x_1(x_2-k), \ \ k>0$$
+    $$\dot x_2 = u$$
+    \begin{proof}
+        \begin{enumerate}
+            \item $x_2 = 0 =: \alpha_1(x_1)$ \\
+            The origin of $\dot x_1 = -kx_1$ is GAS ($V_1(x_1) = \frac{1}{2}x_1^2$)
+            \item $(e_1,e_2) := (x_1,x_2)$ s.t.
+            $$\dot e_1 = e_1(e_2-k)$$
+            $$\dot e_2 = u$$
+            \item $V(e_1,e_2) = V_1(e_1)+\frac{1}{2}e_2^2$ s.t. \\
+            $$\dot V(e_1,e_2) = -ke_1^2 + e_2(e_1^2+u)$$
+            \item $u=-e_1^2-ke_2$
+        \end{enumerate}
+    \end{proof}
+    
+    Problem 3:
+    $$\dot x_1 = x_1(x_2-k)$$
+    $$\dot x_2 = x_2(x_3-k)-x_1^2$$
+    $$\dot x_3 = u$$
+    \begin{proof}
+        \begin{enumerate}
+            \item From problem 2: \\
+            $\dot x_2 = x_2(x_3-k)-x_1^2 = - x_1^2-kx_2 = u$ in Problem 2.\\
+            The origin of 
+            $$\dot x_1 = x_1(x_2-k)$$
+            $$\dot x_2 = x_2(x_3-k)-x_1^2$$
+            is GAS. \\
+            And this is true for $x_3 = 0 =: \alpha_2(x_1,x_2)$.
+            \item $(e_1,e_2,e_3) := (x_1-0, x_2-\alpha_1(x_1), x_3-\alpha_2(x_1,x_2))$ s.t.
+            $$\dot e_1 = e_1(e_2-k)$$
+            $$\dot e_2 = e_2(e_3-k)-e_1^2$$
+            $$\dot e_3 = u$$
+            \item $V(e_1,e_2,e_3) = V_1(e_1)+\frac{1}{2}e_2^2+\frac{1}{2}e_3^2$ s.t. \\
+            \item $u=-e_2^2-ke_3$
+        \end{enumerate}
+    \end{proof}
+    
+    Problem 4:
+    $$\dot x_1 = x_1(x_2-k)$$
+    $$\dot x_2 = x_2(x_3-k)-x_1^2$$
+    $$\dot x_3 = x_3(x_4-k)-x_2^2$$
+    $$\dot x_4 = u$$
+    \begin{proof}
+        \begin{enumerate}
+            \item Is GAS for
+            $$x_3(x_4-k)-x_2^2 = - x_2^2-kx_3$$
+            which is attained for $x_4 = 0 =: \alpha_3(x_1,x_2,x_3)$.
+            \item
+            $$\dot e_1 = e_1(e_2-k)$$
+            $$\dot e_2 = e_2(e_3-k)-e_1^2$$
+            $$\dot e_3 = e_3(e_4-k)-e_2^2$$
+            $$\dot e_4 = u$$
+            \dots
+            \item $u=-e_3^2-ke_4$
+        \end{enumerate}
+    \end{proof}
+    
+    Problem 5:
+    $$\dot x_1 = x_1(x_2-k)$$
+    $$\dot x_2 = x_2(x_3-k)-x_1^2$$
+    $$\dots$$
+    $$\dot x_i = x_i(x_{i+1}-k)-x_{i-1}^2$$
+    $$\dots$$
+    $$\dot x_n = u$$
+    \begin{proof}
+        We will always have $u = e_{n-1}^2-ke_n$. \\
+        Let $V: R \times \dots \times R \rightarrow R, \ \ (e_1, \dots e_n) \mapsto \sum_{i=1}^n V_i(e_i)$, where $V_i(e_i) = \frac{1}{2}e_i^2, \ \ i=2, \dots n$.\\
+        We have $\dot V(e_1, \dots e_n) = L_{f_1+g_1\alpha_1}V_1(e_1)-k\sum_{i=2}^{n-1}e_i^2 + e_nu + e_{n-1}g_{n-1}(x_1, \dots x_{n-1})e_n - e_n \dot \alpha_{n-1}(x_1, \dots x_{n-1}).$\\
+        We observe that for $\alpha_i$ being zero, the inequality
+        $$e_{n-1}g_{n-1}(x_1, \dots x_{n-1})e_n - e_n \dot \alpha_{n-1} (x_1, \dots x_{n-1}) + e_nu < 0$$
+        hence $e_{n-1}^2e_n + e_nu < 0$ for non-zero $e$.\\
+        It is solved by $u = e_{n-1}^2 - ke_n, \ \ k>0$.
+    \end{proof}
+    
+
+\subsection{Exercise 3}
+
+Motivation: Lyapunov Theory
+
+\begin{equation*}
+\dot{x} = f(x,u)
+\end{equation*}
+$f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^n$
+
+\begin{Definition}
+(CLF) A function $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF if it is continuous differentiable, positive definite, radially unbounded and $ \forall x \neq 0 \ \inf_{u}< \triangledown V(x), f(x,u) > < 0$ 
+\end{Definition}
+
+In order to find CLFs, we restrict our analysis to input -affine systems
+\begin{equation*}
+\dot{x} = f(x) + G(x)u
+\end{equation*}
+where $f: \mathbb{R}^n \to \mathbb{R}^n, \ G: \mathbb{R}^n \to \mathbb{R}^{n \times m}$
+
+Proposition: A continuous, differentiable, positive definite and radially unbounded. $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF iff 
+\begin{equation*}
+\forall x \neq 0 \ L_GV(x) = 0 \Rightarrow L_fV(x) < 0
+\end{equation*}
+
+Image to be inserted
+
+Problem 1
+
+Consider $\dot{x} = cos(x) + (1+e^x)u$ where $f(x) = cos(x)$- drift and $g(x) = 1+e^x$
+
+Let $V: \mathbb{R} \to \mathbb{R}, \ x \mapsto \frac{1}{2}x^2$. Clearly, continuous differentiable, positive definite and radially unbounded. Moreover, for any nonzero $x$, we have $L_GV(x) \neq 0$. 
+
+Thus, for any $x \neq 0$, there exists a control that readers $<\triangledown V(x), f(x) + g(x)u>$ negative. 
+Givn this CLF, there exists a state feedback $u = u(x)$, e.g. 
+\begin{equation*}
+u(x) = - \frac{kx+cos(x)}{1+e^x}, \ k > 0
+\end{equation*}
+
+Problem
+
+Consider 
+\begin{equation*}
+\dot{x_1} = -x_1^3 + x_2e^{x_1}cos(x_2)
+\end{equation*}  
+\begin{equation*}
+\dot{x_2} = x_1^5sin(x_2) + u
+\end{equation*}
+
+Take $V: \mathbb{R}^2 \to \mathbb{R}, \ (x_1, x_2) \mapsto \frac{1}{2}(x_1^2 + x_2^2)$
+
+For any $x \neq 0$, we have 
+\begin{equation*}
+\inf_{u \in \mathbb{R}}(L_fV(x) + L_GV(x)u) = 
+\left \{ 
+\begin{tabular}{cc} 
+$L_fV(x), \ $ & $if\ L_GV(x) = 0$ \\ 
+$- \infty$ & $else$ 
+\end{tabular} 
+\right.
+\end{equation*}
+
+In particular,
+\begin{equation*}
+L_fV(x) = \dots = x_1(-x_1^3 + x_2e^x_1 cos(x_2)) + x_2x_1^5sin(x_2)
+\end{equation*}
+\begin{equation*}
+L_GV(x) = \dots = x_2
+\end{equation*}
+
+However, 
+\begin{equation*}
+L_fV(x)|_{x_2 = 0} = -x_1^4 < 0 \ \forall x_1 \neq 0
+\end{equation*}
+
+Image to be inserted
+
+Concluding that $V$ is a CLF.
+
+Problem 2:
+
+$\dot{x} = Ax + Bu$, input defined system where $(A,B)$ is stabilizable, there exists $K \in \mathbb{R}^{m \times n}$ s.t. $A+BK$ is Hurwitz (cf. KRT).The latter is equivalent to the existance $P = P^T > 0$ s.t. $P(A+BK) + (A+BK)^TP < 0$ (cf. Khalil theorem 4,6)
+
+Let $V: \mathbb{R}^n \to \mathbb{R}, x \mapsto <x, Px>$. Moreover, $\forall x \neq 0 \exists u = Kx$ s.t. $<\triangledown V(x), Ax+Bu> < 0$, since 
+\begin{equation*}
+<\triangledown V(x), Ax+Bu> =^{u = Kx} <x, (P(A+BK)+ (A+BK)^TP)x> < 0
+\end{equation*} 
+
+In addition,
+\begin{equation*}
+\forall \epsilon > 0 \exists \delta = \frac{\epsilon}{\|K\| } > 0 \ \forall x \neq 0, \ \|x\| < \delta \ \exists u = Kx \ \|u\| < \epsilon 
+\end{equation*}
+s.t. $L_fV(x) + L_GV(x)u < 0$ since $\|u\| = \|Kx\| \leq \|K\|\|x\| < \|K\|\delta = \epsilon$
+
+Problem 3
+
+Let $P: \mathbb{R}^2 \to \mathbb{R}$ be continuous, differentiable consider 
+\begin{equation*}
+m\dot{v}  = - g \triangledown P(q) + F, \ m,g >0
+\end{equation*} 
+a) Hamiltonian form. Let $x:=(q,v)$. Then $\dot{x} = (-\frac{g}{m}\triangledown P(q) + \frac{1}{m}F)= \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix}\begin{bmatrix}
+ \frac{g}{m}\triangledown P(q) \\
+ V 
+\end{bmatrix} + \begin{bmatrix}
+  \\
+ \frac{1}{m}I
+\end{bmatrix}F = \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)$ given $H(x) = \frac{1}{2}\|\nu\|^2 + \frac{g}{m}P(q)$
+
+b) "CLF". Take $H$ as a CLF candidate. Then, for any $x$ 
+\begin{equation*}
+<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)F> = <\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x)> + <\triangledown H(x), G(x)F> = [<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x)> = L_fH(x) = 0] = \frac{1}{m} <\nu, F>
+\end{equation*}
+
+Strictly speaking, $H$ is no CLF, but it reveals how to choose $F$ s.t. the origin is GAS.
+
+For any point $x$ for which there exists no control $F$ s.t. $<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)F> < 0$
+
+Choose $F = 0$. Why? Using the Krasovsky-Lasallle inv. principle, we conclude that the origin is GAS, since any solution in $\{ x| \dot{H}(x) = 0 \}$ verifies $v(t) \equiv 0$, implying $\dot{v}(t) \equiv 0$ s.t. 
+\begin{equation*}
+0 = - \frac{g}{m} \triangledown P(q(t)) + \frac{1}{m} P(t)
+\end{equation*}
+The last part equals 0.  Since $F = 0$ (by choice) and $\triangledown P(q) = 0$ iff $q = 0$ we conclude that $\dot{H}(x) = 0$ can only be "maintained" at the origin.
+
+Problem 4
+
+Consider 
+
+\begin{equation*}
+\dot{x_1} = x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = - ux_2 + u^3
+\end{equation*}
+
+show that $V(x) = \frac{1}{2} x_1^2 + \frac{1}{2}(x_1 +x_2)^2$ is CLF and let $V: \mathbb{R}^n \to \mathbb{R}$ be defined by
+
+\begin{equation*}
+\ddot{x} + u\dot{x} - u^3 = 0
+\end{equation*}
+
+For any $x$ and $u$, we have $<\triangledown V(x), f(x,u)> = \dots = x_1(2x_2 -ux_2 + u^3) + x_2(x_2 - ux_2 + u^3) = x_1h_1 + x_2h_2$
+
+Image to be inserted
+
+Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,u)> < 0$.
