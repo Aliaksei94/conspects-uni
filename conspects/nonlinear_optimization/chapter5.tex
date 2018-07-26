@@ -1,0 +1,71 @@
+\section{Systems with inputs and outputs}
+
+Study/control systems $\dot{x} = f(x,u)$ with "output" $y(t)=W(x(t))$
+
+\subsection{Sliding mode control}
+
+Motivating example
+\begin{equation*}
+\dot{x_1} = x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = u \Rightarrow \dot{y} = x_2 + u
+\end{equation*}
+\begin{equation*}
+y = x_1 + x_2
+\end{equation*}
+
+Choose:
+\begin{equation*}
+u =  \left\{
+                \begin{array}{ll}
+                  -x_2-1, \ \ y > 0\\
+                  -x_2+1, \ \ y < 0\\
+                  -x_2, \ \ y=0
+                \end{array}
+              \right. 
+\end{equation*}
+\begin{equation*}
+\Rightarrow \dot y =  \left\{
+                \begin{array}{ll}
+                  -1, \ \ y > 0\\
+                  +1, \ \ y < 0\\
+                  0, \ \ y=0
+                \end{array}
+              \right. 
+\end{equation*}
+
+Solutions(Laratheodory) are if $y(0) > 0$, then 
+\begin{equation*}
+y(t) = \left\{ \begin{array}{ll}
+                  y(0) - t, \ \ t \leq y(0)\\
+                  0, \ \ t > y(0)
+                \end{array}
+              \right. 
+\end{equation*}
+If $y(0) < 0$, then
+\begin{equation*}
+y(t) = \left\{ \begin{array}{ll}
+                  y(0) + t, \ \ t \leq y(0)\\
+                  0, \ \ t > -y(0)
+                \end{array}
+              \right. 
+\end{equation*}
+
+%TODO picture
+
+Key property: choose $u$ s.t. $y(t)$ goes to zero in finite time $\Rightarrow x(t)$ tends $\{ (x_1, x_2) \in \mathbb{R}^2 | x_1 +x_2 = 0 \}$ in finite time
+
+Consider dynamics on $S$
+\begin{equation*}
+\left\{ \begin{array}{l}
+                  \dot{x_1} = x_2 (x_2 = -x_1 \ $if$ \  y =1) = -x_1\\
+                 \dot{x_2} = u = -x_2
+                \end{array}
+              \right. 
+\end{equation*} 
+globally as stable
+
+%TODO picture
+
+

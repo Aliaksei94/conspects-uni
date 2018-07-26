@@ -166,7 +166,171 @@ Problem 4:
         Hence, whenever $||x||>\frac{\delta}{\sqrt{c}}||u||, t \mapsto ||x(t)||$ is decreasing. \\
         Moreover whenever $||x|| \ge \frac{\delta}{\sqrt{c\theta}}||u||, \theta \in (0,1)$, we have $\langle \nabla V(x),-\nabla V(x)+\delta u\rangle \le -\frac{c}{2}(1-\theta)||x||^2 \implies$ ISS. 
     \end{proof}
-    
+
+\subsection{Exercise 3}
+
+Motivation: Lyapunov Theory
+
+\begin{equation*}
+\dot{x} = f(x,u)
+\end{equation*}
+$f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^n$
+
+\begin{Definition}
+(CLF) A function $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF if it is continuous differentiable, positive definite, radially unbounded and $ \forall x \neq 0 \ \inf_{u}< \triangledown V(x), f(x,u) > < 0$ 
+\end{Definition}
+
+In order to find CLFs, we restrict our analysis to input -affine systems
+\begin{equation*}
+\dot{x} = f(x) + G(x)u
+\end{equation*}
+where $f: \mathbb{R}^n \to \mathbb{R}^n, \ G: \mathbb{R}^n \to \mathbb{R}^{n \times m}$
+
+Proposition: A continuous, differentiable, positive definite and radially unbounded. $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF iff 
+\begin{equation*}
+\forall x \neq 0 \ L_GV(x) = 0 \Rightarrow L_fV(x) < 0
+\end{equation*}
+
+Image to be inserted
+
+Problem 1
+
+Consider $\dot{x} = cos(x) + (1+e^x)u$ where $f(x) = cos(x)$- drift and $g(x) = 1+e^x$
+
+Let $V: \mathbb{R} \to \mathbb{R}, \ x \mapsto \frac{1}{2}x^2$. Clearly, continuous differentiable, positive definite and radially unbounded. Moreover, for any nonzero $x$, we have $L_GV(x) \neq 0$. 
+
+Thus, for any $x \neq 0$, there exists a control that readers $<\triangledown V(x), f(x) + g(x)u>$ negative. 
+Givn this CLF, there exists a state feedback $u = u(x)$, e.g. 
+\begin{equation*}
+u(x) = - \frac{kx+cos(x)}{1+e^x}, \ k > 0
+\end{equation*}
+
+Problem
+
+Consider 
+\begin{equation*}
+\dot{x_1} = -x_1^3 + x_2e^{x_1}cos(x_2)
+\end{equation*}  
+\begin{equation*}
+\dot{x_2} = x_1^5sin(x_2) + u
+\end{equation*}
+
+Take $V: \mathbb{R}^2 \to \mathbb{R}, \ (x_1, x_2) \mapsto \frac{1}{2}(x_1^2 + x_2^2)$
+
+For any $x \neq 0$, we have 
+\begin{equation*}
+\inf_{u \in \mathbb{R}}(L_fV(x) + L_GV(x)u) = 
+\left \{ 
+\begin{tabular}{cc} 
+$L_fV(x), \ $ & $if\ L_GV(x) = 0$ \\ 
+$- \infty$ & $else$ 
+\end{tabular} 
+\right.
+\end{equation*}
+
+In particular,
+\begin{equation*}
+L_fV(x) = \dots = x_1(-x_1^3 + x_2e^x_1 cos(x_2)) + x_2x_1^5sin(x_2)
+\end{equation*}
+\begin{equation*}
+L_GV(x) = \dots = x_2
+\end{equation*}
+
+However, 
+\begin{equation*}
+L_fV(x)|_{x_2 = 0} = -x_1^4 < 0 \ \forall x_1 \neq 0
+\end{equation*}
+
+Image to be inserted
+
+Concluding that $V$ is a CLF.
+
+Problem 2:
+
+$\dot{x} = Ax + Bu$, input defined system where $(A,B)$ is stabilizable, there exists $K \in \mathbb{R}^{m \times n}$ s.t. $A+BK$ is Hurwitz (cf. KRT).The latter is equivalent to the existance $P = P^T > 0$ s.t. $P(A+BK) + (A+BK)^TP < 0$ (cf. Khalil theorem 4,6)
+
+Let $V: \mathbb{R}^n \to \mathbb{R}, x \mapsto <x, Px>$. Moreover, $\forall x \neq 0 \exists u = Kx$ s.t. $<\triangledown V(x), Ax+Bu> < 0$, since 
+\begin{equation*}
+<\triangledown V(x), Ax+Bu> =^{u = Kx} <x, (P(A+BK)+ (A+BK)^TP)x> < 0
+\end{equation*} 
+
+In addition,
+\begin{equation*}
+\forall \epsilon > 0 \exists \delta = \frac{\epsilon}{\|K\| } > 0 \ \forall x \neq 0, \ \|x\| < \delta \ \exists u = Kx \ \|u\| < \epsilon 
+\end{equation*}
+s.t. $L_fV(x) + L_GV(x)u < 0$ since $\|u\| = \|Kx\| \leq \|K\|\|x\| < \|K\|\delta = \epsilon$
+
+Problem 3
+
+Let $P: \mathbb{R}^2 \to \mathbb{R}$ be continuous, differentiable consider 
+\begin{equation*}
+m\dot{v}  = - g \triangledown P(q) + F, \ m,g >0
+\end{equation*} 
+a) Hamiltonian form. Let $x:=(q,v)$. Then $\dot{x} = (-\frac{g}{m}\triangledown P(q) + \frac{1}{m}F)= \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix}\begin{bmatrix}
+ \frac{g}{m}\triangledown P(q) \\
+ V 
+\end{bmatrix} + \begin{bmatrix}
+  \\
+ \frac{1}{m}I
+\end{bmatrix}F = \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)$ given $H(x) = \frac{1}{2}\|\nu\|^2 + \frac{g}{m}P(q)$
+
+b) "CLF". Take $H$ as a CLF candidate. Then, for any $x$ 
+\begin{equation*}
+<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)F> = <\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x)> + <\triangledown H(x), G(x)F> = [<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x)> = L_fH(x) = 0] = \frac{1}{m} <\nu, F>
+\end{equation*}
+
+Strictly speaking, $H$ is no CLF, but it reveals how to choose $F$ s.t. the origin is GAS.
+
+For any point $x$ for which there exists no control $F$ s.t. $<\triangledown H(x), \begin{bmatrix}
+ & I \\
+ -I & 
+\end{bmatrix} \triangledown H(x) + G(x)F> < 0$
+
+Choose $F = 0$. Why? Using the Krasovsky-Lasallle inv. principle, we conclude that the origin is GAS, since any solution in $\{ x| \dot{H}(x) = 0 \}$ verifies $v(t) \equiv 0$, implying $\dot{v}(t) \equiv 0$ s.t. 
+\begin{equation*}
+0 = - \frac{g}{m} \triangledown P(q(t)) + \frac{1}{m} P(t)
+\end{equation*}
+The last part equals 0.  Since $F = 0$ (by choice) and $\triangledown P(q) = 0$ iff $q = 0$ we conclude that $\dot{H}(x) = 0$ can only be "maintained" at the origin.
+
+Problem 4
+
+Consider 
+
+\begin{equation*}
+\dot{x_1} = x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = - ux_2 + u^3
+\end{equation*}
+
+show that $V(x) = \frac{1}{2} x_1^2 + \frac{1}{2}(x_1 +x_2)^2$ is CLF and let $V: \mathbb{R}^n \to \mathbb{R}$ be defined by
+
+\begin{equation*}
+\ddot{x} + u\dot{x} - u^3 = 0
+\end{equation*}
+
+For any $x$ and $u$, we have $<\triangledown V(x), f(x,u)> = \dots = x_1(2x_2 -ux_2 + u^3) + x_2(x_2 - ux_2 + u^3) = x_1h_1 + x_2h_2$
+
+Image to be inserted
+
+Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,u)> < 0$.
+
+   
     \subsection{Exercise 4}
     
     Consider
@@ -334,166 +498,224 @@ Problem 4:
         It is solved by $u = e_{n-1}^2 - ke_n, \ \ k>0$.
     \end{proof}
     
-
-\subsection{Exercise 3}
-
-Motivation: Lyapunov Theory
-
-\begin{equation*}
-\dot{x} = f(x,u)
-\end{equation*}
-$f:\mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^n$
-
-\begin{Definition}
-(CLF) A function $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF if it is continuous differentiable, positive definite, radially unbounded and $ \forall x \neq 0 \ \inf_{u}< \triangledown V(x), f(x,u) > < 0$ 
-\end{Definition}
-
-In order to find CLFs, we restrict our analysis to input -affine systems
-\begin{equation*}
-\dot{x} = f(x) + G(x)u
-\end{equation*}
-where $f: \mathbb{R}^n \to \mathbb{R}^n, \ G: \mathbb{R}^n \to \mathbb{R}^{n \times m}$
-
-Proposition: A continuous, differentiable, positive definite and radially unbounded. $V: \mathbb{R}^n \to \mathbb{R}$ is a CLF iff 
-\begin{equation*}
-\forall x \neq 0 \ L_GV(x) = 0 \Rightarrow L_fV(x) < 0
-\end{equation*}
-
-Image to be inserted
-
-Problem 1
-
-Consider $\dot{x} = cos(x) + (1+e^x)u$ where $f(x) = cos(x)$- drift and $g(x) = 1+e^x$
-
-Let $V: \mathbb{R} \to \mathbb{R}, \ x \mapsto \frac{1}{2}x^2$. Clearly, continuous differentiable, positive definite and radially unbounded. Moreover, for any nonzero $x$, we have $L_GV(x) \neq 0$. 
-
-Thus, for any $x \neq 0$, there exists a control that readers $<\triangledown V(x), f(x) + g(x)u>$ negative. 
-Givn this CLF, there exists a state feedback $u = u(x)$, e.g. 
-\begin{equation*}
-u(x) = - \frac{kx+cos(x)}{1+e^x}, \ k > 0
-\end{equation*}
-
-Problem
-
-Consider 
-\begin{equation*}
-\dot{x_1} = -x_1^3 + x_2e^{x_1}cos(x_2)
-\end{equation*}  
-\begin{equation*}
-\dot{x_2} = x_1^5sin(x_2) + u
-\end{equation*}
-
-Take $V: \mathbb{R}^2 \to \mathbb{R}, \ (x_1, x_2) \mapsto \frac{1}{2}(x_1^2 + x_2^2)$
-
-For any $x \neq 0$, we have 
-\begin{equation*}
-\inf_{u \in \mathbb{R}}(L_fV(x) + L_GV(x)u) = 
-\left \{ 
-\begin{tabular}{cc} 
-$L_fV(x), \ $ & $if\ L_GV(x) = 0$ \\ 
-$- \infty$ & $else$ 
-\end{tabular} 
-\right.
-\end{equation*}
-
-In particular,
-\begin{equation*}
-L_fV(x) = \dots = x_1(-x_1^3 + x_2e^x_1 cos(x_2)) + x_2x_1^5sin(x_2)
-\end{equation*}
-\begin{equation*}
-L_GV(x) = \dots = x_2
-\end{equation*}
-
-However, 
-\begin{equation*}
-L_fV(x)|_{x_2 = 0} = -x_1^4 < 0 \ \forall x_1 \neq 0
-\end{equation*}
-
-Image to be inserted
-
-Concluding that $V$ is a CLF.
-
-Problem 2:
-
-$\dot{x} = Ax + Bu$, input defined system where $(A,B)$ is stabilizable, there exists $K \in \mathbb{R}^{m \times n}$ s.t. $A+BK$ is Hurwitz (cf. KRT).The latter is equivalent to the existance $P = P^T > 0$ s.t. $P(A+BK) + (A+BK)^TP < 0$ (cf. Khalil theorem 4,6)
-
-Let $V: \mathbb{R}^n \to \mathbb{R}, x \mapsto <x, Px>$. Moreover, $\forall x \neq 0 \exists u = Kx$ s.t. $<\triangledown V(x), Ax+Bu> < 0$, since 
-\begin{equation*}
-<\triangledown V(x), Ax+Bu> =^{u = Kx} <x, (P(A+BK)+ (A+BK)^TP)x> < 0
-\end{equation*} 
-
-In addition,
-\begin{equation*}
-\forall \epsilon > 0 \exists \delta = \frac{\epsilon}{\|K\| } > 0 \ \forall x \neq 0, \ \|x\| < \delta \ \exists u = Kx \ \|u\| < \epsilon 
-\end{equation*}
-s.t. $L_fV(x) + L_GV(x)u < 0$ since $\|u\| = \|Kx\| \leq \|K\|\|x\| < \|K\|\delta = \epsilon$
-
-Problem 3
-
-Let $P: \mathbb{R}^2 \to \mathbb{R}$ be continuous, differentiable consider 
-\begin{equation*}
-m\dot{v}  = - g \triangledown P(q) + F, \ m,g >0
-\end{equation*} 
-a) Hamiltonian form. Let $x:=(q,v)$. Then $\dot{x} = (-\frac{g}{m}\triangledown P(q) + \frac{1}{m}F)= \begin{bmatrix}
- & I \\
- -I & 
-\end{bmatrix}\begin{bmatrix}
- \frac{g}{m}\triangledown P(q) \\
- V 
-\end{bmatrix} + \begin{bmatrix}
-  \\
- \frac{1}{m}I
-\end{bmatrix}F = \begin{bmatrix}
- & I \\
- -I & 
-\end{bmatrix} \triangledown H(x) + G(x)$ given $H(x) = \frac{1}{2}\|\nu\|^2 + \frac{g}{m}P(q)$
-
-b) "CLF". Take $H$ as a CLF candidate. Then, for any $x$ 
-\begin{equation*}
-<\triangledown H(x), \begin{bmatrix}
- & I \\
- -I & 
-\end{bmatrix} \triangledown H(x) + G(x)F> = <\triangledown H(x), \begin{bmatrix}
- & I \\
- -I & 
-\end{bmatrix} \triangledown H(x)> + <\triangledown H(x), G(x)F> = [<\triangledown H(x), \begin{bmatrix}
- & I \\
- -I & 
-\end{bmatrix} \triangledown H(x)> = L_fH(x) = 0] = \frac{1}{m} <\nu, F>
-\end{equation*}
-
-Strictly speaking, $H$ is no CLF, but it reveals how to choose $F$ s.t. the origin is GAS.
-
-For any point $x$ for which there exists no control $F$ s.t. $<\triangledown H(x), \begin{bmatrix}
- & I \\
- -I & 
-\end{bmatrix} \triangledown H(x) + G(x)F> < 0$
-
-Choose $F = 0$. Why? Using the Krasovsky-Lasallle inv. principle, we conclude that the origin is GAS, since any solution in $\{ x| \dot{H}(x) = 0 \}$ verifies $v(t) \equiv 0$, implying $\dot{v}(t) \equiv 0$ s.t. 
-\begin{equation*}
-0 = - \frac{g}{m} \triangledown P(q(t)) + \frac{1}{m} P(t)
-\end{equation*}
-The last part equals 0.  Since $F = 0$ (by choice) and $\triangledown P(q) = 0$ iff $q = 0$ we conclude that $\dot{H}(x) = 0$ can only be "maintained" at the origin.
-
-Problem 4
-
-Consider 
-
-\begin{equation*}
-\dot{x_1} = x_2
-\end{equation*}
-\begin{equation*}
-\dot{x_2} = - ux_2 + u^3
-\end{equation*}
-
-show that $V(x) = \frac{1}{2} x_1^2 + \frac{1}{2}(x_1 +x_2)^2$ is CLF and let $V: \mathbb{R}^n \to \mathbb{R}$ be defined by
-
-\begin{equation*}
-\ddot{x} + u\dot{x} - u^3 = 0
-\end{equation*}
-
-For any $x$ and $u$, we have $<\triangledown V(x), f(x,u)> = \dots = x_1(2x_2 -ux_2 + u^3) + x_2(x_2 - ux_2 + u^3) = x_1h_1 + x_2h_2$
-
-Image to be inserted
-
-Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,u)> < 0$.
+    \subsection{Exercise 5}
+    
+    Consider the SISO system
+    $$\dot x = f(x)+g(x)(u+\sigma(x))$$
+    $$y=s(x)$$
+    $f,g: R^n \rightarrow R^n, \ \ \sigma: R^n \rightarrow R$ and bounded, \ \ $s: R^n \rightarrow R$\\
+    
+    Design steps for SMC:\\
+    \begin{enumerate}
+        \item If no output is provided, design a sliding surface $S:=\{x \in R^n|s(x)=0\}$ s.t.
+        \begin{enumerate}[label=(\alph*)]
+            \item the system has rel. degree one;
+            \item for $y(t) \equiv 0$, all solutions converge to the origin ("zero dynamics" have GAS origin)
+        \end{enumerate}
+        \item Choose a control s.t. the sliding surface is reached (in finite time), e.g. \\
+        $$v(x) = - \frac{1}{L_gs(x)}(L_fs(x)+ \hat u \cdot sgn(s(x))), \ \ \hat u > 0$$
+    \end{enumerate}
+    
+    Problem 1:
+    $$\dot x_1 = (x_2-x_1)x_1^2$$
+    $$\dot x_2 = x_2 + u$$
+    Sliding surface $S, \ \ s:R^2 \rightarrow R, \ \ (x_1,x_2) \mapsto x_2$
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+            \item For the given S, we have $L_gs(x)=1$ for any $x \in R^2$.\\
+            Moreover, from\\
+            $$\dot s(x) = L_fs(x)+L_gs(x)u$$
+            (we want $= 0$) we have that for
+            $$u=-\frac{L_fs(x)}{L_gs(x)}=-x_2$$
+            the "dynamics on $S$" (i.e. $x_2=0$) reduced to
+            $$\dot \eta = - \eta^3$$
+            whose origin is GAS.
+            \item Consider
+            $$u = - \frac{1}{L_gs(x)}(L_fs(x)+ \hat u \cdot sgn(s(x))) = -x_2 - \hat u \cdot sgn(x_2), \ \ \hat u > 0$$
+            such that $x(t)$ "tends to $S$" in finite time (phase 1). Moreover, "on S", $x(t)$ converges to the origin $t \rightarrow +\infty$ (phase 2).
+        \end{enumerate}
+    \end{proof}
+    
+    Remark:
+    Given a system in regular form
+    $$x = (\eta, \xi)^T$$
+    $$\dot \eta = f_1(\eta, \xi)$$
+    $$\dot \xi = f_2(\eta, \xi) + g_2(\eta, \xi)u$$
+    choose $s(x) = \xi - \Phi(\eta)$, s.t. $\Phi$ as. stabilizes $\dot \eta = f_1(\eta, \Phi(\eta))$.
+    
+    Problem 2:
+    $$\dot x_1 = -x_1\cos{x_2} + x_1x_2$$
+    $$\dot x_2 = x_1\cos{x_1} + \sigma(x) + u$$
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+        \item (For the design of sliding surface pretend that uncertainty $\sigma(x)=0$)\\
+        Let $S:=\{x \in R^2|s(x)=0\}$ be def. by $s:R^2 \rightarrow R, \ \ (x_1,x_2) \mapsto x_2(-\Phi(x_1) = 0)$.
+        We have $L_gs(x)=1$ for all $x \in R^2$.\\
+        From
+        $$\dot s(x) = L_fs(x)+L_gs(x)u$$
+        (we want $= 0$) s.t. for $u=-\frac{L_fs(x)}{L_gs(x)}(=-x_1\cos{x_1})$ the "dynamics on $S$" (i.e. $x_2=0$) reads
+        $$\dot \eta = -\eta$$
+        whose origin is GAS.
+        \item Take
+        $$u = - \frac{1}{L_gs(x)}(L_fs(x)+ (\hat u + \beta(x)|L_gs(x)|) \cdot sgn(s(x))) (= -x_1\cos{x_1}-(\hat u + (x_1^2+x_2^2)) \cdot sgn(x_2)), \ \ \hat u > 0$$
+        Consider the Lyapunov(-like) function $V(x)=\frac{1}{2}s(x)^2$ s.t.
+        $$\dot V(x) = s(x)(L_fs(x)+L_gs(x)(u+\sigma(x)))$$
+        Choosing $u$ as above\\
+        $\dot V(x) = s(x)(-(\hat u + \beta(x)|L_gs(x)|) \cdot sgn(s(x)) + \sigma(x)L_gs(x)) \le -(\hat u + \beta(x)|L_gs(x)|)|s(x)| + |\sigma(x)||L_gs(x)||s(x)|\le - \hat u |s(x)| < 0$ for $s(x) \neq 0$
+        \end{enumerate}    
+    \end{proof}
+    
+    Problem 3:
+    $$\dot x_1 = x_2$$
+    $$\dot x_2 = -x_1^3+\sigma(x)+u$$
+    $s(x)=x_2+x_1, \ \ u = -x_2+x_1^3-2 \cdot sgn(s(x))$
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+            \item Given $S$, we have $L_gs(x) = 1$ for all $x \in R^2$. The "dynamics on $S$" (i.e. $x_1+x_2=0$) reads
+            $$\dot \eta_1 = -\eta_1$$
+            $$\dot \eta_2 = -\eta_2$$
+            whose origin is GAS.
+            \item Take $V(x) = \frac{1}{2}s(x)^2$ s.t.\\
+            $\dot V(x) = s(x)(L_fs(x)+L_gs(x)(u+\sigma(x))) \le -\hat u |L_gs(x)||s(x)|+|\sigma(x)||L_gs(x)||s(x)| \le [|\sigma(x)| \le c] \le -(\hat u - c)|L_gs(x)||s(x)|$.\\
+            Hence, for $c < \hat u = 2$ there exists $\varepsilon > 0$ s.t. $\dot V(x) \le - \varepsilon|s(x)| < 0$ for $s(x) \neq 0$
+        \end{enumerate}
+    \end{proof}
+    
+    \subsection{Exercise 6}
+    
+    Problem 1:
+    $$\dot x = xu(x^2+u)$$
+    $$\dot y = h(x)$$
+    $s:R \times R \rightarrow R, \ \ (u,y) \mapsto uy^2+u^2y$ \\
+    $S:R \rightarrow R, \ \ x\mapsto \frac{x^2}{2}$
+    \begin{proof}
+        Clearly, S is non-negative. Moreover:\\
+        $\dot S(x) = x^2u(x^2+u)=x^4u+x^2u^2=[h(x)=x^2]=s(u,x^2)$\\
+        for all $x,u \in R$ with $h:R \rightarrow R, x \mapsto x^2$.
+    \end{proof}
+    
+    Problem 2:
+    $$\dot x = u, \ \ x(0)=x_0$$
+    $$y=x$$
+    $s: R^n \times R^n \rightarrow R, \ \ (u,y) \mapsto <u,y>$
+    \begin{proof}
+        For any $x_0 \in R^n$, we have
+        $$S_a(x_0)=\sup_{u:[0,t] \rightarrow R^n, \ t \ge 0, \ x(0)=x_0} (- \int_0^t <u(\tau),y(\tau)> d\tau) =$$
+        $$ =\sup_{-//-}(-\frac{1}{2}\int_0^t \frac{d}{d\tau}||x(\tau)||^2d\tau) = \sup_{-//-}(-\frac{1}{2}||x(t)||^2+\frac{1}{2}||x(0)||^2) \le \frac{1}{2}||x_0||^2$$ 
+        $\implies$ av. storage is finite $\implies$ system is dissipative.
+    Moreover, we have for any $x_0 \in R^n,$
+    $$S_r(x_0) = \inf_{u:[-t,0] \rightarrow R^n, \ t \ge 0, \ x(-t) = 0, \ x(0) = x_0} \int_{-t}^0 <u(\tau),y(\tau)> d\tau = \inf_{-//-} (\frac{1}{2}||x_0||^2-\frac{1}{2}||x(-t)||^2) = \frac{1}{2}||x_0||^2$$
+    ($S_a=S_r \implies$this is a unique stor. func.)\\
+    Hence the (lossless) system is reachable (from 0 to any $x_0$).
+    \end{proof}
+    
+    Problem 3:
+    \begin{proof}
+        Consider the Lyapunov func. cand. $V(x) = S_1(x_1) + S_2(x_2)$ s.t. \\
+        $\dot V (x) \le S_1(u_1,y_1) + S_2(u_2,y_2) = S_1(u_1,y_1) + S_2(y_1,-u_1) = 0 \implies$ origin is stable.\\
+    \end{proof}
+    
+    Remark: the above problem captures many stability results (in the frequency domain). Particular choices of supply rates are:
+    \begin{itemize}
+        \item $s_i(u_i,y_i) = ||u_i||^2-||y_i||^2, i=1,2$ (small-gain theorem);
+        \item $s_i(u_i,y_i) = <u_i,y_i>, i=1,2$ (positive operator theorem);
+        \item $s_1(u_1,y_1) = <u_1+ay_1, u_1+by_1>$\\
+        $s_2(u_2,y_2) = -ab<u_2-\frac{1}{a}y_2, u_2-\frac{1}{b}y_2>$ (conic operator theorem).
+    \end{itemize}
+    
+    Problem 4:
+    $$\dot x = f(x)+G(x)u$$
+    $$y=h(x)$$
+    $s: R^m \times R^m \rightarrow R, \ \ (u,y) \mapsto ||u||^2-||y||^2$
+    \begin{proof}
+        Take $V=S$ s.t.
+        $$\dot V(x) \le ||u||^2-||h(x)||^2, \ \forall x \in R^n, \ \forall u \in R^m$$
+        Then the (continuous) state feedback $u = \gamma h(x)$ for some $|\gamma|^2 < 1$, s.t.
+        $$\dot V(x) \le (|\gamma|^2-1)||h(x)||^2 < 0, \ \forall x \neq 0$$
+    \end{proof}
+    
+    Problem 5:
+    \begin{proof}
+        Take $S(x) = <x,P_x>$ s.t. 
+        $$\dot S(x) = <x, (PA+A^TP)x>+2<x,PBu>$$
+        Add and subtract $\gamma^2||u||^2$ and $\frac{1}{\gamma^2}||B^TPx||^2$.
+        $$\dot S(x) = <x, (PA+A^TP+\frac{1}{\gamma^2}PBB^TP)x>+\gamma^2||u||^2-\gamma^2||u\frac{1}{\gamma^2}B^TPx||^2$$
+        Add and subtract $||y||^2$.
+        $$\dot S(x) = <x, (PA+A^TP+\frac{1}{\gamma^2}PBB^TP+C^TC)x>+\gamma^2||u||^2-||y||^2-\gamma^2||u-\frac{1}{\gamma^2}B^TPx||^2$$
+        $$\dot S(x) \le \gamma^2||u||^2-||y||^2$$
+    \end{proof}
+    
+    \subsection{Exercise 7}
+    \begin{Definition}
+    A mapping $\Phi: R \rightarrow R, \ u \mapsto \Phi(u)$, belongs to the sector
+    \begin{itemize}
+        \item $[0,+\infty]$ if $u\Phi(u) \ge 0, \ \forall u \in R$;
+        \item $[\alpha,+\infty]$ if $u(\Phi(u)-\alpha u) \ge 0, \ \forall u \in R$ and some $\alpha \in R$;
+        \item $[0,\beta]$ if $\Phi(u)(\Phi(u)-\beta u) \le 0, \ \forall u \in R$ and some $\beta \in R$;
+        \item $[\alpha,\beta]$ if $(\Phi(u)-\alpha u)(\Phi(u)-\beta u) \le 0, \ \forall u \in R$ and some $\alpha, \beta \in R$;
+    \end{itemize}
+    Notation: we write, e.g., $\Phi \in [0,+\infty]$.
+    \end{Definition}
+    
+    Problem 1:
+    $$\dot x = x^3-kx+u, \ k>0$$
+    $$y = x$$
+    \begin{proof}
+        Take, e.g., $S:R \rightarrow R, x \mapsto \frac{x^2}{2} \ (S \ge 0)$ s.t.
+        $$\dot S(x) = x^2(x^2-k)+yu \le yu$$
+        whenever $x \in [-\sqrt{k}, \sqrt{k}].$
+        
+        Let $\bar x \in R$ and take $u = - \bar x^3 + k \bar x$ with init. condition $x(0) = \bar x$, s.t. we have $x(t) = \bar x$ for all $t \ge 0$. If the system is passive, then along this (constant) solution we must have
+        $$S(x(t))-S(\bar x) \le \int_0^t u(\tau)y(\tau)d\tau, \ t \ge 0$$ 
+        This inequality, however, is violated for $\bar x \notin [-\sqrt{k}, \sqrt{k}]$ and hence $[-\sqrt{k}, \sqrt{k}]$ must be the largest interval.
+    \end{proof}
+    
+    Problem 2:
+    $$\dot x = -x+\frac{1}{\beta}h(x)+u, \ \beta>0$$
+    $$y = h(x)$$
+    $S(x) = \int_0^x h(\sigma) d \sigma, \ h \in [0,\beta]$
+    \begin{proof}
+        Clearly, we have $S \ge 0$ since $h \in [0, \beta]$.\\
+        Moreover,
+        $$\dot S(x) = S'(x) \dot x = \dot x \frac{d}{dx}\int_0^x h(\sigma)d\sigma = h(x)\dot x = \frac{1}{\beta}h(x)(h(x)-\beta x) + yu \le yu$$
+        since $h \in [0,\beta]$.
+    \end{proof}
+    
+    Problem 3:
+    $$H_1: \left\{
+                \begin{array}{ll}
+                  \dot x_1 = x_2\\
+                  \dot x_2 = -x_1 + kx_2 + u, \ k>0 \\
+                  y = x_2
+                \end{array}
+              \right.$$
+    \begin{proof}
+        Take $S:R^2 \rightarrow R, \ (x_1,x_2) \mapsto \frac{x_1^2}{2}+\frac{x_2^2}{2}$ s.t. $\dot S(x) = uy + ky^2$. \\ 
+        Let $u = -\Phi(y), \ \Phi: R \rightarrow R$ satisfying $\Phi \in [l,+\infty]$ for some $l>k \ (\nu_2+\rho_1 > 0)$ s.t. 
+        $$\dot S(x) = -y\Phi(y)+ky^2 \le -(l-k)y^2$$
+        Since the system $H_1$ is ZSO the origin is GAS.
+    \end{proof}
+    
+    Problem 4:
+    \begin{proof}
+        Take $S(x) = S_1(x_1)+S_2(x_2)$ s.t.
+        $$\dot S(x) \le <u_1,y_1> - \rho_1||y_1||^2 - \nu_1||u_1||^2 + <u_2,y_2> - \rho_2||y_2||^2-\nu_2||u_2||^2$$
+        Using that
+        $$<u_1,y_1>+<u_2,y_2> = <u-y_2, y_1> + <v+y_1,y_2> = <u,y_1>+<v,y_2>$$
+        and
+        $$||u_1||^2=||u||^2-2<u,y_2>+||y_2||^2$$
+        $$||u_2||^2=||v||^2+2<v,y_1>+||y_1||^2$$
+        we obtain \\
+        $\dot S(x) = - <\begin{pmatrix} y_1 \\ y_2 \end{pmatrix}, \begin{pmatrix} (\nu_2+\rho_1)I_m & \space \\ \space & (\nu_1+\rho_2)I_m \end{pmatrix} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}> - <\begin{pmatrix} u \\ v \end{pmatrix}, \begin{pmatrix} \nu_1 I_m & \space \\ \space & \nu_2 I_m \end{pmatrix} \begin{pmatrix} u \\ v \end{pmatrix}> + <\begin{pmatrix} u \\ v \end{pmatrix}, \begin{pmatrix} I_m & 2\nu_1 I_m \\ -2\nu_2 I_m & I_m \end{pmatrix} \begin{pmatrix} u \\ v \end{pmatrix}> \le [Coshi-Schwarz] \le -a||(y_1,y_2)||^2+b||(u,v)||||(y_1,y_2)||+c||(u,v)||^2$ \\
+        with $a = \min \{\nu_2 + \rho_1, \nu_1+\rho_2\} > 0, \ b = ||N|| \ge 0$ and $c = ||M|| \ge 0$. \\
+        Hence, \\
+        $\dot S(x) \le - \frac{1}{2a}(b||(u,v)||-a||(y_1,y_2)||)^2 + \frac{b^2}{2a}||(u,v)||^2-\frac{a}{2}||(y_1,y_2)||^2+c||(u,v)||^2 \le \frac{b^2+2ac}{2a}||(u,v)||^2-\frac{a}{2}||(y_1,y_2)||^2$
+    \end{proof}
+    
+    Problem 5:
+    \begin{proof}
+        Take $V(x) = <x,Px>$ s.t.
+        $$\dot V(x) = <x, (PA+A^TP)x>-2\Phi(y)<x,PB>$$
+        Add and subtract $2\Phi(y)^2$ and $2\Phi(y)BCx$ yields \\
+        $\dot V(x) = - \varepsilon <x,Px> - <x,L^TLx> - 2\Phi(y)<x,PB-BC^T> - 2\Phi(y)^2 + 2\Phi(y)(\Phi(y)-By) = - \varepsilon <x,Px> - |Lx-\sqrt{2}\Phi(y)|^2+2\Phi(y)(\Phi(y)-By) \le - \varepsilon <x,Px>$.
+    \end{proof}
