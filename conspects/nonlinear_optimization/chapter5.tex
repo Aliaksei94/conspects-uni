@@ -68,4 +68,25 @@ globally as stable
 
 %TODO picture
 
+Two "phases"
+\begin{enumerate}
+\item solutions converge to $S$ in finite time
+\item solutions converge to zero ("on S") asymptotically
+\end{enumerate}
+$\leadsto $ "sliding mode" control
+
+Remark: in (1) "finite time convergence is crucial"
+
+General procedure:
+\begin{equation*}
+\dot{x} = f(x)+g(x)u \\
+y = h(x)= s(x)
+\end{equation*}
+$f: \mathbb{R}^n \to \mathbb{R}^n, \  y : \mathbb{R}^n \to \mathbb{R}^n, \ s: \mathbb{R}^n \to \mathbb{R}$
+
+$u$ - scalar input, $s(x)$ - sliding
+
+single input, single output 
+
+Assumptions: $y$ has relative degree 1, well - defined globally, i.e. $L_gs(x) \neq 0 \ \forall \in \mathbb{R}^n$
 
