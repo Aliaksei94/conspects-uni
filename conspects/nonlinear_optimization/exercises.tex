@@ -15,7 +15,7 @@ Problem 2:
     \end{Lemma}
     
     Clearly, for any $c > 0, lev_{\le c}V$ is positive invariant w.r.t $\dot x = f(x)$. Given $c > 0$, let $x_0 \in lev_{\le c}V$, i.e., $V(x_0) \le c$. Then, for any $t \ge 0$
-    $$V(x(t)) = V(x_0) + \int_0^t \frac{d}{dt}V(xx(\tau))d\tau < V(x_0) \le c,$$
+    $$V(x(t)) = V(x_0) + \int_0^t \frac{d}{dt}V(x(\tau))d\tau < V(x_0) \le c,$$
     i.e. $x(t) \in lev_{\le c}V$ for any $t \ge 0$. \\
     Then, for any $x_0 \in lev_{\le c}V$ there exists a solution $x: [ 0,+\infty ] \to R^n$ of $\dot x = f(x)$ s.t. $x(t) \in lev_{\le c}V$ for all $t \ge 0$.
     Clearly, $O \in lev_{\le c}V$. We conclude by using the above Lemma $(K = lev_{\le c}V)$.
@@ -33,21 +33,21 @@ Problem 4:
     Let $P:R^2 \to R^2$ be continuously differentiable. Consider
     $$m \dot v = -g \nabla P(q).$$
     Consider $x=(q,v), \dot q = v, \dot v = - \frac{g}{m} \nabla P(q)$. Let $H:R^2 \to R$ be defined by
-    $$H(q,r) = \frac{1}{2}||v||^2+\frac{g}{m}P(q).$$
+    $$H(q,v) = \frac{1}{2}||v||^2+\frac{g}{m}P(q).$$
     We have
     $$\begin{pmatrix}
         \dot q \\
-        \dot r
+        \dot v
     \end{pmatrix}
     =
     \begin{pmatrix}
         \space & I \\
         -I & \space
     \end{pmatrix}
-    \nabla H(q,r)$$
+    \nabla H(q,v)$$
     Since $P$ is positive definite, then $H$ is positive definite. \\
     Then
-    $$L_{\begin{pmatrix} \space & I \\ -I & \space \end{pmatrix} \nabla H}H(q,r) = \langle \nabla H(q,r), \begin{pmatrix} \space & I \\ -I & \space \end{pmatrix} \nabla H(q,r) \rangle = 0 \ \ \forall (q,r) \in R^2 \times R^2$$
+    $$L_{\begin{pmatrix} \space & I \\ -I & \space \end{pmatrix} \nabla H}H(q,v) = \langle \nabla H(q,v), \begin{pmatrix} \space & I \\ -I & \space \end{pmatrix} \nabla H(q,v) \rangle = 0 \ \ \forall (q,v) \in R^2 \times R^2$$
     $\implies$ the origin is stable.
 \end{proof}
 

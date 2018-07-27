@@ -7,7 +7,7 @@ where $D \subseteq R^n$, and $D$ is open.
  \dot x(t)=f(t,x(t)), \ \ t \ge t_0 \ge 0,\ \ x(t_0)=x_0
 \end{equation} 
 
-The origin $x^* \in D$ is an equilinrium point for (\ref{c2:eq}),
+The origin $x^* \in D$ is an equilibrium point for (\ref{c2:eq}),
 if $f(t,0)=0, \ \ \forall t \ge 0$.
 
 Remark: EP (equilibrium point) $x^*=0$ can be translation of a nonzero
@@ -18,14 +18,14 @@ Suppose $\overline{y}$ is a solution of $\dot y = g(t, y)$.
 Change of coordinates: $x(t)=y(t)-\overline{y}(t)$, then
 $\dot x(t) = \dot y(t)-\dot{\overline{y}}(t)=
 g(t, x(t)+\overline{y}(t)) - \dot{\overline{y}}(t):=f(t,x(t))$.
-Since $\dot{\overline{y}}(t)=g*t,\overline{y}(t))$, then
+Since $\dot{\overline{y}}(t)=g(t,\overline{y}(t))$, then
 $f(t,0)=0,\ \forall t \ge 0$.
 
-Existance and uniquence of solution to (\ref{c2:eq}):
+Existence and uniqueness of solution to (\ref{c2:eq}):
 \begin{itemize}
- \item if $f$ continuous, then exist local colution
+ \item if $f$ continuous, then exist local solution
  \item if $f$ continuous and locally Lipschitz in $x^*$, then
- 	exist local uniq solution 
+ 	exist local unique solution 
 \end{itemize}
 
 
@@ -44,13 +44,13 @@ Now we need new stability definitions.
 \end{Definition}
 
 \begin{Definition}
- Point $x^*=0$ asymptoticaly stable if it is stable and $\forall t_0 \ge 0\ $  
+ Point $x^*=0$ asymptotically stable if it is stable and $\forall t_0 \ge 0\ $  
  $\exists c>0$, s.t from $||x_0||<c$
  follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
 \end{Definition}
 
 \begin{Definition}
- Point $x^*=0$ uniformly asymptoticaly stable if it is uniformly stable and 
+ Point $x^*=0$ uniformly asymptotically stable if it is uniformly stable and 
  $\exists c>0$, s.t $\forall t_0 \ge 0\ $ from $||x_0||<c$
  follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
 \end{Definition}
@@ -79,7 +79,7 @@ Consider next equation:
 \end{Example}
 
 \begin{Definition}
- Point $x^*=0$ is globaly uniformly asymptotically stable if it is uniformly stable
+ Point $x^*=0$ is globally uniformly asymptotically stable if it is uniformly stable
  with $\delta \to \infty$ for $\epsilon \to \infty$ and $\forall c,\eta\ \ $ 
  $\exists T>0$ such that $\forall t_0\ge0$ from $||x_0||<c$ follows 
  $\|x(t)\|<\eta$, $\forall t \ge t_0 + T$.
@@ -110,7 +110,7 @@ $\dot V(t,x)=\frac{\partial}{\partial t}V(t,x)+\frac{\partial}{\partial x}V(t,x)
 \begin{Example}
  Consider the equation $\dot x(t) = -(1+t)x(t)$.
 
- Check function $V(t,x)=\frac{1}{2}x^2$ as candidat for Lyapunov's function. Then
+ Check function $V(t,x)=\frac{1}{2}x^2$ as candidate for Lyapunov's function. Then
  $W_1(x)=W_2(x)=\frac{1}{2}x^2$ and $\dot V(t,x)=-(1+t)x^2 \le -x^2(t)=: W_3(x)$.
  Then from theorem we have, that $X^*=0$  is globally uniformly asymptotically stable.
 \end{Example}
@@ -124,10 +124,10 @@ $\dot V(t,x)=\frac{\partial}{\partial t}V(t,x)+\frac{\partial}{\partial x}V(t,x)
  $\|x(t)\|\le K\|x(t_0)\|e^{\lambda(t-t_0)}$.
 \end{Definition}
 
-Remark: from exponential stability follows uniformly asymptoticaly stability.
+Remark: from exponential stability follows uniformly asymptotically stability.
 
-\begin{Lemma}[Auxilarity result]
- Let $\dot x(t)=f(t,x(t))$, f scalar and $\dot \xi(t)\le f(t, \xi(t)$ with 
+\begin{Lemma}[Auxiliary result]
+ Let $\dot x(t)=f(t,x(t))$, f scalar and $\dot \xi(t)\le f(t, \xi(t))$ with 
  $\xi (t_0)\le x(t_0)$. Then $\xi (t) \le x(t)\ \ \forall t\ge t_0$.
 \end{Lemma}
 
@@ -150,7 +150,7 @@ Remark: from exponential stability follows uniformly asymptoticaly stability.
  remain bounded and in D. From 1) and 2) we can conclude 
  $\dot V \le -\frac{k_3}{k_2}V$. Then from previous Lemma 
  $V(t,x(t)) \le V(t_0,x(t_0))e^{-\frac{k_3}{k_2}(t-t_0)}$. Then
- $||x(t)|| \le [from 1)] \le \left( \frac{V(t,x(t))}{k_1}\right)^{\frac{1}{a}} \le$
+ $||x(t)|| \le [from (1)] \le \left( \frac{V(t,x(t))}{k_1}\right)^{\frac{1}{a}} \le$
  $\left(\frac{V(t_0,x(t_0))e^{-\frac{k_3}{k_2}(t-t_0)}}{k_1}\right)^{\frac{1}{a}} \le$ 
  $\left(\frac{k_2||x(t_0)||^a e^{-\frac{k_3}{k_2}(t-t_0)}}{k_1}\right)^{\frac{1}{a}} =$
  $\left( \frac{k_2}{k_1}\right)^{\frac{1}{a}} ||x(t_0)||e^{-\frac{k_3}{k_2a}(t-t_0)}$

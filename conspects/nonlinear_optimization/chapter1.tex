@@ -18,17 +18,17 @@ Questions:
 \begin{itemize}[label=$\#$]
 \item existence of solution
 \item "how large" is $I_{x_0}$
-\item uniquence of solution
+\item uniqueness of solution
 \end{itemize}
 
 
 
-Usaly we will add some restrictions on $f$ functions, like continuous.
+Usually we will add some restrictions on $f$ functions, like continuous.
 
 \subsection{Existence of solutions}
 
 \begin{Definition}
-Function $f:D \rightarrow R^n$ is contiuous at $x' \in D$ if for
+Function $f:D \rightarrow R^n$ is continuous at $x' \in D$ if for
 $\forall \epsilon > 0 \ \exists \delta>0$ such that for $\forall x \in D$,
 $\|x-x'\|<\delta => \|f(x)-f(x')\| < \epsilon$
 
@@ -42,7 +42,7 @@ $\exists x:(-\epsilon,\epsilon) \rightarrow D, \ \epsilon > 0$
 satisfying (\ref{c1:eq}).
 \end{Theorem}
 
-Further, given a compact sed $U \subset D$, then 
+Further, given a compact set $U \subset D$, then 
 $\exists \alpha > 0$ s.t. $\forall x_0 \in U 
 \ \exists x:(-\epsilon,\epsilon) \rightarrow D$ satisfying (\ref{c1:eq}).
 
@@ -55,7 +55,7 @@ solution exist in interval $(-c, c)$.
 
 
 But, what about the number of solutions? Which conditions we should
-add to garanty uniquence of solution?
+add to garantie uniqueness of solution?
 
 
 \subsection{Uniquence of solutions}
@@ -72,7 +72,7 @@ For all $x_1,x_2 \in N$.
 \end{Definition}
 
 \begin{itemize}
-\item Lipschiz on $W \in D$ if (\ref{c1:lip}) holds $\forall x_1,x_2 \in W$ 
+\item Lipschitz on $W \in D$ if (\ref{c1:lip}) holds $\forall x_1,x_2 \in W$ 
 (with same L)
 \item globally Lipschitz if (\ref{c1:lip}) holds $\forall x_1, x_2 \in R^n$
 (with same L)
@@ -81,8 +81,8 @@ For all $x_1,x_2 \in N$.
 
 We have
 \begin{itemize}[label=$\#$]
- \item localy Lipschitz functions are continuous
- \item differenciable functions are locally Lipschitz
+ \item locally Lipschitz functions are continuous
+ \item differentiable functions are locally Lipschitz
  \item locally Lipschitz functions are Lipschitz on each compact subset of D
  	(Khalil Ex 3.19)
 \end{itemize}
@@ -94,7 +94,7 @@ continuous. Then $\phi(t) \le c e^{Lt}$.
 $c + L\int^t_0 \phi(\tau) d \tau := \psi(t)$, $\dot \psi(t) = L\phi(t) \le L \psi (t)$.
 
 Consider $\frac{d}{dt} \left(\psi(t) e^{-LT}\right) = e^{-Lt}
-\dot \psi(t)-L \psi(t) \left(\right) \le 0$, thus $\psi(t) e^{-LT}$ is
+ \left( \dot \psi(t)-L \psi(t) \right) \le 0$, thus $\psi(t) e^{-LT}$ is
 decreased, and as a result we have $\phi(t)e^{-Lt}\le \psi(t)e^{-Lt}\le \psi(0)=c$ 
 
 \end{proof}
@@ -115,7 +115,7 @@ Consider two solutions $x_1(.)$ and $x_2(.)$ to (\ref{c1:eq}). $\dot x_1-\dot x_
 $x_1(0)=x_2(0)$. Then we can integrate equality: 
 $x_1(t)-x_2(t)=\int^t_0 f(x_1(\tau))-f(x_2(\tau)) d\tau$.  
 $|x_1(t)-x_2(t)| \le \int^t_0 |f(x_1(\tau))-f(x_2(\tau))| d\tau \le 
-L \int^t_0 |f(x_1(\tau))-f(x_2(\tau))| d\tau$. Now we can apply Cromwall's lemma with $c=0$
+L \int^t_0 |x_1(\tau)-x_2(\tau)| d\tau$. Now we can apply Cromwall's lemma with $c=0$
 and $\phi(t)=|x_1(t)-x_2(t)|$, then $\phi(t)\le 0$, then $x_1(t)=x_2(t), \ \forall t 
 \in (-\epsilon,\epsilon)$
 \end{proof}
@@ -151,7 +151,7 @@ Global existance $\&$ uniqueness
 
 \subsection{Lyapunov stability}
 
-If functions $\dot V(x) < 0$, $\forall x \in D\\ \{0\}$, then $x^*$ is
+If functions $\dot V(x) < 0$, $\forall x \in D \setminus \{0\}$, then $x^*$ is
 asymptotically stable.
 
 \begin{Definition}
@@ -160,7 +160,7 @@ s.t. from $\|x_0\| < \delta$ follows $\|x(t)\| \le \epsilon, \ \forall t \ge 0$.
 \end{Definition}
 
 \begin{Definition}
-Equilibrium point $x=0$ is asymptotikaly stable if it stable and exist $\delta>0$
+Equilibrium point $x=0$ is asymptotically stable if it is stable and exist $\delta>0$
 s.t. from $\|x_0\|<\delta$ follows 
 $\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
 \end{Definition}
@@ -168,10 +168,10 @@ $\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
 
 \begin{Theorem}[Lyapunov's direct method]
 Let $x^*=0 \in D$ be an equilibrium point of (\ref{c1:eq}), i.e., $f(0)=0.$ Let
-$f: D \rightarrow R^n$ is continious. If there exist a differetiable 
+$f: D \rightarrow R^n$ is continuous. If there exists a differentiable 
 $V:D\rightarrow R$ s.t. 
 \begin{enumerate}
-\item $V(x^*)=0$, $V(x)>0$, $\forall x \in D\\ \{0\}$
+\item $V(x^*)=0$, $V(x)>0$, $\forall x \in D \setminus \{0\}$
 \item $\dot V(x) = \frac{\partial V}{\partial x}f(x) \le 0$, $\forall x \in D$
 \end{enumerate}
 
