@@ -340,3 +340,182 @@ S(x) - S(x^*) \leq[by DIE] inf_{u[-T,0] \to \mathbb{R}^n, \ T \geq 0, \ x(-T) = 
 \end{Theorem}
 
 Remark: Set of all storage functions is convex, i.e. , $\alpha S_1 + (1-\alpha) S_2$, $\alpha\in [0,1]$ is a storage function (for $S1, \ S2$ storage functions)
+
+Dissipativity widely used in control theory
+
+If system is dissipative with positive definite storage $S$ and if there exists a (continuous) $k: \mathbb{R}^n \to \mathbb{R}^n$ s.t. 
+\begin{equation*}
+s(k(x),h(x)) < 0, \ \forall x \neq 0
+\end{equation*}
+then $x=0$ is asymptotically stable under $u=k(x)$
+
+Why? Take $S$ as Lyapunov function 
+\begin{equation*}
+\dot{S} \leq s(u,y) =^{u=k(x)} s(k(x),h(x)) < 0, \ \forall x \neq 0
+\end{equation*}
+
+$L_2$ - gain via supply rate 
+\begin{equation*}
+s(u,y) = \frac{1}{2} \gamma^2 \|u\|^2 - \frac{1}{2}\|y\|^2
+\end{equation*}
+$\leadsto $ from dissipation inequality
+
+\begin{equation*}
+\begin{split}
+\frac{1}{2} \int_0^t \gamma^2 \|u(\tau)\|^2 + \|y(\tau)\|^2d\tau \geq S(x(t)) - S(x(0)) \geq -S(x(0)) \\
+\Rightarrow \int_0^t \|y(\tau)\|^2d\tau \leq \gamma^2 \int_0^t \|u(\tau)\|^2d\tau + 2 S(x(0)) \\
+\end{split}
+\end{equation*}
+$\Rightarrow$ system has $L_2$ - gain $\gamma$
+
+Classify optional $l(x,u^{\leftarrow x})$ operating conditions $s(u,y) = l(x,u) - l(x^*,u^*)$ 
+
+%TODO picture
+
+\begin{Example}
+\begin{equation*}
+\dot{x} = u, \ y = x 
+\end{equation*}
+$S(x) = \frac{1}{2}x^2, \ \dot{S} = xu = uy \leadsto $ system is dissipative w.r.t. supply rate $s(u,y) = uy$.
+\end{Example}
+
+\begin{Example}
+"part-Hamiltonian systems" 
+\begin{equation*}
+\dot{x} = [F(x) - R(x)] \triangledown H(x) + g(x)u
+\end{equation*}
+$y = y(x)^T\triangledown H(x)$, $H$ - Hamiltonian total stored energy in system
+
+$F(x) = -F^T(x)$ internal interconnection structure (power conserving) $R(x) \geq 0$ dissipation structure
+
+Take $S(x) = H(x)$
+\begin{equation*}
+\begin{split}
+\dot{S}(x) = \triangledown H(x) \cdot [F(x) -R(x)]\triangledown H(x) + \triangledown H(x) \cdot g(x)u \\
+= - \triangledown H(x) \cdot R(x) \triangledown H(x) + yu \leq yu 
+\end{split}
+\end{equation*}
+as far as $- \triangledown H(x) \cdot R(x) \triangledown H(x) \leq 0 \Rightarrow$ dissipative w.r.t. $s(u,y) = u^Ty$   
+\end{Example}
+
+\subsection{Passivity}
+
+\begin{equation}\label{passivity_system}
+\begin{split}
+\dot{x} = f(x,u), \ x \in \mathbb{R}^n, \ u \in \mathbb{R}^m \\
+y = h(x), \ y \in \mathbb{R}^m
+\end{split}
+\end{equation}
+(same number of inputs and outputs)
+
+\begin{Definition}
+System (\ref{passivity_system}) is passive if it is dissipative w.r.t. supply rate $s(u,y) = u^Ty$
+\end{Definition}
+
+Why "passive"? From circuit theory passive compared to "active" ones as diods or transistors
+
+Examples: electrical, mechanical systems
+
+Stabilization of passive systems
+
+\begin{Definition}
+System (\ref{passivity_system}) is zero-state observable (ZSO) if (for $u(t)=0$) $y(t)=0$ for all $t \geq 0 \Rightarrow x(t) = 0$ for all $t \geq 0$
+
+"trivial solution $x(t) \equiv 0$ is observable from the output" 
+\end{Definition}
+
+Remark: can be related to zero-state detectability
+
+\begin{Theorem}
+Let system (\ref{passivity_system}) be 
+
+i) passive in differentiable storage set
+
+ii)ZSO
+
+Then the feedback $u=-Py, \ P > 0$ renders the origin asymptotically stable
+\begin{proof}
+Sketch of proof 
+From passivity
+\begin{equation}\label{passivity_inequality}
+\dot{S} \leq u^Ty = -y^TPy \leq 0
+\end{equation}
+\begin{equation*}
+S(x(t)) - S(x(0)) \leq - \int_0^ty(\tau)^TPy(\tau)d\tau , \ \forall t \geq 0
+\end{equation*}
+$S(x(t)) \geq 0$
+\begin{equation}\label{sx0-inequiality}
+S(x_0) \geq \int_0^ty(\tau)^TPy(\tau)d\tau, \ \forall t \geq 0
+\end{equation}
+$y(\tau)^TPy(\tau) \geq 0$. Want to show $S(x_0) > 0$ for all $x_0 \neq 0$. By contradiction. Suppose $\exists \bar{x} \neq 0$ with $S(\bar{x}) = 0$.
+
+From (\ref{sx0-inequiality}) $\Rightarrow y(\tau) = 0 \ \forall \tau \geq 0$
+
+By ZSO $\Rightarrow x(\tau) = 0 \ \forall \tau \geq 0 \Rightarrow \bar{x} = 0$
+
+$\Rightarrow S$ is positive definite. $\Rightarrow$ Lyapunov stability together with (\ref{passivity_inequality})
+
+For convergence, use (\ref{passivity_inequality}) together with La Salle's invariance principle and ZSO 
+\end{proof}  
+\end{Theorem}
+
+Advantage. We have (static) output feedback (no observer needed)
+
+Passivity of interconnections
+\begin{enumerate}
+\item Parallel interconnections of two passive systems are passive 
+%TODO picture
+
+Take $S(x_1,x_2) = S_1(x_1) +S_2(x_2)$.
+\begin{equation*}
+\dot{S} \leq u_1^Ty_1 + u_2^Ty_2 = u^T(y_1+y_2) = u^Ty
+\end{equation*}
+\item Feedback interconnection of passive systems are passive
+
+%TODO picture
+
+Take $S(x_1+x_2) = S_1(x_1) + S_2(x_2)$
+\begin{equation*}
+S \leq u_1^Ty_1 + u_2^Ty_2 =^{x_1=u_2=y} y^T(u_1+y_2) = y^Tu
+\end{equation*}
+\end{enumerate}
+
+Remark:
+\begin{itemize}
+\item does not work for serious interconnections
+\item can construct possibly large networks of passive systems
+\end{itemize}
+
+Stability if feedback interconnections:
+
+Main idea: "shortage" of passivity of $H_1$ can be compensated by nexcess of passivity of $H_2$
+
+\begin{Theorem}
+Consider feedback interconnection (2) with $u \equiv 0$. Assume that $H_1$ and $H_2$ are (i) ZSO and dissipative with differentiable $S_1, \ S_2$ w.r.t. the supply rates
+\begin{equation}\label{passivity_interconnection}
+S_i(u_i,y_i) = u_i^Ty_i - \rho_iy_i^Ty_i - \nu_iu_i^Tu_i, \ i=1,2, \ \rho,\nu \in \mathbb{R}
+\end{equation}
+Then the origin $(x_1,x_2) = (0,0)$ for interconnection is asymptotically stable if $\nu_1 + \rho_2 > 0$ and $\nu_2 + \rho_1 > 0$.
+\begin{proof}
+Take $S(x) = S_1(x_1)+S_2(x_2)$.
+\begin{equation*}
+\begin{split}
+\dot{S}(x) \leq^{(\ref{passivity_interconnection})} u_1^Ty_1 - \rho_1 y_1^Ty_1 - \nu_1u_1^Tu_1 \\
++ u_2^Ty_2 - \rho_2y_2^Ty_2 - \nu_2u_2^Tu_2 \\
+= - (\rho_1 + \nu_2)y_1^Ty_1 - (\rho_2 +\nu_1)y_2^Ty_2
+\end{split}
+\end{equation*}
+
+$u_1^Ty_1$ and $u_2^Ty_2$ can be excluded as $u_1=y_2, \ u_2 = y_1$. 
+
+$\Rightarrow$ can show as in previous theorem that $S$ is positive definite $Rightarrow$ Lyapunov stability
+
+For using La Salle:
+\begin{equation*}
+\begin{split}
+y_1 \equiv 0 \Rightarrow u_2 \equiv 0 \Rightarrow^{ZSO} x_2 \equiv 0 \\
+y_2 \equiv 0 \Rightarrow u_1 \equiv 0 \Rightarrow^{ZSO} x_1 \equiv 0
+\end{split}
+\end{equation*}
+\end{proof}
+\end{Theorem}
