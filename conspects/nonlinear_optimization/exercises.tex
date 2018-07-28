@@ -271,7 +271,7 @@ a) Hamiltonian form. Let $x:=(q,v)$. Then $\dot{x} = (-\frac{g}{m}\triangledown 
  -I & 
 \end{bmatrix}\begin{bmatrix}
  \frac{g}{m}\triangledown P(q) \\
- V 
+ v 
 \end{bmatrix} + \begin{bmatrix}
   \\
  \frac{1}{m}I
@@ -282,16 +282,19 @@ a) Hamiltonian form. Let $x:=(q,v)$. Then $\dot{x} = (-\frac{g}{m}\triangledown 
 
 b) "CLF". Take $H$ as a CLF candidate. Then, for any $x$ 
 \begin{equation*}
+\begin{split}
 <\triangledown H(x), \begin{bmatrix}
  & I \\
  -I & 
-\end{bmatrix} \triangledown H(x) + G(x)F> = <\triangledown H(x), \begin{bmatrix}
+\end{bmatrix} \triangledown H(x) + G(x)F> =& <\triangledown H(x), \begin{bmatrix}
  & I \\
  -I & 
-\end{bmatrix} \triangledown H(x)> + <\triangledown H(x), G(x)F> = [<\triangledown H(x), \begin{bmatrix}
+\end{bmatrix} \triangledown H(x)> + <\triangledown H(x), G(x)F> = \\
+& [<\triangledown H(x), \begin{bmatrix}
  & I \\
  -I & 
-\end{bmatrix} \triangledown H(x)> = L_fH(x) = 0] = \frac{1}{m} <\nu, F>
+\end{bmatrix} \triangledown H(x)> = L_fH(x) = 0] = \frac{1}{m} <v, F>
+\end{split}
 \end{equation*}
 
 Strictly speaking, $H$ is no CLF, but it reveals how to choose $F$ s.t. the origin is GAS.

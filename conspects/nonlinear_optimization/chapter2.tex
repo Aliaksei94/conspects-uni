@@ -164,15 +164,15 @@ Remark: from exponential stability follows uniformly asymptotically stability.
 \end{Example}
 
 
-\subsection{Comparsion function}
+\subsection{Comparison function}
 
 \begin{Definition}
- A function $\alpha:[0,\delta)\to [0, \infty)$ is (of) "klass $K$" if it is continous,
+ A function $\alpha:[0,\delta)\to [0, \infty)$ is (of) "class $K$" if it is continuous,
  strictly increasing, and $\alpha(0)=0$.
 \end{Definition}
 
 \begin{Definition}
- A function $\alpha:[0,\delta)\to [0, \infty)$ is "class $K_\infty$ if $\alpha in K$
+ A function $\alpha:[0,\delta)\to [0, \infty)$ is "class $K_\infty$" if $\alpha \in K$
  and $\lim_{r\to\infty} \to\infty$.
 \end{Definition}
 
@@ -190,22 +190,22 @@ Remark: from exponential stability follows uniformly asymptotically stability.
 \end{Definition}
 
 \begin{Example}
- Function $\beta(x,s)=max(r,r^2)e^{s}$ belong class $KL$.
+ Function $\beta(x,s)=max(r,r^2)e^{-s}$ belongs to class $KL$.
 \end{Example}
 
-Properties of compasion functions:
+Properties of comparison functions:
 
 \begin{itemize}
  \item If $\alpha \in K$ on $[0, \delta)$, then $\alpha^{-1}$ is defined on 
- $[0, \alpha(\delta))$ and $\alpha^-1 \in K$.
+ $[0, \alpha(\delta))$ and $\alpha^{-1} \in K$.
  \item If $\alpha \in K_\infty$, then $\alpha^{-1}\in K_\infty$
  \item If $\alpha_1,\alpha_2\in K$, then $\alpha_1 \circ \alpha_2\in K$
-  (same for $K_\infty$
+  (same for $K_\infty$)
  \item If $\alpha_1,\alpha_2\in K$, $\beta\in KL $ then 
   $\alpha_1(\beta(\alpha_2(r),s)) \in KL$
 \end{itemize}
 
-Now we conseider comparsion funcctions and stability definitions.
+Now we consider comparison functions and stability definitions.
 
 \begin{Lemma}
  The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly stable iff
@@ -219,20 +219,6 @@ Now we conseider comparsion funcctions and stability definitions.
  follows $||x(t)||\le\alpha(||x(t_0)||)<\alpha(\alpha^{-1}(\epsilon))=\epsilon$.
  \end{proof}
 \end{Lemma}
-
-
-\begin{Lemma}
- The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly asymptotically stable iff
- $\exists \beta\in KL$ and $c>0$ s.t. $\forall t \ge t_0$,
- $\forall ||x(t_0)||<c$ and $||x(t)|| \le \beta(||x(t_0)||, t-t_0).$ 
-
- \begin{proof}[(only sufficiency)] Let $\|x(t_0)\|<c$. Then 
- $\|x(t)\| \le \beta(\|x(t_0)\|, t-t_0) < \beta(c,t-t_0)$. This mean uniform convergence.
- $\|x(t)\| \le \beta(\|x(t_0)\|, t-t_0)<\beta(\|x_{t_0}\|, 0)$. This gives us uniform
- stability.
- \end{proof}
-\end{Lemma}
-
 
 \begin{Lemma}
  The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly asymptotically stable iff
@@ -251,7 +237,7 @@ Now we conseider comparsion funcctions and stability definitions.
  stable iff previous lemma holds for all $x_0\in R^n$.
 \end{Lemma}
 
-Now consider comparsion functios and Lyapunov functions
+Now consider comparison functions and Lyapunov functions
 
 If $W:R^n \to R$ is continuous and positive definite, then $\forall r>0\ $
 $\exists \alpha_1, \alpha_2 \in K$ s.t. $\alpha_1(||x||) \le W(x)\le \alpha_2(|x||)$ for 
@@ -260,7 +246,7 @@ all $x\in B_r(0)=\{x|||x||\le r\}$.
 If $W$ is radially unbounded, then $\exists \alpha_1,\alpha_2\in K_\infty$ s.t.
 $\alpha_1(||x||) \le W(x)\le\alpha_2(|x||)$ for all $x\in R^n$.
 
-\begin{Lemma}[Auxility]
+\begin{Lemma}[Auxiliary]
  Consider $\dot y=\alpha(y),\ \ y(t_0)=y_0>0, \ \alpha\in K$. Then 
  $\exists \beta\in KL$ s.t. $y(t)=\beta(y_0, t-t_0)$.
 \end{Lemma}
@@ -281,14 +267,14 @@ $\alpha_1(||x||)\le V(t,x)\le \alpha_2(||x||)$ and $\dot V(t,x)\le -\alpha_3(||x
 
 Proof uniform stability:
 
-$||x(t)||\le\alpha^{-1}_1(V(t,x(t)) \le [\alpha_1 in K] \le \alpha^{-1}_1(V(t_0,x(t_0)) \le$
+$||x(t)||\le\alpha^{-1}_1(V(t,x(t)) \le [\alpha_1 \in K] \le \alpha^{-1}_1(V(t_0,x(t_0)) \le$
 $\alpha^{-1}_1(\alpha_2(||x(t_0)||))$.
 
 Proof uniform convergence
 
 $\dot V \le -\alpha_3(||x||)\le -\alpha_3(\alpha_2^{-1}(V))$. We know, that 
-$\alpha_3 \circ \alpha_2^{-1} \in K$. By comparsion lemma, $V(t,x(t))\le W(t)$, where $W$
-solves $\dot W=-\alpha_3(\alpha_2^{-1}(W))$ with $W(t_0)=V(t_0,x(t_0))$. By auxility lemma
+$\alpha_3 \circ \alpha_2^{-1} \in K$. By comparison lemma, $V(t,x(t))\le W(t)$, where $W$
+solves $\dot W=-\alpha_3(\alpha_2^{-1}(W))$ with $W(t_0)=V(t_0,x(t_0))$. By auxiliary lemma
 $\exists \beta\in KL$ s.t. $V(t,x(t))\le\beta(V(t_0,x(t_0)), t-t_0)$, then
 $||x(t)||\le\alpha^{-1}_1(V(t,x(t)))\le\alpha^{-1}_1(\beta(V(t_0,x(t_0)), t-t_0))\le$
 $\alpha_1^{-1}(\beta(\alpha_2(||x(t_0)||),t-t_0))=:$
@@ -300,17 +286,17 @@ $\bar{\beta}\in KL$.
 
 \begin{Theorem}
  Let $X^*=0$ be an EP of $\dot x(t)=f(t,x(t))$ with $f:[0,\infty)\times R^n \to R^n$
- continously differentiable and $\frac{\partial f}{\partial x}$ bounded in $R^n$,
+ continuously differentiable and $\frac{\partial f}{\partial x}$ bounded in $R^n$,
  uniformly in t ($||\frac{\partial f}{\partial x}(t,x)||\le L$ for all 
  $x\in R^n,\ t\ge 0,\ L>0$.
 
- If $x^*=0$ is globally exponentially stale, then exists differentiable 
+ If $x^*=0$ is globally exponentially stable, then exists differentiable 
  $V:[0,\infty)\times R^n\to R$ and $c_1,c_2,c_3,c_4>0$ s.t.
  $c_1||x||^2\le V(t,x)\le c_2||x||^2$, $\dot V(t,x)\le -c_3||x||^2$ and
  $\left\Vert \frac{\partial V}{\partial x}\right\Vert \le c_4||x||$.
 
 \begin{proof}
-Let $\Phi(\tau;t,x)$ -- solution to $\dot x(t)=f(t, x(t))$ which static
+Let $\Phi(\tau;t,x)$ -- solution to $\dot x(t)=f(t, x(t))$ which is static
 at $(t,x)$.
 
 $V(t,x)=\int_t^{t+\delta}\Phi^T(\tau;t,x)\Phi(\tau;t,x) d\tau, \ \ \delta>0$.

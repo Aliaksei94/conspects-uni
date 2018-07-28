@@ -8,9 +8,9 @@ Consider equation:
 
 where $f:R^n\to R^n$.
 
-Assumption: $f$ in localy Lipschitz.
+Assumption: $f$ in locally Lipschitz.
 
-Exageneous signa $u:R\to R^n$.
+Exogenous signal $u:R\to R^n$.
 
 Input can be "bad" (disturbance) or "good" (control).
 
@@ -47,7 +47,7 @@ Remarks:
 
 \begin{itemize}
  \item From ISS follows O-GAS (global assymptotical stability of $x=0$ for
-   $\dot x=f(x,0)$
+   $\dot x=f(x,0)$)
  \item $\gamma$ can be interpreted as "gain" w.r.t. $u$
  \item if $\lim_{t\to\infty} u(t)=0$ then $\lim_{t \to\infty}x(t)=0$
 \end{itemize}
@@ -108,7 +108,7 @@ Remarks:
  Sketch:
  $\exists$ continuous differentiable $V$:
  $$c_1||x||^2 \le V(x) \le c_2||x||^2$$
- $$ \frac{\partial V}{\partial x}f(x,0) \le -c_3||x||^2$$
+ $$ \frac{\partial V}{\partial x}f(x,0)) \le -c_3||x||^2$$
  $$||\frac{\partial V}{\partial x}|| \le c_4||x||$$
  Then: \\
   $\frac{\partial V}{\partial x}f(x,u)=\frac{\partial V}{\partial x}f(x,0)+\frac{\partial V}{\partial x}(f(x,u)-f(x,0) \le -c_3||x||^2+c_4||x||L||u|| = -c_3(1-\theta)||x||^2-\theta||x||^2+c_4L||x||||u|| \le -c_3(1-\theta)||x||^2$ \\
@@ -173,7 +173,7 @@ $$\dot x = \left\{
                 \end{array}
               \right.$$
 If you want to move the system you need to apply control $|u| \ge 1$. \\
-Using $$V(x) = \left\{
+Using $$u(x) = \left\{
                 \begin{array}{ll}
                   x+1, \ \ x>0\\
                   x-1, \ \ x \le 0
