@@ -197,7 +197,7 @@ How to construct a globally stabilizing state feedback $k$ from knowledge of a C
 Fix $c \ge 0, a(x):=L_fV(x), b(x):=(L_GV(x))^T$
 $$k(x) = \left\{
                 \begin{array}{ll}
-                  -cb(x)-\frac{a(x)+\sqrt{a(x)^2+(b(x)^Tb(x))^2}}{b(x)^Tb(x)}, \ \ b(x) \neq 0\\
+                  -cb(x)-\frac{a(x)+\sqrt{a(x)^2+(b(x)^Tb(x))^2}}{b(x)^Tb(x)}b(x)^T, \ \ b(x) \neq 0\\
                   0, \ \ b(x)=0
                 \end{array}
               \right.$$
