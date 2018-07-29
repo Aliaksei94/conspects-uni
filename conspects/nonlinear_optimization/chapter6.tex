@@ -143,3 +143,166 @@ for $\Phi \in Lp$ $\Rightarrow$
  \item for $\alpha \in mathbb{R}$, $||\alpha\Phi||_{Lp}=|\alpha| ||\Phi||_{Lp}$
  \item for $\Phi_1, \Phi_2 \in Lp\ $ $||\Phi_1+\Phi_2||_{Lp} \le ||\Phi_1||_{Lp}+||\Phi_2||_{Lp}$
 \end{itemize}
+
+For $p \to \infty$ set of all measurable and (essentially) bounded functions $L_{\infty}$, for continuous $\phi$ 
+\begin{equation*}
+\|\phi\|_{L_{\infty}} = \inf \{ c \in \mathbb{R} | \|\phi(t)\| \leq c a.e.\} = \sup_{t > 0} \| \phi(t)\|
+\end{equation*}
+%TODO picture
+
+\begin{Example}
+\begin{equation*}
+\phi (t) = e^{- \alpha t}, \ \alpha > 0, \ p \in [1,\infty )
+\end{equation*}
+\begin{equation*}
+\begin{split}
+\|\phi \|_{L_p} = \sqrt{p}{\int_0^{\infty} \|e^{-\alpha t}\|^p dt} = \\
+= \sqrt{p}{[-\frac{1}{2p}e^{-\alpha pt}]_0^{\infty}} > \sqrt{p}{\frac{1}{2p}} < \infty \\
+\Rightarrow \phi \in L_p \ \forall p \in [1, \infty) \ p= \infty : \\
+\sup_{t \geq 0} \phi (t) = \phi (0) = 1 \Rightarrow p \in L_{\infty}
+\end{split}
+\end{equation*}
+\end{Example}
+
+Special case $p = 2$ 
+
+$L_2$ can be equipped with an inner product $\phi_1, \phi_2 \in L_2$, we write $<\phi_1, \phi_2>_{L_2} :=  \int_0^{\infty} \phi_1(t)^T\phi_2(t)dt$
+
+symmetry $<\phi_1, \phi_2>_{L_2} = <\phi_2, \phi_1>_{L_2}$
+
+(bi- )linearity 
+\begin{equation*}
+\begin{split}
+<\alpha \phi_1, \phi_2>_{L_2} = \alpha <\phi_1, \phi_2>_{L_2} \ \alpha \in \mathbb{R} \\ 
+<\phi_1 + \phi_2, \phi_3>_{L_2} = <\phi_1, \phi_3>_{L_2} + <\phi_2, \phi32>_{L_2}
+\end{split}
+\end{equation*}
+$\phi_3 \in L_2$ 
+positive definiteness: $<\phi_1, \phi_1>_{L_2} = 0$ iff $\phi_1 = 0$, $<\phi_1, \phi_1>_{L_2} > 0$ else.
+
+$\Rightarrow (L_2, <\cdot, \cdot>_{L_2})$ is an inner product space
+
+$\|\ \phi|_{L_2}^2 = < \phi, \phi>_{L_2}$ "induced norm". Particularly useful(Cauchy -Schwarz inequality) $|<\phi_1,\phi_2>_{L_2}| \leq \|\phi_1\|_{L_2}\|\phi_2\|_{L_2}$
+
+Original motivation 
+
+%TODO picture
+
+\begin{Example}
+\begin{equation*}
+\dot{x} = x+u, \ y = x, \ x(0) = 0
+\end{equation*}
+$y(t) = \int_0^te^(t-\tau)u(t)d\tau$
+
+Take $u(t) = \left\{
+                \begin{array}{ll}
+                  1, \ \ 0 \leq t \leq 1\\
+                  0, \ \ t > 1
+                \end{array}
+              \right. $
+              
+Clearly, $u \in L_p$ for any $p \in [1,\infty)$. Let $t geq 1$: 
+\begin{equation*}
+\begin{split}
+y(t) = \int_0^1 e^{(t-\tau)}d\tau = e^t\int_0^1e^{-\tau}d\tau \\
+= e^t[-e^{-\tau}]^1_0 = e^t(1-e^{-1})
+\end{split}
+\end{equation*}
+$\Rightarrow y \not\in L_p, \ p \in [1,\infty) $.$\Rightarrow $ even that $ u \in L_p$, the output neednot be an $L_p$ - signal.
+\end{Example}
+
+Taking $H: L_p \to L_p$ does (in general) not make sense? (would be excluded too many "relevant" systems)
+
+Meaningful longer class: extended $L_p$ spaces
+
+Introduce "truncation operator"
+\begin{equation*}
+\phi_T(t) = \left\{
+                \begin{array}{ll}
+                  \phi (t), \ \ 0 \leq t \leq T\\
+                  0, \ \ t > T
+                \end{array}
+              \right. 
+\end{equation*}
+
+The extension $L^e_p$ of $L_p$ is defined as 
+\begin{equation*}
+L^e_p = \{ \phi: [0,\infty) \to \mathbb{R}^n | \forall T \geq 0 \ \phi_T \in L_p\}
+\end{equation*}
+%TODO picture
+
+$L^e_p \setminus L_p$ are "unstable" signals
+
+\begin{Example}
+$\phi (t) = e^t $ ("unstable linear system")
+\begin{equation*}
+\begin{split}
+\|\phi_T\|^0_{L_p} = \int_0^{\infty} |\phi_T(t)|^pdt = \int_0^T|\phi(t)|^pdt =  \\
+= \int_0^Te^{pt}dt = \frac{1}{p}(e^{Tp} - 1) < \infty, \ \forall T \geq 0 \\
+\Rightarrow \phi \in L_p^e 
+\end{split}
+\end{equation*}
+\end{Example}
+
+We consider systems 
+\begin{equation*}
+H: u \mapsto y, L_p^e \mapsto L_p^e
+\end{equation*}
+and define input-output stability as follows:
+\begin{Definition}
+$H$ is $L_p$-stable if there exists $\alpha \in K, \ \beta \geq 0$ s.t. 
+\begin{equation*}
+\|(H(u))_T\|_{L_p} \leq \alpha (\|u_T\|_{L_p}) + \beta
+\end{equation*}
+for all $u \in L^e_p$ and all $T \geq 0$. 
+
+$H$ is finite-gain $L_p$ stable if there exist $\gamma, \ \beta \geq 0$ s.t. 
+\begin{equation}\label{finite_gain}
+\|(H(u))_T\|_{L_p} \leq \gamma \|u_T\|_{L_p} + \beta 
+\end{equation}
+for all $u \in L_p^e$ and $T \geq 0$. Then $\gamma_p(H) := \{ \inf \gamma | \exists \beta \geq 0 s.t. (\ref{finite_gain}) holds\}$ is $L_p$ - gain of $H$
+\end{Definition}
+\begin{Definition}
+A map $H: L_p^e \mapsto L_p^e$ is causal if $(H(u))_T = (H(u_T))_T$ for all $u \in L_p^e$ and $T \geq 0$. 
+\end{Definition}
+
+Interpretation: $H$ is "nonanticipativity", outputs up to time $T$ cannot be influenced by inputs after time $T$.
+
+Remark: if $H$ is defined by $u \mapsto y, \ y = h(x), \ \dot{x} = f(x,u)$ then it is causal.
+\begin{itemize}
+\item (\ref{finite_gain})
+\begin{equation}\label{causal_formula}
+\Rightarrow \|H(u)\|_{L_p} \leq \gamma \|u\|_{L_p} + \beta, \ \forall u \in L_p
+\end{equation}
+\item For causal systems, (\ref{causal_formula}) implies (\ref{finite_gain})
+\item sometimes slightly different definitions of finite-gain $L_2$ stability
+\begin{equation}\label{finite_gain_stability}
+\|(H(u))_T\|^2_{L_2} \leq \bar{\gamma}^2 \|u_T\|^2_{L_2} + \beta, \ \forall u \in L_p^e, \ \forall T \geq 0
+\end{equation}
+One can show 
+\begin{equation*}
+\gamma_2(H) := \{ \inf \bar{\gamma} | \exists \beta \geq 0 \ s.t. \ (\ref{finite_gain_stability})\ holds \}
+\end{equation*}
+\end{itemize}
+
+\subsection{Input-output stability of state-space systems}
+
+\begin{Theorem}
+Consider $\dot{x} = f(x,u), \ y = h(x,u)$. Suppose the system is ISS and there exist $\alpha_1, \alpha_2 \in K$ and $\eta \geq 0$ s.t. $\|L(x,u)\| \leq \alpha_1(\|x\|) + \alpha_2(\|u\|) + \eta$. Then for each $x_0 \in \mathbb{R}^n$, the system is $L_{\infty}$ - stable.
+\begin{proof}
+From ISS, $\exists \phi \in KL$ and $\alpha_3 \in K$ s.t. for all $t \geq 0$.
+\begin{equation*}
+\|x(t)\| \leq \phi(\|x_0\|, t) + \alpha_3(\sup_{0\leq \tau \leq t}\|u(\tau)\|)
+\end{equation*}
+Hence 
+\begin{equation*}
+\begin{split}
+\|y(t)\| \leq \alpha_1(\phi (\|x_0\|, t) + \alpha_3(\sup_{ 0 \leq \tau 
+\leq t}\|u(\tau)\|)) + \alpha_2(\|u(t)\|) + \eta \leq \\ 
+[\alpha_1(a+b) \leq \alpha_1(2a)+\alpha_2(2b)] \leq \alpha_1(2\phi(\|x_0\|,t)) + \alpha_1(2 \alpha_3(\sup_{0 \leq \tau \leq t}\|u(\tau)\|))\\
++ \alpha_2(\|u(t)\|)+\eta \Rightarrow \|y_T\|_{L_{\infty}} \leq \gamma(\|u_T\|_{L_{\infty}}) + \beta \\
+with\ \gamma = \alpha_2 \circ 2\alpha_3 + \alpha_2, \ \beta = \alpha_1(2\phi(\|x_0\|,0)) + \eta
+\end{split}
+\end{equation*}
+\end{proof}
+\end{Theorem}
