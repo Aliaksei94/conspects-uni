@@ -492,13 +492,13 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
     $$\dots$$
     $$\dot x_n = u$$
     \begin{proof}
-        We will always have $u = e_{n-1}^2-ke_n$. \\
+        We will always have $u = -e_{n-1}^2-ke_n$. \\
         Let $V: R \times \dots \times R \rightarrow R, \ \ (e_1, \dots e_n) \mapsto \sum_{i=1}^n V_i(e_i)$, where $V_i(e_i) = \frac{1}{2}e_i^2, \ \ i=2, \dots n$.\\
         We have $\dot V(e_1, \dots e_n) = L_{f_1+g_1\alpha_1}V_1(e_1)-k\sum_{i=2}^{n-1}e_i^2 + e_nu + e_{n-1}g_{n-1}(x_1, \dots x_{n-1})e_n - e_n \dot \alpha_{n-1}(x_1, \dots x_{n-1}).$\\
         We observe that for $\alpha_i$ being zero, the inequality
-        $$e_{n-1}g_{n-1}(x_1, \dots x_{n-1})e_n - e_n \dot \alpha_{n-1} (x_1, \dots x_{n-1}) + e_nu < 0$$
+        $$e_{n-1}g_{n-1}(x_1, \dots x_{n-1})e_n - e_n \dot \alpha_{n-1} (x_1, \dots x_{n-1}) + e_nu  0$$
         hence $e_{n-1}^2e_n + e_nu < 0$ for non-zero $e$.\\
-        It is solved by $u = e_{n-1}^2 - ke_n, \ \ k>0$.
+        It is solved by $u = -e_{n-1}^2 - ke_n, \ \ k>0$.
     \end{proof}
     
     \subsection{Exercise 5}
@@ -722,3 +722,118 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
         Add and subtract $2\Phi(y)^2$ and $2\Phi(y)BCx$ yields \\
         $\dot V(x) = - \varepsilon <x,Px> - <x,L^TLx> - 2\Phi(y)<x,PB-BC^T> - 2\Phi(y)^2 + 2\Phi(y)(\Phi(y)-By) = - \varepsilon <x,Px> - |Lx-\sqrt{2}\Phi(y)|^2+2\Phi(y)(\Phi(y)-By) \le - \varepsilon <x,Px>$.
     \end{proof}
+
+\subsection{Exercise 8}
+
+Problem 1:\\
+Show that if $\Phi : [0,+\inf) \rightarrow R$ and $\Phi \in L_1 \cap L_{\infty}$, then $\Phi \in L_p \ \forall p \in [1,+\infty]$.
+\begin{proof}
+    Holder inequality:\\
+    Let $p,q \in [1,+\infty], \ \frac{1}{p}+\frac{1}{q}=1$.
+    If $f \in L_p$ and $g \in L_q$, then $fg \in L_1$ with
+    $$||fg||_{L_1} \le ||f||_{L_p}||g||_{L_q}$$
+    Convention: If $p = +\infty \ (q = +\infty)$, then $\frac{1}{p}=0 \ (\frac{1}{q}=0)$. \\
+    Let $p \in (1, +\infty).$ We have
+    $$(||\Phi||^p_{L_p}=)\int_0^{\infty}|\Phi(t)|^pdt = \int_0^{\infty}|\Phi(t)\Phi(t)^{p-1}|dt \ le [HE] \le ||\Phi||_{L_1}||\Phi||_{L_{\infty}}^{p-1}$$
+    Hence, $\Phi \in L_p$ for any $p \in [1,+\infty)$
+\end{proof}
+
+Problem 2:
+\begin{proof}
+    b) $\Phi_2 = \frac{1}{t+1}$\\
+    For $p \in \{1,2\}$, we have
+    $$\int_0^{\infty}|\Phi_2(t)|^pdt = \lim_{T \rightarrow +\infty} \int_0^T \frac{1}{(t+1)^p}dt = \left\{\begin{array}{ll}
+        \lim_{T \rightarrow +\infty} [\ln(t+1)]|^T_0 = +\infty, \ p=1 \\
+        \lim_{T \rightarrow +\infty} [-\frac{1}{t+1}]|^T_0 < +\infty, \ p=2 
+    \end{array} \right.$$
+    s.t. $\Phi_2 \in L_1$, but $\Phi_2 \in L_2$.\\
+    Moreover, 
+    $$\sup_{t \ge 0} |\Phi_2(t)|=\sup_{t \ge 0} |\frac{1}{t+1}| = 1 < +\infty$$
+    s.t $\Phi_2 \in L_{\infty}$.
+\end{proof}
+
+Problem 3:
+\begin{proof}
+    Take $v=\frac{u}{||u||_{l_p}}, \ u \neq 0$, s.t. $v \in L_p$ and $||v||_{L_p}=1$.\\
+    Then
+    $$||Hv||_{L_p}=||H\frac{u}{||u||_{l_p}}||_{L_p}=[H - linear]=||\frac{1}{||u||_{l_p}}Hu||_{L_p}=\frac{u}{||u||_{l_p}}||Hu||_{L_p}$$
+\end{proof}
+
+Problem 4:
+Let $\Phi:[0,+\infty) \rightarrow R$ be defined by $\Phi(t)=t$. Show that $\Phi \in L^e_p$ for any $p \in [1, +\infty]$.
+\begin{proof}
+    Let $p \in [1, +\infty)$ and fix some $T \ge 0$. Then
+    $$(||\Phi_T||^p_{L_p}=)\int^{\infty}_0|\Phi_T(t)|^pdt = \int^T_0|\Phi(t)|^pdt = \int^T_0|t|^pdt = \frac{t^{p+1}}{p+1}|^T_0 = \frac{T^{p+1}}{p+1} < +\infty$$
+    Moreover, 
+    $$||\Phi_T||_{L_{\infty}}=\sup_{t \ge 0} |\Phi_T(t)|=\sup_{t \in [0,T]} |\Phi(t)|=T < +\infty$$
+    $\implies \Phi \in L^e_p \ \forall p \in [1,+\infty]$.
+\end{proof}
+
+Problem 5:
+\begin{proof}
+    $\Longrightarrow$: \\
+    Take $u,v \in L^e_p$ s.t. $v_T=u_T$ for some $T \ge 0$. Then, by causality of $H$,
+    $$H(u)_T = H(u_T)_T, \ H(v)_T = H(v_T)_T$$
+    Since $u_T=v_T$, ot follows $H(u)_T = H(v)_T$.\\
+    $\Longleftarrow$: \\
+    Take $u \in L^e_p$ and consider $v=u_T$ for some $T \ge 0$. Noting that $v_T = (u_T)_T=u_T$, we have
+    $$H(u)_T=H(v)_T=H(u_T)_T$$
+\end{proof}
+
+Problem 6:
+\begin{proof}
+    Let $u \in L^e_{\infty}$ and $T \ge 0$ s.t. for any $0 \le t \le T$
+    \begin{multline*} 
+        |y_i(t)| \le \int_0^t |h(t-\tau)||u(t)|d\tau \le \sup_{\tau \in [0,T]} |u(\tau)| \int^t_0|h(t-\tau)|d\tau = [\sigma = t - \tau]  = \\ = \sup_{\tau \in [0,T]} |u(\tau)| \int^t_0|h(\sigma)|d\sigma \le \sup_{\tau \in [0,T]} |u(\tau)|( \int^t_0|h|+\int^{\infty}_t|h|) \dots
+    \end{multline*}
+\end{proof}
+
+\subsection{Exercise 9}
+
+Problem 1:
+\begin{proof}
+    Let $H_2:L^e_P \rightarrow L^e_p$ be defined by $H_2(e_2)=\frac{1}{2\gamma}e_2$. \\
+    Using that $y_2=H_2(e_2)$, it follows
+    $$||(y_2)_T||_{L_p}=\frac{1}{2\gamma}||(e_2)_T||_{L_2}, \ \forall e_2 \in L^e_p, \ \forall T \ge 0$$
+    Since $\gamma_1 \gamma_2 = \gamma \frac{1}{2\gamma} = \frac{1}{2} < 1$, the SGT reveals that $y \in L_p$ whenever $u \in L_p$.
+\end{proof}
+
+Problem 2:
+\begin{proof}
+    Let $e_2 \in L^e_{\infty}$ and $T \ge 0$ s.t. $y_2=H_2(e_2)$. Then
+    $$(||(y_2)_T||^2_{L_2}=) \int^T_0|y_2(t)|^2dt \le ess \sup_{t \in [0,T]} |y_2(t)| \int_0^T |y_2(t)|dt = ||(y_2)_T||_{L_\infty}||(y_2)_T||_{L_1} \le \delta \varepsilon ||(e_2)_T||^2_{L_\infty}$$
+    Hence,
+    $$||(y_2)_T||_{L_2} \le \sqrt{\delta \varepsilon}||(e_2)_T||_{L_{\infty}}, \ \forall e_2 \in L^e_{\infty}, \forall T \ge 0$$
+    for any $u \in L^e_2$ and $T \ge 0$ (with $y=y_2$),
+    $$||y_T||_{L_2} \le \sqrt{\delta \varepsilon}||(y_1)_T||_{L_{\infty}} \le \gamma \sqrt{\delta \varepsilon} ||(e_1)_T||_{L_2} \le \gamma \sqrt{\delta \varepsilon} ||u_T||_{L_2} + \gamma \sqrt{\delta \varepsilon} ||y_T||_{L_2}$$
+    s.t.
+    $$(1-\gamma \sqrt{\delta \varepsilon})||y_T||_{L_2} \le \gamma \sqrt{\delta \varepsilon} ||u_T||_{L_2}$$
+    If $\gamma \sqrt{\delta \varepsilon} < 1$, then the SGT reveals that $y \in L_2$ whenever $u \in L_2$.
+\end{proof}
+
+Problem 3:
+\begin{proof}
+    For any $u \in L^e_2$ and $T \ge 0$, we have
+    $$<u_T,y_T>_{L_2} = <u_T,h(x)_T>_{L_2} = <a \dot{x}_T+x_T,h(x)_T>_{L_2} = a \int_0^T h(x(t)) \dot{x}(t)dt + \int_0^T x(t)h(x(t))dt$$
+    Since $h \in [0, +\infty]$, i.e. $xh(x) \ge 0, \ \forall x \in R$, we have $\int_0^Tx(t)h(x(t))dt \ge 0$.\\
+    Now, $\Phi: R \rightarrow R$ be defined by $\Phi(x) = \int_0^x h(\sigma)d\sigma$. \\
+    Clearly, $\Phi(x) \ge 0$ for all $x \in R$.\\
+    It follows that
+    $$a \int_0^Th(x(t)) \dot{x}(t) dt = a \int_{x(0)}^{x(T)}h(\sigma)d\sigma = a(\Phi(x(T))-\Phi(x(0))) \ge -a\Phi(x(0)) =: \beta$$
+    Hence, the system is passive ($<u_T,y_T>_{L_2} \ge - \beta, \ \forall u \in L^e_2, \ \forall T \ge 0$).
+\end{proof}
+
+Problem 4:
+\begin{proof}
+    Since $H_1$ is passive (with zero bias ($\beta = 0$)), it follows
+    $$<(e_1)_T,(y_1)_T>_{L_2} \ge 0, \ \forall e_1 \in L_2^e, \ \forall T \ge 0.$$
+    Using that
+     $$<(e_2)_T,(y_2)_T>_{L_2} \ge \delta ||(e_2)_T||^2_{L_2}, \ \forall e_2 \in L_2^e, \ \forall T \ge 0,$$
+    we have for $u \in L_2^e$ and $T \ge 0$ with $y=y_1$,
+    $$<u_T,y_T>_{L_2} = <(e_1)_T,(y_1)_T>_{L_2} + <(e_2)_T,(y_2)_T>_{L_2} \ge \delta ||y_T||^2_{L_2}.$$
+    Using Caschy-Schwarz
+    $$||y_T||_{L_2}||u_T||_{L_2} \ge |<u_T,y_T>_{L_2}| \ge <u_T,y_T>_{L_2} \ge \delta ||y_T||^2_{L_2}$$
+    s.t.
+    $$||y_T||_{L_2} \le \frac{1}{\delta}||u_T||_{L_2}$$
+    Since $u \in L_2$, passing to the limit, as $T \rightarrow \infty$, reveals $y \in L_2$.
+\end{proof}

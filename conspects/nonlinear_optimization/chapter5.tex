@@ -1,19 +1,20 @@
 \section{Systems with inputs and outputs}
 
-Study/control systems $\dot{x} = f(x,u)$ with "output" $y(t)=W(x(t))$
+Study/control systems $\dot{x} = f(x,u)$ with "output" $y(t)=h(x(t))$
 
 \subsection{Sliding mode control}
 
 Motivating example
 \begin{equation*}
-\dot{x_1} = x_2
+\left\{
+                \begin{array}{l}
+                  \dot{x_1} = x_2\\
+                  \dot{x_2} = u \\
+                  y = x_1 + x_2
+                \end{array}
+              \right. 
 \end{equation*}
-\begin{equation*}
-\dot{x_2} = u \Rightarrow \dot{y} = x_2 + u
-\end{equation*}
-\begin{equation*}
-y = x_1 + x_2
-\end{equation*}
+$\Rightarrow \dot{y} = x_2 + u$
 
 Choose:
 \begin{equation*}
@@ -54,7 +55,7 @@ y(t) = \left\{ \begin{array}{ll}
 
 %TODO picture
 
-Key property: choose $u$ s.t. $y(t)$ goes to zero in finite time $\Rightarrow x(t)$ tends $\{ (x_1, x_2) \in \mathbb{R}^2 | x_1 +x_2 = 0 \}$ in finite time
+Key property: choose $u$ s.t. $y(t)$ goes to zero in finite time $\Rightarrow x(t)$ tends $S := \{ (x_1, x_2) \in \mathbb{R}^2 | x_1 +x_2 = 0 \}$ in finite time
 
 Consider dynamics on $S$
 \begin{equation*}
@@ -79,8 +80,10 @@ Remark: in (1) "finite time convergence is crucial"
 
 General procedure:
 \begin{equation*}
+\begin{split}
 \dot{x} = f(x)+g(x)u \\
 y = h(x)= s(x)
+\end{split}
 \end{equation*}
 $f: \mathbb{R}^n \to \mathbb{R}^n, \  y : \mathbb{R}^n \to \mathbb{R}^n, \ s: \mathbb{R}^n \to \mathbb{R}$
 
@@ -106,10 +109,10 @@ How are 1 + 2 achieved?
 \begin{itemize}
 \item Design of sliding manifolds crucial!
 
-Need: For $y(t)=0$ for all $t \geq 0$. All solutions convergeto the origin, i.e., "zero dynamics" have globally asymptotically stable origin.
+Need: For $y(t)=0$ for all $t \geq 0$. All solutions converge to the origin, i.e., "zero dynamics" have globally asymptotically stable origin.
 
 How? e.g. systems in "regular form"
-$x = \left[ \eta \xi \right]'$ 
+$x = \left[ \eta, \ \xi \right]'$ 
 \begin{equation*}
 \begin{array}{l}
      \dot{\eta} = f_1(\eta, \xi)\\
@@ -119,9 +122,9 @@ $x = \left[ \eta \xi \right]'$
 Choose $s(x)=\eta - \phi(\eta)$, where $\phi$ asymptotically stabilizes zero dynamics $\dot{\eta} = f_1(\eta, \phi(\eta))$ (and $\phi(0) = 0$)
 Ex. 1.9 in Khalil
 \item Converging to sliding manifold in finite time:
-$\leadsto \dot{y} = L_fs(x) + L_gs(x)u$, where $L_gs(x) \neq 0$. Obvious choice to render $S$ invariant is $u = - \frac{L_fS(x)}{L_gs(x)}$ (mode 2, behaviour on $S$)
+$\leadsto \dot{s} = L_fs(x) + L_gs(x)u$, where $L_gs(x) \neq 0$. Obvious choice to render $S$ invariant is $u = - \frac{L_fS(x)}{L_gs(x)}$ (mode 2, behaviour on $S$)
 
-Asin motivating example, add 
+Motivating example, add 
 \begin{equation*}
 \left \{ \begin{array}{ll}
      - \hat{u}/ L_gs(x) & y > 0 \\
@@ -144,23 +147,23 @@ Control Lyapunov perspective
 
 $V(X) = \frac{1}{2}s(x)^2$
 \begin{equation*}
-\dot{V}(x) = s(x) \dot{s}(x) = s(x)(L_fs(x)+L_gs(x)u) = -s(x)sgn(s(x))\hat{u} = | s(x)|\hat{u} < 0 for s(x) \neq 0
+\dot{V}(x) = s(x) \dot{s}(x) = s(x)(L_fs(x)+L_gs(x)u) = -s(x)sgn(s(x))\hat{u} = | s(x)|\hat{u} < 0,\ s(x) \neq 0
 \end{equation*}
 
-Consider $W = \sqrt{2v} \leadsto^{s \neq 0} \dot{w} = \sqrt{2}, \ \frac{1}{2\sqrt{v}}\dot{v}=-\hat{u}$
+Consider $w = \sqrt{2v} \leadsto^{s \neq 0} \dot{w} = \sqrt{2}\frac{1}{2\sqrt{v}}\dot{v}=-\hat{u}$
 
-$\leadsto w$ converges to 0 in finite time $\Rightarrow V $ converges to 0 in finite time $\Rightarrow S(x(t))$ converges to 0 in finite time.
+$\leadsto w$ converges to 0 in finite time $\Rightarrow v $ converges to 0 in finite time $\Rightarrow S(x(t))$ converges to 0 in finite time.
 
 \begin{Example}
-\begin{equation}
+\begin{equation*}
 \begin{array}{l}
      \dot{x_1} = x_2 + x_1 sin(x_2)\\
      \dot{x_2} = x_2^2 + x_1 + u
 \end{array}
-\end{equation}
-Choose $s(x) = x_2 + 2x_1$, where $+2x_! := \phi(x_1)$ on $S$: $\dot{x_1} = -2x_1 + x_1 sin(-2x_1) \leadsto $ asymptotically stable
+\end{equation*}
+Choose $s(x) = x_2 + 2x_1$, where $-2x_1 := \phi(x_1)$ on $S$: $\dot{x_1} = -2x_1 + x_1 sin(-2x_1) \leadsto $ asymptotically stable
 \begin{equation*}
-\dot{s} = x_2^2 + x_1 + u - 2x_2 -2x_1 sin(x_2) \leadsto u = - (x_2^2 + x_1 -2x_2 -2x_1sin(x_2) + \hat{u}sgn(x_2 -2x_1)), \ \hat{u} > 0
+\dot{s} = x_2^2 + x_1 + u + 2x_2 + 2x_1 sin(x_2) \leadsto u = - (x_2^2 + x_1 +2x_2+2x_1sin(x_2) + \hat{u}sgn(x_2 + 2x_1)), \ \hat{u} > 0
 \end{equation*} 
 $\leadsto$ yields finite-time convergence to $S$.
 \end{Example}
@@ -189,7 +192,6 @@ u = - \frac{1}{L_gs(x)}(L_fs(x) + (\hat{u} + \beta (x) |L_gs(x)|) sgn(s(x)))
 \end{equation*}
 ensures robustness w.r.t. matched uncertainties s.t. $\sigma (x) \leq \beta (x) \ \forall x\in \mathbb{R}^n$
 
-Example 2
 \begin{Example}
 \begin{equation*}
 \begin{array}{l}
@@ -232,20 +234,20 @@ Dissipativity: Generalization of Lyapunov theory to systems $w$ inputs and outpu
 
 Definition: 
 \begin{itemize}
-\item storage function $s: \mathbb{R}^n \to \mathbb{R}$, $x \to S(x)$ nonnegative (i.e., $s(x) \geq 0 \ \forall x \in \mathbb{R}^n$)
+\item storage function $S: \mathbb{R}^n \to \mathbb{R}$, $x \to S(x)$ nonnegative (i.e., $S(x) \geq 0 \ \forall x \in \mathbb{R}^n$)
 \item supply rate $s: \mathbb{R}^m \times \mathbb{R}^p \to \mathbb{R}$, $(u,y) \to s(u,y)$
 \end{itemize}
 
 Definition: System (\ref{input-output}) is dissipative w.r.t. the supply rate $s$ if there exists a storage function $S$ s.t. $\forall x_0 \in \mathbb{R}$, $\forall t \geq 0$, $\forall u : [0, t] \to \mathbb{R}^m$
 
-\begin{equation*}
+\begin{equation}\label{DIE}
 S(x(t)) \leq S(x_0)
  + \int_0^ts(u(\tau), y(\tau))d\tau
-\end{equation*}  
+\end{equation}  
 
 First item - storage at time $t$, second item - initial storage,the last item - supply delivered over [0, $t$]
 
-"dissipation inequality" (DIE)
+"dissipation inequality" (DIE) is the inequality (\ref{DIE})
 
 Interpretation:
 \begin{itemize}
@@ -297,7 +299,10 @@ Moreover, if $S_a(x) < \infty$ for all $x \in \mathbb{R}^n$, then $S_a$ is a sto
 \begin{proof}
 Sketch of proof. "$S_a(x) < \infty \Rightarrow$ dissipativity". $S_a(x) \geq 0 \ \forall x \in \mathbb{R}^n$ by definition (can take $T=0$)
 \begin{equation*}
-S_a(x) = sup_{u[0,T] \to \mathbb{R}^m, T \geq 0, x(0) = 0}- \int_0^Ts(u(\tau), y(\tau))d\tau \geq^* - \int_0^t s(u(\tau), y(\tau))d\tau + sup_{u[t,t+T] \to \mathbb{R}^m, T \geq 0, x(t) = x(t)} - \int_t^{t+T}s(u(\tau), y(\tau))d\tau
+\begin{split}
+S_a(x) = sup_{u[0,T] \to \mathbb{R}^m, T \geq 0, x(0) = 0}- \int_0^Ts(u(\tau), y(\tau))d\tau \geq^* \\ 
+- \int_0^t s(u(\tau), y(\tau))d\tau + sup_{u[t,t+T] \to \mathbb{R}^m, T \geq 0, x(t) = x(t)} - \int_t^{t+T}s(u(\tau), y(\tau))d\tau
+\end{split}
 \end{equation*} 
 the last item is $S_a(x(t))$, 
 \begin{equation*}
@@ -320,7 +325,7 @@ $\Rightarrow S_a(x) < \infty \ \forall x \in \mathbb{R}^n$ and $S \geq S_a$ for 
 Another special supply rate: "required supply"
 
 \begin{equation*}
-S_r(x) := inf_{u:[-T,0] \to \mathbb{R}^m, \ T \geq 0, \ x(-T) = x^*, \ x(0) = x} \int_T^0 s(u(\tau), y(\tau))d\tau
+S_r(x) := inf_{u:[-T,0] \to \mathbb{R}^m, \ T \geq 0, \ x(-T) = x^*, \ x(0) = x} \int_{-T}^0 s(u(\tau), y(\tau))d\tau
 \end{equation*}
 
 \begin{Theorem}
@@ -334,7 +339,7 @@ Sketch of proof.
 
 Consider $u:[-T,0] \to \mathbb{R}^n$ which transfers the system from $x^*$ to $x$
 \begin{equation*}
-S(x) - S(x^*) \leq[by DIE] inf_{u[-T,0] \to \mathbb{R}^n, \ T \geq 0, \ x(-T) = x^*, \ x(0) = x} \int_{-T}^0 s(u(\tau), y(\tau))d\tau = S_r(x)
+S(x) - S(x^*) \leq[by\ DIE] inf_{u[-T,0] \to \mathbb{R}^n, \ T \geq 0, \ x(-T) = x^*, \ x(0) = x} \int_{-T}^0 s(u(\tau), y(\tau))d\tau = S_r(x)
 \end{equation*}
 \end{proof}
 \end{Theorem}

@@ -179,7 +179,7 @@ Backstepping recursion:
     \item "Input data": a CLF $V_1$ for $\dot x_1 = f_1(x_1)+g_1(x_1)u_1$ with a (smooth) feedback $u_1=\alpha_1x_1$ which as. stabilizes the origin of $\dot x_1 = f_1(x_1)+g_1(x_1)u_1$.
     \item for $i=2, \dots k$:\\
     construct a CLF $V_i(e_i)=\frac{1}{2}e_i^2, V = \sum \limits_{j=1}^iV_j(e_j)$ and a feedback $\alpha_1$ which as. stabilizes origin of $(e_1, \dots e_i) = (x_1,x_2-\alpha_1(x_1), \dots, x_i - \alpha_{i-1}(x_1, \dots x_{i-1}))$
-    $$\alpha_i(x_1, \dots x_i) = \frac{1}{g_i}(\dot \alpha_{i-1} - \frac{\partial V_{i-1}}{\partial e_{i-1}}g_{i-1}-k_i(x_i-\alpha_{i-1}-f_i)$$
+    $$\alpha_i(x_1, \dots x_i) = \frac{1}{g_i}(\dot \alpha_{i-1} - \frac{\partial V_{i-1}}{\partial e_{i-1}}g_{i-1}-k_i(x_i-\alpha_{i-1})-f_i)$$
     \item apply $u=\alpha_k(x_1, \dots x_k)$
 \end{enumerate}
 
