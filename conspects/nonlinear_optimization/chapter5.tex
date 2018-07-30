@@ -361,13 +361,13 @@ Why? Take $S$ as Lyapunov function
 
 $L_2$ - gain via supply rate 
 \begin{equation*}
-s(u,y) = \frac{1}{2} \gamma^2 \|u\|^2 + \frac{1}{2}\|y\|^2
+s(u,y) = \frac{1}{2} \gamma^2 \|u\|^2 - \frac{1}{2}\|y\|^2
 \end{equation*}
 $\leadsto $ from dissipation inequality
 
 \begin{equation*}
 \begin{split}
-\frac{1}{2} \int_0^t \gamma^2 \|u(\tau)\|^2 + \|y(\tau)\|^2d\tau \geq S(x(t)) - S(x(0)) \geq -S(x(0)) \\
+\frac{1}{2} \int_0^t \gamma^2 \|u(\tau)\|^2 - \|y(\tau)\|^2d\tau \geq S(x(t)) - S(x(0)) \geq -S(x(0)) \\
 \Rightarrow \int_0^t \|y(\tau)\|^2d\tau \leq \gamma^2 \int_0^t \|u(\tau)\|^2d\tau + 2 S(x(0)) \\
 \end{split}
 \end{equation*}
@@ -389,7 +389,7 @@ $S(x) = \frac{1}{2}x^2, \ \dot{S} = xu = uy \leadsto $ system is dissipative w.r
 \begin{equation*}
 \dot{x} = [F(x) - R(x)] \triangledown H(x) + g(x)u
 \end{equation*}
-$y = y(x)^T\triangledown H(x)$, $H$ - Hamiltonian total stored energy in system
+$y = g(x)^T\triangledown H(x)$, $H$ - Hamiltonian total stored energy in system
 
 $F(x) = -F^T(x)$ internal interconnection structure (power conserving) $R(x) \geq 0$ dissipation structure
 
@@ -493,12 +493,12 @@ Remark:
 
 Stability if feedback interconnections:
 
-Main idea: "shortage" of passivity of $H_1$ can be compensated by nexcess of passivity of $H_2$
+Main idea: "shortage" of passivity of $H_1$ can be compensated by "excess" of passivity of $H_2$
 
 \begin{Theorem}
 Consider feedback interconnection (2) with $u \equiv 0$. Assume that $H_1$ and $H_2$ are (i) ZSO and dissipative with differentiable $S_1, \ S_2$ w.r.t. the supply rates
 \begin{equation}\label{passivity_interconnection}
-S_i(u_i,y_i) = u_i^Ty_i - \rho_iy_i^Ty_i - \nu_iu_i^Tu_i, \ i=1,2, \ \rho,\nu \in \mathbb{R}
+s_i(u_i,y_i) = u_i^Ty_i - \rho_iy_i^Ty_i - \nu_iu_i^Tu_i, \ i=1,2, \ \rho,\nu \in \mathbb{R}
 \end{equation}
 Then the origin $(x_1,x_2) = (0,0)$ for interconnection is asymptotically stable if $\nu_1 + \rho_2 > 0$ and $\nu_2 + \rho_1 > 0$.
 \begin{proof}
@@ -511,9 +511,9 @@ Take $S(x) = S_1(x_1)+S_2(x_2)$.
 \end{split}
 \end{equation*}
 
-$u_1^Ty_1$ and $u_2^Ty_2$ can be excluded as $u_1=y_2, \ u_2 = y_1$. 
+$u_1^Ty_1$ and $u_2^Ty_2$ can be excluded as $u_1=-y_2, \ u_2 = y_1$. 
 
-$\Rightarrow$ can show as in previous theorem that $S$ is positive definite $Rightarrow$ Lyapunov stability
+$\Rightarrow$ can show as in previous theorem that $S$ is positive definite $\Rightarrow$ Lyapunov stability
 
 For using La Salle:
 \begin{equation*}
@@ -524,3 +524,80 @@ y_2 \equiv 0 \Rightarrow u_1 \equiv 0 \Rightarrow^{ZSO} x_1 \equiv 0
 \end{equation*}
 \end{proof}
 \end{Theorem}
+
+Remark
+\begin{itemize}
+ \item If (\ref{passivity_interconnection}) is sabisfied with $v_i=0$: "output - feedback passive" $\Rightarrow$ $p_i>0$
+  -  "excess" of passivity, $p_i<0$ - "shortage" of passivity ($|p_i|$).
+ \item If (\ref{passivity_interconnection}) satisfied with $p_i=0$: "input - feadforward passive" $\Rightarrow$ $v_i>0$
+  -  "excess" of passivity, $v_i<0$ - "shortage" of passivity ($|v_i|$).
+ \item Comment on terminology "output feedback passive" 
+  $\dot s \le u^Ty-\rho y^Ty =$ [output feedback $u=\bar u -ky$] 
+  $=\bar u^T y - (\rho+k)y^T y \le \bar u^Ty$ In other words, system can be made passive
+  by output feedback.
+ \item Similar for feedforward passivity, system can be made passive by feedback forward
+  the input: $\bar y = y + ku$.
+\end{itemize}
+
+Remark:
+
+Feedforward interconnection 2) can be extended to allow $h_1$ or $h_2$ to explicitly depend
+on $u$ $\Rightarrow$ includes static systems (controllers) e.g. state output feedback $y=h(u)$
+e.g. $y_2=ku_2$ $\Rightarrow$ input-strictly passive controller.
+
+Extension of output-feedback/input-feedforward passivity:
+
+$$s(u,y)=u^T-\rho(y)^Ty$$
+
+with $\rho(y) = [\rho_1(y_1),\dots,\rho_n(y_n)]^T$ with $\rho_i$ sectionnonliniarities, 
+$\rho_i: \mathbb{R}\rightarrow\mathbb{R}$
+
+\begin{Example}
+\begin{equation*}
+H_1: 
+\begin{split}
+ &\dot x_1 = x2 \\
+ &\dot x_2 = -x_1^3 + x_2 + u \\
+ &y = x_2
+\end{split}
+\end{equation*}
+
+Take $S_1(x) = \frac{1}{4} x_1^4 + \frac{1}{2}x_2^2$ $\Rightarrow$ 
+$\dot S_1 = x_1^3x_2 - x_1^3x_2 + x_2^2 + x_2u$, define $y^2:=x_2^2$ then
+$yu=x_2u$ $\Rightarrow$ output - feedback passive with shortage of passivity 1
+$\Rightarrow$ $\rho_1=-1$ and $v_1 = 0$.
+
+
+\begin{tikzpicture}[auto,>=latex']
+    \tikzstyle{block} = [draw, shape=rectangle, minimum height=3em, minimum width=3em, node distance=2cm, line width=1pt]
+    \tikzstyle{sum} = [draw, shape=circle, node distance=1.5cm, line width=1pt, minimum width=1.25em]
+    \tikzstyle{branch}=[fill,shape=circle,minimum size=4pt,inner sep=0pt]
+    \tikzstyle{tmp} = [coordinate]
+    %Creating Blocks and Connection Nodes
+    \node at (-2.5,0) (input) {};
+    \node [sum] (sum) {};
+    %\node at (sum) (plus) {};
+    \node [block, right of=sum] (u1) {$H_1$};
+    \node [block, below of=u1] (k) {$k$};
+    \node [tmp, right of=u1] (tmp1) {};
+    \node [tmp, right of=k] (tmp2) {};
+    \node [tmp, left of=k] (tmp3) {};
+    %Conecting Blocks
+    \begin{scope}[line width=1pt]
+         \draw[->] (input) -- (sum);
+         \draw[->] (sum) -- node{$u$} (u1);
+         \draw[-] (u1) -- node{$y$} (tmp1);
+         \draw[-] (tmp1) -- (tmp2);
+         \draw[->] (tmp2) -- node{$u_2$} (k);
+         \draw[-] (k) -- node{$y_2$} (tmp3);
+         \draw[->] (tmp3) -| node[pos=0.99]{$-$} (sum);
+    \end{scope}
+\end{tikzpicture}
+
+$y_2 = ku_2 \Rightarrow s(u_2,y_2)= \gamma ku_2^2 + \frac{1-\gamma}{k}y_2^2$,  $0<\gamma<1$ $\Rightarrow$ 
+$\rho 2 = \frac{1-\gamma}{k}$, $v_2 = \gamma k$
+
+$\Rightarrow v_2+\rho 1 > 0$ for $k>1$ and $\gamma$ close enough to 1, $v_1+\rho_2 = \rho_2 > 0$.
+$\Rightarrow$ with ZSO, the origin is a stable.
+
+\end{Example}

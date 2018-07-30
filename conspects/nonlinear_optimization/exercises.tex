@@ -588,7 +588,7 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
     
     Problem 1:
     $$\dot x = xu(x^2+u)$$
-    $$\dot y = h(x)$$
+    $$y = h(x)$$
     $s:R \times R \rightarrow R, \ \ (u,y) \mapsto uy^2+u^2y$ \\
     $S:R \rightarrow R, \ \ x\mapsto \frac{x^2}{2}$
     \begin{proof}
@@ -615,7 +615,7 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
     Problem 3:
     \begin{proof}
         Consider the Lyapunov func. cand. $V(x) = S_1(x_1) + S_2(x_2)$ s.t. \\
-        $\dot V (x) \le S_1(u_1,y_1) + S_2(u_2,y_2) = S_1(u_1,y_1) + S_2(y_1,-u_1) = 0 \implies$ origin is stable.\\
+        $\dot V (x) \le s_1(u_1,y_1) + s_2(u_2,y_2) = s_1(u_1,y_1) + s_2(y_1,-u_1) = 0 \implies$ origin is stable.\\
     \end{proof}
     
     Remark: the above problem captures many stability results (in the frequency domain). Particular choices of supply rates are:
@@ -642,7 +642,7 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
         Take $S(x) = <x,P_x>$ s.t. 
         $$\dot S(x) = <x, (PA+A^TP)x>+2<x,PBu>$$
         Add and subtract $\gamma^2||u||^2$ and $\frac{1}{\gamma^2}||B^TPx||^2$.
-        $$\dot S(x) = <x, (PA+A^TP+\frac{1}{\gamma^2}PBB^TP)x>+\gamma^2||u||^2-\gamma^2||u\frac{1}{\gamma^2}B^TPx||^2$$
+        $$\dot S(x) = <x, (PA+A^TP+\frac{1}{\gamma^2}PBB^TP)x>+\gamma^2||u||^2-\gamma^2||u -\frac{1}{\gamma^2}B^TPx||^2$$
         Add and subtract $||y||^2$.
         $$\dot S(x) = <x, (PA+A^TP+\frac{1}{\gamma^2}PBB^TP+C^TC)x>+\gamma^2||u||^2-||y||^2-\gamma^2||u-\frac{1}{\gamma^2}B^TPx||^2$$
         $$\dot S(x) \le \gamma^2||u||^2-||y||^2$$
@@ -709,7 +709,7 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
         $$||u_1||^2=||u||^2-2<u,y_2>+||y_2||^2$$
         $$||u_2||^2=||v||^2+2<v,y_1>+||y_1||^2$$
         we obtain \\
-        $\dot S(x) = - <\begin{pmatrix} y_1 \\ y_2 \end{pmatrix}, \begin{pmatrix} (\nu_2+\rho_1)I_m & \space \\ \space & (\nu_1+\rho_2)I_m \end{pmatrix} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}> - <\begin{pmatrix} u \\ v \end{pmatrix}, \begin{pmatrix} \nu_1 I_m & \space \\ \space & \nu_2 I_m \end{pmatrix} \begin{pmatrix} u \\ v \end{pmatrix}> + <\begin{pmatrix} u \\ v \end{pmatrix}, \begin{pmatrix} I_m & 2\nu_1 I_m \\ -2\nu_2 I_m & I_m \end{pmatrix} \begin{pmatrix} u \\ v \end{pmatrix}> \le [Coshi-Schwarz] \le -a||(y_1,y_2)||^2+b||(u,v)||||(y_1,y_2)||+c||(u,v)||^2$ \\
+        $\dot S(x) = - <\begin{pmatrix} y_1 \\ y_2 \end{pmatrix}, \begin{pmatrix} (\nu_2+\rho_1)I_m & \space \\ \space & (\nu_1+\rho_2)I_m \end{pmatrix} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}> - <\begin{pmatrix} u \\ v \end{pmatrix}, \begin{pmatrix} \nu_1 I_m & \space \\ \space & \nu_2 I_m \end{pmatrix} \begin{pmatrix} u \\ v \end{pmatrix}> + <\begin{pmatrix} u \\ v \end{pmatrix}, \begin{pmatrix} I_m & 2\nu_1 I_m \\ -2\nu_2 I_m & I_m \end{pmatrix} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}> \le [Coshi-Schwarz] \le -a||(y_1,y_2)||^2+b||(u,v)||||(y_1,y_2)||+c||(u,v)||^2$ \\
         with $a = \min \{\nu_2 + \rho_1, \nu_1+\rho_2\} > 0, \ b = ||N|| \ge 0$ and $c = ||M|| \ge 0$. \\
         Hence, \\
         $\dot S(x) \le - \frac{1}{2a}(b||(u,v)||-a||(y_1,y_2)||)^2 + \frac{b^2}{2a}||(u,v)||^2-\frac{a}{2}||(y_1,y_2)||^2+c||(u,v)||^2 \le \frac{b^2+2ac}{2a}||(u,v)||^2-\frac{a}{2}||(y_1,y_2)||^2$
@@ -719,8 +719,8 @@ Hence if $u < 0$ and $-u$ "large", then we can render $<\triangledown V(x), f(x,
     \begin{proof}
         Take $V(x) = <x,Px>$ s.t.
         $$\dot V(x) = <x, (PA+A^TP)x>-2\Phi(y)<x,PB>$$
-        Add and subtract $2\Phi(y)^2$ and $2\Phi(y)BCx$ yields \\
-        $\dot V(x) = - \varepsilon <x,Px> - <x,L^TLx> - 2\Phi(y)<x,PB-BC^T> - 2\Phi(y)^2 + 2\Phi(y)(\Phi(y)-By) = - \varepsilon <x,Px> - |Lx-\sqrt{2}\Phi(y)|^2+2\Phi(y)(\Phi(y)-By) \le - \varepsilon <x,Px>$.
+        Add and subtract $2\Phi(y)^2$ and $2\Phi(y)\beta Cx$ yields \\
+        $\dot V(x) = - \varepsilon <x,Px> - <x,L^TLx> - 2\Phi(y)<x,PB-\beta C^T> - 2\Phi(y)^2 + 2\Phi(y)(\Phi(y)-\beta y) = - \varepsilon <x,Px> - |Lx-\sqrt{2}\Phi(y)|^2+2\Phi(y)(\Phi(y)-\beta y) \le - \varepsilon <x,Px>$.
     \end{proof}
 
 \subsection{Exercise 8}
