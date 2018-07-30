@@ -229,3 +229,72 @@ with\ \gamma = \alpha_2 \circ 2\alpha_3 + \alpha_2, \ \beta = \alpha_1(2\phi(\|x
 \end{equation*}
 \end{proof}
 \end{Theorem}
+
+
+$L_2$ - gain of LTI system:
+
+
+Consider 
+
+\begin{equation} \label{eq:L2}
+\begin{split}
+&x=Ax+Bu \ \ \ \ \ u,y\in\mathbb{R}\rightarrow SISO\\
+&y=Cx+Du \ \ \ \ \ A ... Hurwitz
+\end{split}
+\end{equation}
+
+\begin{Lemma}
+The $L_2$ gain of (\ref{eq:L2}) is
+$$\gamma=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$$
+
+where $G(s)=C(SI-A)^{-1}B+D$
+\begin{proof}
+ Sketch:
+
+ Due to linearity, we can assume without loss of generality $x(0)=0$ ($x_0 \ne 0$ changes $\gamma$).
+
+ 
+ \begin{equation*}
+  \begin{split}
+   ||y||^2_{L_2} &=\int_0^\infty (y(t))^2dt = [Parseval's theorem]=\frac{1}{2\pi}\int_{-\infty}^\infty Y(-jw)Y(jw)dw=\\
+                 &=\frac{1}{2\pi}\int_{-\infty}^\infty U(-jw)G(-jw)G(jw)U(jw)dw\le\sup_{w\in\mathbb{R}} (G(-jw)G(jw))\int_{-\infty}^\infty U(-jw)U(jw)dw=\\
+                 &=[Parseval's th.] = \gamma^2 ||u||_{L_2}^2
+  \end{split}
+ \end{equation*}
+
+ $\Rightarrow$ $L_2$-gain of (\ref{eq:L2}) is $\le\gamma$.
+
+ Can show by contradiction that $L_2$-gain equals $\gamma$.
+\end{proof}
+\end{Lemma}
+
+
+$L_2$ - gain of input affine system:
+
+Consider
+
+\begin{equation} \label{eq:L2af}
+\begin{split}
+&\dot x = f(x) +g(x)u\\
+&y = h(x)
+\end{split}
+\end{equation}
+
+Racall. System has $L_2$ gain less oe equal $\gamma$ if it is dissipative w.r.t. supply
+rate $s(u,y)=\frac{1}{2}\gamma^2||u||^2_2-\frac{1}{2}||y||_2^2$
+
+$\Rightarrow$ with diff. storege function $S$ such that:
+
+$$\frac{\partial S}{\partial x} [f(x)+g(x)u] \le \frac{1}{2}\gamma^2||u||^2_2-\frac{1}{2}||h(x)||_2^2\ \ \forall x,u$$
+
+
+"Worst case" (maximizing) u:
+
+$$u^*=\frac{1}{\gamma^2} g^T(x)\left(\frac{\partial S}{\partial x}\right)^T$$
+
+$\Rightarrow \frac{\partial S}{\partial x} f(x)+$
+$\frac{1}{2\gamma^2}\frac{\partial S}{\partial x}g(x)g^T(x)\left(\frac{\partial S}{\partial x}\right)^T+$
+$\frac{1}{2}h^T(x)h(x)\le 0 \ \ \ \forall x\in\mathbb{R}^n$ (Hamilton-Jacobi equation)
+
+If there exist pos. semi-definite S satisfying (1), then system (\ref{eq:L2af}) has $L_2$-gain
+less or equal $j$.
