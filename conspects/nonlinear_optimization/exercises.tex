@@ -734,7 +734,7 @@ Show that if $\Phi : [0,+\inf) \rightarrow R$ and $\Phi \in L_1 \cap L_{\infty}$
     $$||fg||_{L_1} \le ||f||_{L_p}||g||_{L_q}$$
     Convention: If $p = +\infty \ (q = +\infty)$, then $\frac{1}{p}=0 \ (\frac{1}{q}=0)$. \\
     Let $p \in (1, +\infty).$ We have
-    $$(||\Phi||^p_{L_p}=)\int_0^{\infty}|\Phi(t)|^pdt = \int_0^{\infty}|\Phi(t)\Phi(t)^{p-1}|dt \ le [HE] \le ||\Phi||_{L_1}||\Phi||_{L_{\infty}}^{p-1}$$
+    $$(||\Phi||^p_{L_p}=)\int_0^{\infty}|\Phi(t)|^pdt = \int_0^{\infty}|\Phi(t)\Phi(t)^{p-1}|dt \ \le [HE] \le ||\Phi||_{L_1}||\Phi||_{L_{\infty}}^{p-1}$$
     Hence, $\Phi \in L_p$ for any $p \in [1,+\infty)$
 \end{proof}
 
@@ -756,7 +756,7 @@ Problem 3:
 \begin{proof}
     Take $v=\frac{u}{||u||_{l_p}}, \ u \neq 0$, s.t. $v \in L_p$ and $||v||_{L_p}=1$.\\
     Then
-    $$||Hv||_{L_p}=||H\frac{u}{||u||_{l_p}}||_{L_p}=[H - linear]=||\frac{1}{||u||_{l_p}}Hu||_{L_p}=\frac{u}{||u||_{l_p}}||Hu||_{L_p}$$
+    $$||Hv||_{L_p}=||H\frac{u}{||u||_{l_p}}||_{L_p}=[H - linear]=||\frac{1}{||u||_{l_p}}Hu||_{L_p}=\frac{1}{||u||_{l_p}}||Hu||_{L_p}$$
 \end{proof}
 
 Problem 4:
@@ -784,7 +784,7 @@ Problem 6:
 \begin{proof}
     Let $u \in L^e_{\infty}$ and $T \ge 0$ s.t. for any $0 \le t \le T$
     \begin{multline*} 
-        |y_i(t)| \le \int_0^t |h(t-\tau)||u(t)|d\tau \le \sup_{\tau \in [0,T]} |u(\tau)| \int^t_0|h(t-\tau)|d\tau = [\sigma = t - \tau]  = \\ = \sup_{\tau \in [0,T]} |u(\tau)| \int^t_0|h(\sigma)|d\sigma \le \sup_{\tau \in [0,T]} |u(\tau)|( \int^t_0|h|+\int^{\infty}_t|h|) \dots
+        |y_T(t)| \le \int_0^t |h(t-\tau)||u(t)|d\tau \le \sup_{\tau \in [0,T]} |u(\tau)| \int^t_0|h(t-\tau)|d\tau = [\sigma = t - \tau]  = \\ = \sup_{\tau \in [0,T]} |u(\tau)| \int^t_0|h(\sigma)|d\sigma \le \sup_{\tau \in [0,T]} |u(\tau)|( \int^t_0|h|+\int^{\infty}_t|h|) \dots
     \end{multline*}
 \end{proof}
 

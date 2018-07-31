@@ -224,9 +224,9 @@ Hence
 \begin{split}
 \|y(t)\| \leq \alpha_1(\phi (\|x_0\|, t) + \alpha_3(\sup_{ 0 \leq \tau 
 \leq t}\|u(\tau)\|)) + \alpha_2(\|u(t)\|) + \eta \leq \\ 
-[\alpha_1(a+b) \leq \alpha_1(2a)+\alpha_2(2b)] \leq \alpha_1(2\phi(\|x_0\|,t)) + \alpha_1(2 \alpha_3(\sup_{0 \leq \tau \leq t}\|u(\tau)\|))\\
+[\alpha_1(a+b) \leq \alpha_1(2a)+\alpha_1(2b)] \leq \alpha_1(2\phi(\|x_0\|,t)) + \alpha_1(2 \alpha_3(\sup_{0 \leq \tau \leq t}\|u(\tau)\|))\\
 + \alpha_2(\|u(t)\|)+\eta \Rightarrow \|y_T\|_{L_{\infty}} \leq \gamma(\|u_T\|_{L_{\infty}}) + \beta \\
-with\ \gamma = \alpha_2 \circ 2\alpha_3 + \alpha_2, \ \beta = \alpha_1(2\phi(\|x_0\|,0)) + \eta
+with\ \gamma = \alpha_1 \circ 2\alpha_3 + \alpha_2, \ \beta = \alpha_1(2\phi(\|x_0\|,0)) + \eta
 \end{split}
 \end{equation*}
 \end{proof}
@@ -243,7 +243,7 @@ $L_2$ - gain of LTI system:
  \begin{Lemma}
 The $L_2$ gain of (\ref{eq:L2}) is
 $$\gamma=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$$
- where $G(s)=C(SI-A)^{-1}B+D$
+ where $G(s)=C(sI-A)^{-1}B+D$
 \begin{proof}
  Sketch:
   Due to linearity, we can assume without loss of generality $x(0)=0$ ($x_0 \ne 0$ changes $\gamma$).
