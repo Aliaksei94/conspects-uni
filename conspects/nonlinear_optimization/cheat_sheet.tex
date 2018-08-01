@@ -1,4 +1,4 @@
-\documentclass[10pt,landscape]{article}
+\documentclass[9pt,landscape]{article}
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{ifthen}
@@ -33,10 +33,10 @@
 \newtheorem{reg}{Rule}
 \newtheorem{exer}{Exercise}
 \newtheorem{note}{Note}
-\newtheorem{Theorem}{Theorem}[section]
+\newtheorem*{Theorem}{Th}
 \newtheorem{corollary}{Corollary}
-\newtheorem{Lemma}{Lemma}
-\newtheorem*{Definition}{Definition}
+\newtheorem*{Lemma}{L}
+\newtheorem*{Definition}{Def}
 \newtheorem*{Example}{Example}
 \usepackage{accents}
 \usepackage[T1,T2A]{fontenc}
@@ -44,6 +44,8 @@
 \usepackage[english]{babel}
 \newcommand*\underdot[1]{%
   \underaccent{\dot}{#1}}
+  
+
 
 
 
@@ -136,50 +138,37 @@
 \setlength{\columnsep}{2pt}
 
 
-\section{Differential equations}
 
 \begin{Lemma}[Cromwall]
-Suppose that $0 \le \phi(t) \le c + L \int^t_0 \phi(\tau) d \tau$, $c,L > 0$, $\phi$ -- 
+Supp. $0 \le \phi(t) \le c + L \int^t_0 \phi(\tau) d \tau$, $c,L > 0$, $\phi$ -- 
 continuous. Then $\phi(t) \le c e^{Lt}$.
 \end{Lemma}
-
-\begin{Definition}
-Equilibrium point $x=0$ is stable if $\forall \epsilon > 0\ \exists \delta > 0$
-s.t. from $\|x_0\| < \delta$ follows $\|x(t)\| \le \epsilon, \ \forall t \ge 0$.
-\end{Definition}
-
-\begin{Definition}
-Equilibrium point $x=0$ is asymptotically stable if it is stable and exist $\delta>0$
-s.t. from $\|x_0\|<\delta$ follows 
-$\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
-\end{Definition}
 
 \section{Nonlinear systems}
 
 \begin{Definition}
- Point $x^*=0$ is stable if $\forall \epsilon > 0$ and 
+ Pt $x^*=0$ is stable if $\forall \epsilon > 0$ and 
  $\forall t_0 \ge 0,\ \exists \delta>0$ s.t. from $||x_0||<\delta$
  follows $||x(t)|| < \epsilon$, $\forall t  \ge t_0$.
 \end{Definition}
 
 \begin{Definition}
- Point $x^*=0$ is uniformly stable if $\forall \epsilon > 0\ $  
+ Point $x^*=0$ is unif. stable if $\forall \epsilon > 0\ $  
  $\exists \delta>0$, s.t $\forall t_0 \ge 0,$ from $||x_0||<\delta$
  follows $||x(t)|| < \epsilon$, $\forall t  \ge t_0$.
 \end{Definition}
 
 \begin{Definition}
- Point $x^*=0$ asymptotically stable if it is stable and $\forall t_0 \ge 0\ $  
+ Point $x^*=0$ asympt. stable if it is stable and $\forall t_0 \ge 0\ $  
  $\exists c>0$, s.t from $||x_0||<c$
  follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
 \end{Definition}
 
 \begin{Definition}
- Point $x^*=0$ uniformly asymptotically stable if it is uniformly stable and 
+ Point $x^*=0$ unif. asympt. stable if it is unif. stable and 
  $\exists c>0$, s.t $\forall t_0 \ge 0\ $ from $||x_0||<c$
  follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
 \end{Definition}
-
 
 \begin{Definition}
  Convergence: $\forall \eta > 0 \ \ \forall t_0 \ge 0$, $\exists T>0$ such
@@ -187,57 +176,41 @@ $\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
 \end{Definition}
 
 \begin{Definition}
- Uniform convergence: $\forall \eta > 0 \ \ \exists T>0$ such
+ Unif. convergence: $\forall \eta > 0 \ \ \exists T>0$ such
  that $\forall t_0 \ge 0$ and $\forall t \ge t_0+T$ follows $||x(t)||<\eta$.
 \end{Definition}
 
 \begin{Definition}
- Point $x^*=0$ is globally uniformly asymptotically stable if it is uniformly stable
+ Pt $x^*=0$ is glob. unif. asympt. stable if it is unif. stable
  with $\delta \to \infty$ for $\epsilon \to \infty$ and $\forall c,\eta\ \ $ 
- $\exists T>0$ such that $\forall t_0\ge0$ from $||x_0||<c$ follows 
+ $\exists T>0$ s.t. $\forall t_0\ge0$ from $||x_0||<c$ follows 
  $\|x(t)\|<\eta$, $\forall t \ge t_0 + T$.
 \end{Definition}
 
-\begin{Theorem}[Lyapunov's direct method]
- Let $f:[0,\infty)\times D\to R^n$ is continuous and let $x^*=0$ be equilibrium point.
- If there is a differentiable function $V:[0,\infty)\times D\to R$ with:
+\begin{Theorem}
+ Let $f:[0,\infty)\times D\to R^n$ is contin. and let $x^*=0$ be EP.
+ If there is a diff. $V:[0,\infty)\times D\to R$ with:
  \begin{itemize}
   \item $W_1(x) \le V(t,x) \le W_2(x)$, $\forall t\ge0,\ x\in D$
   \item $\dot V(t,x)\le 0$, $\forall t \ge0,\ x\in D$
  \end{itemize}
- where $W_1,W_2:D \to R$ continuous and positive definite, then $x^*=0$ is uniformly stable.
+ where $W_1,W_2:D \to R$ contin. and posit. def., then $x^*=0$ is unif. stable.
 
- If further $\dot V(t,x) \le -W_3(x)$, $\forall t\ge0,\ x\in D$ with $W_3:D \to R$
- continuous and positive definite, the $x^*=0$ is uniformly asymptotically stable.
+ If $\dot V(t,x) \le -W_3(x)$, $\forall t\ge0,\ x\in D$ with $W_3:D \to R$
+ contin. and pos. def., the $x^*=0$ is unif. asympt. stable.
 
- If $D=R^n$ and $W_1$ is radialy unbounded then $X^*=0$ is globally uniformly
- asymptotically stable.
+ If $D=R^n$ and $W_1$ is radialy unbounded then $X^*=0$ is glob. unif.
+ asympt. stable.
 \end{Theorem}
 
-\begin{Definition}
- A function $\alpha:[0,\delta)\to [0, \infty)$ is (of) "class $K$" if it is continuous,
- strictly increasing, and $\alpha(0)=0$.
-\end{Definition}
-
-\begin{Definition}
- A function $\alpha:[0,\delta)\to [0, \infty)$ is "class $K_\infty$" if $\alpha \in K$
- and $\lim_{r\to\infty} \to\infty$.
-\end{Definition}
-
-\begin{Definition}
- A function $\beta:[0,\delta)\times[0,\delta)\to [0, \infty)$ is "class $KL$ if it is continuous
- , $\beta(\cdot, s) \in K$ for all fixed $s$, and for each fixed $r$, $\beta(r, \cdot)$ is
- strictly decreasing: $\lim_{s\to\infty}\beta(r,s)=0$
-\end{Definition}
-
 \begin{Lemma}
- The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly stable iff
+ EP $x^*=0$ of $\dot x(t)=f(t,x(t))$ is unif. stable iff
  $\exists \alpha\in K$ and $c>0$ s.t.  $\forall t \ge t_0$,
  $\forall ||x(t_0)||<c$ and $||x(t)|| \le \alpha(||x(t_0)||).$ 
 \end{Lemma}
 
 \begin{Lemma}
- The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly asymptotically stable iff
+ EP $x^*=0$ of $\dot x(t)=f(t,x(t))$ is unif asympt stable iff
  $\exists \beta\in KL$ and $c>0$ s.t. $\forall t \ge t_0$,
  $\forall ||x(t_0)||<c$ and $||x(t)|| \le \beta(||x(t_0)||, t-t_0).$ 
 \end{Lemma}
@@ -245,31 +218,29 @@ $\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
 \section{System with inputs}
 
 \begin{Definition}
- System (\ref{c3:eq}) is input-to-state stable (ISS) if $\exists \beta\in KL$,
+ System is ISS if $\exists \beta\in KL$,
  $\gamma\in K$ s.t. $\forall x_0\in R^n$, $\forall t \ge 0$ follows 
  $||x(t)||\le\beta(||x_0||, t)+\gamma(\sup_{\tau\in[0,t]} ||u(\tau)||)$.
 \end{Definition}
 
 \begin{Theorem}
- Suppose that there exists a continuously differentiable function 
+ Suppose that there exists a cont. diff. func. 
  $V:R^n\to R$ and $\alpha_1,\alpha_2\in K_\infty$ and $\alpha_3, \rho \in K$
- such that $\alpha_1(||x||)\le V(x)\le\alpha_2(||x||)$, $\forall x\in R^n$ and
+ s.t. $\alpha_1(||x||)\le V(x)\le\alpha_2(||x||)$, $\forall x\in R^n$ and
  $\frac{\partial V}{\partial x}f(x,u)\le-\alpha_3(||x||)$,
- $\forall x: ||x||\ge\rho(||u||)$. Then (\ref{c3:eq}) is ISS with 
+ $\forall x: ||x||\ge\rho(||u||)$. Then is ISS with 
  $\gamma = \alpha_1^{-1} \circ \alpha_2\circ\rho$
 \end{Theorem}
 
 \begin{Theorem}
- Assume that:
- \begin{itemize}
-     \item $f$ is globally Lipschitz;
-     \item $x = 0$ is a globally exponentially stable EP for $\dot x = f(x,0)$
- \end{itemize}
- Then the system (\ref{c3:eq}) is ISS.
+ Assume:
+ $f$ is glob. Lipschitz;
+ $x = 0$ is a glob. exp. stable EP for $\dot x = f(x,0)$
+ Then ISS.
 \end{Theorem}
 
 \begin{Theorem}[Artstein]
- There exists $k:R^n \to R^m$ (state feedback) which is continuous on $R^n \backslash \{ 0 \}$ s.t. $x^*=0$ is globally asymptotically stable EP for $\dot x = f(x)+G(x)k(x)$ iff there exists a CLF.
+ There exists $k:R^n \to R^m$ which is cont. on $R^n \backslash \{ 0 \}$ s.t. $x^*=0$ is glob. asympt. stable EP for $\dot x = f(x)+G(x)k(x)$ iff there exists a CLF.
 \end{Theorem}
 
 Sontag's formula" \\
@@ -284,33 +255,28 @@ $$
 \section{Backstepping}
 
 Integrator backstepping 
-\begin{equation}\label{system_backstepping}
+\begin{equation*}\label{system_backstepping}
 \dot x_1 = f_1(x_1) + g_1(x_1)x_2 
-\end{equation}
+\end{equation*}
 \begin{equation*}
 \dot x_2 = u
 \end{equation*}
-
-\begin{equation}\label{u_choice}
+\begin{equation*}\label{u_choice}
 u = (- \frac{\partial V_1}{\partial e_1}g_1(e_1) + \dot{\alpha_1})- k_2e_2 , \ k_2 > 0
-\end{equation}
-
+\end{equation*}
 \begin{equation*}
 \dot{x_1} = f_1(x_1) + g_1(x_1)x_2
 \end{equation*}
 \begin{equation*}
 \dot{x_2} = f_2(x_1, x_2) + g_2(x_1,x_2)u
 \end{equation*}
-
 \begin{equation*}
 \begin{split}
 u = \alpha_2(x_1, x_2) = \frac{1}{g_2(x_1,x_2)}(-\frac{\partial V_1}{\partial x_1}g_1(x_1) + \dot{\alpha_1}  \\ 
 - k_2(x_2 - \alpha_1(x_1)) - f_2(x_1, x_2))
 \end{split}
 \end{equation*} 
-
 $$\alpha_i(x_1, \dots x_i) = \frac{1}{g_i}(\dot \alpha_{i-1} - \frac{\partial V_{i-1}}{\partial e_{i-1}}g_{i-1}$$
-
 $-k_i(x_i-\alpha_{i-1})-f_i)$
 
 \section{Systems with inputs and outputs}
@@ -319,10 +285,6 @@ Two-step approach:
 \begin{enumerate}
 \item Bring $x(t)$ to $S := \left \{ x \in \mathbb{R}^n | S(x) = 0 \right\}$ in finite time
 \item Have $x(t)$ going to zero asymptotically (on $S$)
-\begin{itemize}
-\item switching between nodes 1 and 2
-\item mode 2 is "sliding mode"
-\end{itemize}
 \end{enumerate} 
 
 $$V(X) = \frac{1}{2}s(x)^2$$
@@ -330,20 +292,16 @@ $$V(X) = \frac{1}{2}s(x)^2$$
 \begin{equation*}
 u = - \frac{1}{L_gs(x)}(L_fs(x) + \hat{u}sgn(s(x))), \ \hat{u} > 0
 \end{equation*}
-
 \begin{equation*}
 \dot{x} = f(x) + g(x) \sigma (x) + g(x)u 
 \end{equation*}
-
 If $|\sigma (x)| \leq \beta (x)$
-
 \begin{equation*}
 \begin{split}
 & u = - \frac{L_fs(x)}{L_gs(x)} -\\
 & - \frac{1}{L_gs(x)}(\hat{u} + \beta (x)) |L_gs(x)| sgn(s(x))
 \end{split}
 \end{equation*}
-
 \begin{Definition}[dissipativity]
 \begin{equation}\label{DIE}
 S(x(t)) \leq S(x_0)
@@ -353,16 +311,16 @@ S(x(t)) \leq S(x_0)
 
 Introduce "available storage" $S_a(x)$
 \begin{equation*}
-sup_{u:[0,T] \to \mathbb{R}^m, T \geq 0, x(0) = 0} (- \int_0^Ts(u(\tau),y(\tau)))d\tau
+sup_{u:[0,T] \to \mathbb{R}^m, T \geq 0, x(0) = 0} (- \int_0^Ts(u(\tau),y(\tau)))
 \end{equation*}
 
 \begin{Theorem}
 System is dissipative w.r.t. the supply rate $s$ iff $S_a(x) < \infty$ for all $x \in \mathbb{R}^n$
 
-Moreover, if $S_a(x) < \infty$ for all $x \in \mathbb{R}^n$, then $S_a$ is a storage function and $S(x) \geq S_a(x) \ \forall x \in \mathbb{R}^n$ for all storage functions $S$.
+If $S_a(x) < \infty$ for all $x \in \mathbb{R}^n$, then $S_a$ is a storage function and $S(x) \geq S_a(x) \ \forall x \in \mathbb{R}^n$ for all storage functions $S$.
 \end{Theorem}
 
-If system is dissipative then $x=0$ is asymptotically stable.
+If system is dissipative then $x=0$ is asympt. stable.
 
 \begin{equation}\label{passivity_system}
 \begin{split}
@@ -394,7 +352,7 @@ s_i(u_i,y_i) = u_i^Ty_i - \rho_iy_i^Ty_i - \nu_iu_i^Tu_i, \ i=1,2, \\
 The origin $(x_1,x_2) = (0,0)$ for interconnection is asymptotically stable if $\nu_1 + \rho_2 > 0$ and $\nu_2 + \rho_1 > 0$.
 \end{Theorem}
 
-If is sabisfied with $v_i=0$: "output - feedback passive". If (\ref{passivity_interconnection}) satisfied with $p_i=0$: "input - feadforward passive".
+If is satisfied with $v_i=0$: "output - feedback passive". If (\ref{passivity_interconnection}) satisfied with $p_i=0$: "input - feadforward passive".
 
 \section{Input/Output Methods}
 
@@ -404,25 +362,24 @@ If is sabisfied with $v_i=0$: "output - feedback passive". If (\ref{passivity_in
   \int_0^\infty ||\Phi(t)||^p dt < \infty\}$
 \end{Definition}
 
-Particularly useful(Cauchy -Schwarz inequality) $|<\phi_1,\phi_2>_{L_2}| \leq \|\phi_1\|_{L_2}\|\phi_2\|_{L_2}$
+(Cauchy-Schwarz inequality) $|<\phi_1,\phi_2>_{L_2}| \leq \|\phi_1\|_{L_2}\|\phi_2\|_{L_2}$
 
 \begin{Definition}
 $H$ is $L_p$-stable if there exists $\alpha \in K, \ \beta \geq 0$ s.t. 
-\begin{equation*}
 
 $H$ is finite-gain $L_p$ stable if there exist $\gamma, \ \beta \geq 0$ s.t. 
-\begin{equation}\label{finite_gain}
+\begin{equation*}\label{finite_gain}
 \|(H(u))_T\|_{L_p} \leq \gamma \|u_T\|_{L_p} + \beta 
-\end{equation}
+\end{equation*}
+\end{Definition}
 
 \begin{Definition}
-A map $H: L_p^e \mapsto L_p^e$ is causal if $(H(u))_T = (H(u_T))_T$ for all $u \in L_p^e$ and $T \geq 0$. 
+A map $H: L_p^e \mapsto L_p^e$ is {\it causal} if $(H(u))_T = (H(u_T))_T$ for all $u \in L_p^e$ and $T \geq 0$. 
 \end{Definition}
 
 \begin{Theorem}
-Consider $\dot{x} = f(x,u), \ y = h(x,u)$. Suppose the system is ISS and there exist $\alpha_1, \alpha_2 \in K$ and $\eta \geq 0$ s.t. $\|L(x,u)\| \leq \alpha_1(\|x\|) + \alpha_2(\|u\|) + \eta$. Then for each $x_0 \in \mathbb{R}^n$, the system is $L_{\infty}$ - stable.
+Consider $\dot{x} = f(x,u), \ y = h(x,u)$. Suppose the system is ISS and there exist $\alpha_1, \alpha_2 \in K$ and $\eta \geq 0$ s.t. $\|h(x,u)\| \leq \alpha_1(\|x\|) + \alpha_2(\|u\|) + \eta$. Then for each $x_0 \in \mathbb{R}^n$, the system is $L_{\infty}$ - stable.
 \end{Theorem}
-
 \begin{equation} \label{eq:L2}
 \begin{split}
 &x=Ax+Bu \ \ \ \ \ u,y\in\mathbb{R}\rightarrow SISO\\
@@ -434,7 +391,6 @@ The $L_2$ gain of (\ref{eq:L2}) is
 $$\gamma=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$$
  where $G(s)=C(sI-A)^{-1}B+D$
  \end{Lemma}
- 
 \begin{equation} \label{eq:L2af}
 \begin{split}
 &\dot x = f(x) +g(x)u\\
@@ -462,22 +418,14 @@ rate $s(u,y)=\frac{1}{2}\gamma^2||u||^2_2-\frac{1}{2}||y||_2^2$
 \begin{Lemma}
  Let $H:L_p^e\rightarrow L_p^e$ be output strictly passive with excess $\epsilon$. Then $H$
  has $L_2$-gain $\le\frac{1}{\epsilon}$.
- \begin{proof}
-	TODO
-\end{proof}	
 \end{Lemma}
 
-\begin{Theorem}[Feedback theorem for passive system in I/O framework]
- Suppose there exist $\epsilon_i, \delta_i, \beta_i$; $i=1,2$ s.t.
-
- $$<(e_i)_T, (H_i(e_i))_T>_{L_2} \ge \epsilon_i ||(H_i(e_i))_T||_{L_2}^2+\delta_i
- ||(e_i)_T||_{L_2}^2-\beta_i$$
-
+\begin{Theorem}
+ Suppose exist $\epsilon_i, \delta_i, \beta_i$; $i=1,2$ s.t.
+ $$\langle(e_i)_T, (H_i(e_i))_T\rangle \ge \epsilon_i ||(H_i(e_i))_T||^2+\delta_i
+ ||(e_i)_T||^2-\beta_i$$
  for all $T\ge0, \ e_i\in L_2^e$, $i=1,2$. If $\epsilon_1+\delta_2>0$ and $\epsilon_2+\delta_1>0$
  then the feedback interconnection has finite $L_2$-gain from $(u_1,u_2)\rightarrow(y_1,y_2)$.
- \begin{proof}
-  TODO
- \end{proof}
 \end{Theorem}
 
 \end{multicols}
