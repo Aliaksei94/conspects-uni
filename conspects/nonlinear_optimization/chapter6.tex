@@ -302,16 +302,16 @@ H_1:
 \begin{split}
  &x=Ax+Be_1\\
  &y_1=Cx+De_1\\
- &A is Hurwitz
+ &A\ is\ Hurwitz
 \end{split}
 \end{equation}
 
 
 \begin{equation}
-H_2: y=$\Phi(t,e_2)$
+H_2: y=\Phi(t,e_2)
 \end{equation}
 
-We cnow, that $H_1$ has gain $\gamma_1=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$.
+We know, that $H_1$ has gain $\gamma_1=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$.
 
 Suppose: $|\Phi(t,e_2)|\le\gamma_2|e_2|$, $\forall t\ge0$, $\forall e_2\in\mathbb{R}$
 $\Rightarrow$ $H_2$ has $L_2$ gain $\le\gamma_2$.
@@ -336,6 +336,15 @@ Passivity framework ($p=2$)
 \end{proof}	
 \end{Lemma}
 
-\begin{Theorem}[Feedback theorem for passive system in I/O
+\begin{Theorem}[Feedback theorem for passive system in I/O framework]
+ Suppose there exist $\epsilon_i, \delta_i, \beta_i$; $i=1,2$ s.t.
 
+ $$<(e_i)_T, (H_i(e_i))_T>_{L_2} \ge \epsilon_i ||(H_i(e_i))_T||_{L_2}^2+\delta_i
+ ||(e_i)_T||_{L_2}^2-\beta_i$$
+
+ for all $T\ge0, \ e_i\in L_2^e$, $i=1,2$. If $\epsilon_1+\delta_2>0$ and $\epsilon_2+\delta_1>0$
+ then the feedback interconnection has finite $L_2$-gain from $(u_1,u_2)\rightarrow(y_1,y_2)$.
+ \begin{proof}
+  TODO
+ \end{proof}
 \end{Theorem}
