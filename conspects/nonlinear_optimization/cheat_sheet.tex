@@ -396,6 +396,89 @@ The origin $(x_1,x_2) = (0,0)$ for interconnection is asymptotically stable if $
 
 If is sabisfied with $v_i=0$: "output - feedback passive". If (\ref{passivity_interconnection}) satisfied with $p_i=0$: "input - feadforward passive".
 
+\section{Input/Output Methods}
+
+\begin{Definition}
+ $Lp$-spaces, $p\in[1,\infty]$. 
+ $Lp[0,\infty) = \{\Phi:[0,\infty)\rightarrow\mathbb{R}^m, measurable|
+  \int_0^\infty ||\Phi(t)||^p dt < \infty\}$
+\end{Definition}
+
+Particularly useful(Cauchy -Schwarz inequality) $|<\phi_1,\phi_2>_{L_2}| \leq \|\phi_1\|_{L_2}\|\phi_2\|_{L_2}$
+
+\begin{Definition}
+$H$ is $L_p$-stable if there exists $\alpha \in K, \ \beta \geq 0$ s.t. 
+\begin{equation*}
+
+$H$ is finite-gain $L_p$ stable if there exist $\gamma, \ \beta \geq 0$ s.t. 
+\begin{equation}\label{finite_gain}
+\|(H(u))_T\|_{L_p} \leq \gamma \|u_T\|_{L_p} + \beta 
+\end{equation}
+
+\begin{Definition}
+A map $H: L_p^e \mapsto L_p^e$ is causal if $(H(u))_T = (H(u_T))_T$ for all $u \in L_p^e$ and $T \geq 0$. 
+\end{Definition}
+
+\begin{Theorem}
+Consider $\dot{x} = f(x,u), \ y = h(x,u)$. Suppose the system is ISS and there exist $\alpha_1, \alpha_2 \in K$ and $\eta \geq 0$ s.t. $\|L(x,u)\| \leq \alpha_1(\|x\|) + \alpha_2(\|u\|) + \eta$. Then for each $x_0 \in \mathbb{R}^n$, the system is $L_{\infty}$ - stable.
+\end{Theorem}
+
+\begin{equation} \label{eq:L2}
+\begin{split}
+&x=Ax+Bu \ \ \ \ \ u,y\in\mathbb{R}\rightarrow SISO\\
+&y=Cx+Du \ \ \ \ \ A ... Hurwitz
+\end{split}
+\end{equation}
+ \begin{Lemma}
+The $L_2$ gain of (\ref{eq:L2}) is
+$$\gamma=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$$
+ where $G(s)=C(sI-A)^{-1}B+D$
+ \end{Lemma}
+ 
+\begin{equation} \label{eq:L2af}
+\begin{split}
+&\dot x = f(x) +g(x)u\\
+&y = h(x)
+\end{split}
+\end{equation}
+ Recall. System has $L_2$ gain less or equal $\gamma$ if it is dissipative w.r.t. supply
+rate $s(u,y)=\frac{1}{2}\gamma^2||u||^2_2-\frac{1}{2}||y||_2^2$
+
+\begin{Theorem}
+ Suppose that $H_1$ and $H_2$ are finite-gain $L_p$ stable (with gains $\gamma_1$, $\gamma_2$).
+ Then the feedback interconnection is finite-gain $L_p$ stable if $\gamma_1\gamma_2<1$.
+\end{Theorem}
+
+\begin{Definition}
+ $H:L_p^e\rightarrow L_p^e$ is
+
+ {\it passive} if there exist $B\in\mathbb{R}$ s.t. $\forall u\in L_p^e$, $\forall T\ge0$,
+ $<u_T,y^T>\ \ge -B$
+
+ {\it output-strictly passive} if there exists $B\in\mathbb{R}$ and $\epsilon>0$ s.t.
+ $\forall u\in L_p^e$, $\forall T\ge0$ follows  $<u_T,y^T>\ \ge -B+\epsilon ||y_T||_{L_2}^2$
+\end{Definition}
+
+\begin{Lemma}
+ Let $H:L_p^e\rightarrow L_p^e$ be output strictly passive with excess $\epsilon$. Then $H$
+ has $L_2$-gain $\le\frac{1}{\epsilon}$.
+ \begin{proof}
+	TODO
+\end{proof}	
+\end{Lemma}
+
+\begin{Theorem}[Feedback theorem for passive system in I/O framework]
+ Suppose there exist $\epsilon_i, \delta_i, \beta_i$; $i=1,2$ s.t.
+
+ $$<(e_i)_T, (H_i(e_i))_T>_{L_2} \ge \epsilon_i ||(H_i(e_i))_T||_{L_2}^2+\delta_i
+ ||(e_i)_T||_{L_2}^2-\beta_i$$
+
+ for all $T\ge0, \ e_i\in L_2^e$, $i=1,2$. If $\epsilon_1+\delta_2>0$ and $\epsilon_2+\delta_1>0$
+ then the feedback interconnection has finite $L_2$-gain from $(u_1,u_2)\rightarrow(y_1,y_2)$.
+ \begin{proof}
+  TODO
+ \end{proof}
+\end{Theorem}
 
 \end{multicols}
 \end{document}
