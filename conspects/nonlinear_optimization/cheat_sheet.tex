@@ -1,0 +1,393 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{hyperref}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{cancel}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage{xcolor}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}
+\newtheorem{Lemma}{Lemma}
+\newtheorem*{Definition}{Definition}
+\newtheorem*{Example}{Example}
+\usepackage{accents}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\newcommand*\underdot[1]{%
+  \underaccent{\dot}{#1}}
+
+
+
+% To make this come out properly in landscape mode, do one of the following
+% 1.
+%  pdflatex latexsheet.tex
+%
+% 2.
+%  latex latexsheet.tex
+%  dvips -P pdf  -t landscape latexsheet.dvi
+%  ps2pdf latexsheet.ps
+
+
+% If you're reading this, be prepared for confusion.  Making this was
+% a learning experience for me, and it shows.  Much of the placement
+% was hacked in; if you make it better, let me know...
+
+
+% 2008-04
+% Changed page margin code to use the geometry package. Also added code for
+% conditional page margins, depending on paper size. Thanks to Uwe Ziegenhagen
+% for the suggestions.
+
+% 2006-08
+% Made changes based on suggestions from Gene Cooperman. <gene at ccs.neu.edu>
+
+
+% To Do:
+% \listoffigures \listoftables
+% \setcounter{secnumdepth}{0}
+
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+	{ \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+% Turn off header and footer
+\pagestyle{empty}
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{4}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{\LaTeXe\ Cheat Sheet}} \\
+\end{center}
+
+\section{Differential equations}
+
+\begin{Lemma}[Cromwall]
+Suppose that $0 \le \phi(t) \le c + L \int^t_0 \phi(\tau) d \tau$, $c,L > 0$, $\phi$ -- 
+continuous. Then $\phi(t) \le c e^{Lt}$.
+\end{Lemma}
+
+\begin{Definition}
+Equilibrium point $x=0$ is stable if $\forall \epsilon > 0\ \exists \delta > 0$
+s.t. from $\|x_0\| < \delta$ follows $\|x(t)\| \le \epsilon, \ \forall t \ge 0$.
+\end{Definition}
+
+\begin{Definition}
+Equilibrium point $x=0$ is asymptotically stable if it is stable and exist $\delta>0$
+s.t. from $\|x_0\|<\delta$ follows 
+$\lim_{t\rightarrow \infty}x(t) \rightarrow 0$.
+\end{Definition}
+
+\section{Nonlinear systems}
+
+\begin{Definition}
+ Point $x^*=0$ is stable if $\forall \epsilon > 0$ and 
+ $\forall t_0 \ge 0,\ \exists \delta>0$ s.t. from $||x_0||<\delta$
+ follows $||x(t)|| < \epsilon$, $\forall t  \ge t_0$.
+\end{Definition}
+
+\begin{Definition}
+ Point $x^*=0$ is uniformly stable if $\forall \epsilon > 0\ $  
+ $\exists \delta>0$, s.t $\forall t_0 \ge 0,$ from $||x_0||<\delta$
+ follows $||x(t)|| < \epsilon$, $\forall t  \ge t_0$.
+\end{Definition}
+
+\begin{Definition}
+ Point $x^*=0$ asymptotically stable if it is stable and $\forall t_0 \ge 0\ $  
+ $\exists c>0$, s.t from $||x_0||<c$
+ follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
+\end{Definition}
+
+\begin{Definition}
+ Point $x^*=0$ uniformly asymptotically stable if it is uniformly stable and 
+ $\exists c>0$, s.t $\forall t_0 \ge 0\ $ from $||x_0||<c$
+ follows $\lim_{t\to \infty} ||x(t)|| \to 0$.
+\end{Definition}
+
+
+\begin{Definition}
+ Convergence: $\forall \eta > 0 \ \ \forall t_0 \ge 0$, $\exists T>0$ such
+ that $\forall t \ge t_0+T$ follows $||x(t)||<\eta$.
+\end{Definition}
+
+\begin{Definition}
+ Uniform convergence: $\forall \eta > 0 \ \ \exists T>0$ such
+ that $\forall t_0 \ge 0$ and $\forall t \ge t_0+T$ follows $||x(t)||<\eta$.
+\end{Definition}
+
+\begin{Definition}
+ Point $x^*=0$ is globally uniformly asymptotically stable if it is uniformly stable
+ with $\delta \to \infty$ for $\epsilon \to \infty$ and $\forall c,\eta\ \ $ 
+ $\exists T>0$ such that $\forall t_0\ge0$ from $||x_0||<c$ follows 
+ $\|x(t)\|<\eta$, $\forall t \ge t_0 + T$.
+\end{Definition}
+
+\begin{Theorem}[Lyapunov's direct method]
+ Let $f:[0,\infty)\times D\to R^n$ is continuous and let $x^*=0$ be equilibrium point.
+ If there is a differentiable function $V:[0,\infty)\times D\to R$ with:
+ \begin{itemize}
+  \item $W_1(x) \le V(t,x) \le W_2(x)$, $\forall t\ge0,\ x\in D$
+  \item $\dot V(t,x)\le 0$, $\forall t \ge0,\ x\in D$
+ \end{itemize}
+ where $W_1,W_2:D \to R$ continuous and positive definite, then $x^*=0$ is uniformly stable.
+
+ If further $\dot V(t,x) \le -W_3(x)$, $\forall t\ge0,\ x\in D$ with $W_3:D \to R$
+ continuous and positive definite, the $x^*=0$ is uniformly asymptotically stable.
+
+ If $D=R^n$ and $W_1$ is radialy unbounded then $X^*=0$ is globally uniformly
+ asymptotically stable.
+\end{Theorem}
+
+\begin{Definition}
+ A function $\alpha:[0,\delta)\to [0, \infty)$ is (of) "class $K$" if it is continuous,
+ strictly increasing, and $\alpha(0)=0$.
+\end{Definition}
+
+\begin{Definition}
+ A function $\alpha:[0,\delta)\to [0, \infty)$ is "class $K_\infty$" if $\alpha \in K$
+ and $\lim_{r\to\infty} \to\infty$.
+\end{Definition}
+
+\begin{Definition}
+ A function $\beta:[0,\delta)\times[0,\delta)\to [0, \infty)$ is "class $KL$ if it is continuous
+ , $\beta(\cdot, s) \in K$ for all fixed $s$, and for each fixed $r$, $\beta(r, \cdot)$ is
+ strictly decreasing: $\lim_{s\to\infty}\beta(r,s)=0$
+\end{Definition}
+
+\begin{Lemma}
+ The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly stable iff
+ $\exists \alpha\in K$ and $c>0$ s.t.  $\forall t \ge t_0$,
+ $\forall ||x(t_0)||<c$ and $||x(t)|| \le \alpha(||x(t_0)||).$ 
+\end{Lemma}
+
+\begin{Lemma}
+ The equilibrium $x^*=0$ of $\dot x(t)=f(t,x(t))$ is uniformly asymptotically stable iff
+ $\exists \beta\in KL$ and $c>0$ s.t. $\forall t \ge t_0$,
+ $\forall ||x(t_0)||<c$ and $||x(t)|| \le \beta(||x(t_0)||, t-t_0).$ 
+\end{Lemma}
+
+\section{System with inputs}
+
+\begin{Definition}
+ System (\ref{c3:eq}) is input-to-state stable (ISS) if $\exists \beta\in KL$,
+ $\gamma\in K$ s.t. $\forall x_0\in R^n$, $\forall t \ge 0$ follows 
+ $||x(t)||\le\beta(||x_0||, t)+\gamma(\sup_{\tau\in[0,t]} ||u(\tau)||)$.
+\end{Definition}
+
+\begin{Theorem}
+ Suppose that there exists a continuously differentiable function 
+ $V:R^n\to R$ and $\alpha_1,\alpha_2\in K_\infty$ and $\alpha_3, \rho \in K$
+ such that $\alpha_1(||x||)\le V(x)\le\alpha_2(||x||)$, $\forall x\in R^n$ and
+ $\frac{\partial V}{\partial x}f(x,u)\le-\alpha_3(||x||)$,
+ $\forall x: ||x||\ge\rho(||u||)$. Then (\ref{c3:eq}) is ISS with 
+ $\gamma = \alpha_1^{-1} \circ \alpha_2\circ\rho$
+\end{Theorem}
+
+\begin{Theorem}
+ Assume that:
+ \begin{itemize}
+     \item $f$ is globally Lipschitz;
+     \item $x = 0$ is a globally exponentially stable EP for $\dot x = f(x,0)$
+ \end{itemize}
+ Then the system (\ref{c3:eq}) is ISS.
+\end{Theorem}
+
+\begin{Theorem}[Artstein]
+ There exists $k:R^n \to R^m$ (state feedback) which is continuous on $R^n \backslash \{ 0 \}$ s.t. $x^*=0$ is globally asymptotically stable EP for $\dot x = f(x)+G(x)k(x)$ iff there exists a CLF.
+\end{Theorem}
+
+Sontag's formula" \\
+Fix $c \ge 0, a(x):=L_fV(x), b(x):=(L_GV(x))^T$
+$$k(x) = \left\{
+                \begin{array}{ll}
+                  -cb(x)-\frac{a(x)+\sqrt{a(x)^2+(b(x)^Tb(x))^2}}{b(x)^Tb(x)}b(x)^T, \ \ b(x) \neq 0\\
+                  0, \ \ b(x)=0
+                \end{array}
+              \right.$$
+
+\section{Backstepping}
+
+Integrator backstepping 
+\begin{equation}\label{system_backstepping}
+\dot x_1 = f_1(x_1) + g_1(x_1)x_2 
+\end{equation}
+\begin{equation*}
+\dot x_2 = u
+\end{equation*}
+
+\begin{equation}\label{u_choice}
+u = (- \frac{\partial V_1}{\partial e_1}g_1(e_1) + \dot{\alpha_1})- k_2e_2 , \ k_2 > 0
+\end{equation}
+
+\begin{equation*}
+\dot{x_1} = f_1(x_1) + g_1(x_1)x_2
+\end{equation*}
+\begin{equation*}
+\dot{x_2} = f_2(x_1, x_2) + g_2(x_1,x_2)u
+\end{equation*}
+
+\begin{equation*}
+u = \alpha_2(x_1, x_2) = \frac{1}{g_2(x_1,x_2)}(-\frac{\partial V_1}{\partial x_1}g_1(x_1) + \dot{\alpha_1} - k_2(x_2 - \alpha_1(x_1)) - f_2(x_1, x_2))
+\end{equation*} 
+
+$$\alpha_i(x_1, \dots x_i) = \frac{1}{g_i}(\dot \alpha_{i-1} - \frac{\partial V_{i-1}}{\partial e_{i-1}}g_{i-1}-k_i(x_i-\alpha_{i-1})-f_i)$$
+
+\section{Systems with inputs and outputs}
+
+Two-step approach:
+\begin{enumerate}
+\item Bring $x(t)$ to $S := \left \{ x \in \mathbb{R}^n | S(x) = 0 \right\}$ in finite time
+\item Have $x(t)$ going to zero asymptotically (on $S$)
+\begin{itemize}
+\item switching between nodes 1 and 2
+\item mode 2 is "sliding mode"
+\end{itemize}
+\end{enumerate} 
+
+$$V(X) = \frac{1}{2}s(x)^2$$
+
+\begin{equation*}
+u = - \frac{1}{L_gs(x)}(L_fs(x) + \hat{u}sgn(s(x))), \ \hat{u} > 0
+\end{equation*}
+
+\begin{equation*}
+\dot{x} = f(x) + g(x) \sigma (x) + g(x)u 
+\end{equation*}
+
+If $|\sigma (x)| \leq \beta (x)$
+
+\begin{equation*}
+u = - \frac{1}{L_gs(x)}(L_fs(x) + (\hat{u} + \beta (x) |L_gs(x)|) sgn(s(x)))
+\end{equation*}
+
+\begin{Definition}[dissipativity]
+\begin{equation}\label{DIE}
+S(x(t)) \leq S(x_0)
+ + \int_0^ts(u(\tau), y(\tau))d\tau
+\end{equation}
+\end{Definition}
+
+Introduce "available storage"
+\begin{equation*}
+S_a(x) := sup_{u:[0,T] \to \mathbb{R}^m, T \geq 0, x(0) = 0} (- \int_0^Ts(u(\tau),y(\tau)))
+\end{equation*}
+
+\begin{Theorem}
+System is dissipative w.r.t. the supply rate $s$ iff $S_a(x) < \infty$ for all $x \in \mathbb{R}^n$
+
+Moreover, if $S_a(x) < \infty$ for all $x \in \mathbb{R}^n$, then $S_a$ is a storage function and $S(x) \geq S_a(x) \ \forall x \in \mathbb{R}^n$ for all storage functions $S$.
+\end{Theorem}
+
+If system is dissipative then $x=0$ is asymptotically stable.
+
+\begin{equation}\label{passivity_system}
+\begin{split}
+\dot{x} = f(x,u), \ x \in \mathbb{R}^n, \ u \in \mathbb{R}^m \\
+y = h(x), \ y \in \mathbb{R}^m
+\end{split}
+\end{equation}
+
+\begin{Definition}
+System is passive if it is dissipative w.r.t. supply rate $s(u,y) = u^Ty$
+\end{Definition}
+
+\begin{Definition}
+System is zero-state observable (ZSO) if (for $u(t)=0$) $y(t)=0$ for all $t \geq 0 \Rightarrow x(t) = 0$ for all $t \geq 0$
+\end{Definition}
+
+\begin{Theorem}
+Let system (\ref{passivity_system}) be i) passive in differentiable storage set ii)ZSO. Then the feedback $u=-Py, \ P > 0$ renders the origin asymptotically stable.
+\end{Theorem}
+
+\begin{Theorem}
+Feedback interconnection with $u \equiv 0$. $H_1$ and $H_2$ are ZSO and dissipative with $S_1, \ S_2$ w.r.t.
+\begin{equation}\label{passivity_interconnection}
+s_i(u_i,y_i) = u_i^Ty_i - \rho_iy_i^Ty_i - \nu_iu_i^Tu_i, \ i=1,2, \ \rho,\nu \in \mathbb{R}
+\end{equation}
+The origin $(x_1,x_2) = (0,0)$ for interconnection is asymptotically stable if $\nu_1 + \rho_2 > 0$ and $\nu_2 + \rho_1 > 0$.
+\end{Theorem}
+
+If is sabisfied with $v_i=0$: "output - feedback passive". If (\ref{passivity_interconnection}) satisfied with $p_i=0$: "input - feadforward passive".
+
+
+\end{multicols}
+\end{document}

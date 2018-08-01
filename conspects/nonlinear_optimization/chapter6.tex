@@ -278,3 +278,64 @@ $\frac{1}{2\gamma^2}\frac{\partial S}{\partial x}g(x)g^T(x)\left(\frac{\partial 
 $\frac{1}{2}h^T(x)h(x)\le 0 \ \ \ \forall x\in\mathbb{R}^n$ (Hamilton-Jacobi equation)
  If there exist pos. semi-definite S satisfying (1), then system (\ref{eq:L2af}) has $L_2$-gain
 less or equal $j$.
+
+\subsection{Feedback theorem}
+
+Assumption: Feedback interconnection is well defined.
+
+\begin{Theorem}
+ Suppose that $H_1$ and $H_2$ are finite-gain $L_p$ stable (with gains $\gamma_1$, $\gamma_2$).
+ Then the feedback interconnection is finite-gain $L_p$ stable if $\gamma_1\gamma_2<1$.
+
+ \begin{proof}
+  TODO
+ \end{proof}
+\end{Theorem}
+
+Remark: Small gain theorem implies inherent robastness property: closed loop remains stable
+for perturbed maps $H_1$, $H_2$ as long as $\gamma_1\gamma_2<1$.
+
+Example:
+
+\begin{equation}
+H_1:
+\begin{split}
+ &x=Ax+Be_1\\
+ &y_1=Cx+De_1\\
+ &A is Hurwitz
+\end{split}
+\end{equation}
+
+
+\begin{equation}
+H_2: y=$\Phi(t,e_2)$
+\end{equation}
+
+We cnow, that $H_1$ has gain $\gamma_1=\sup_{w\in\mathbb{R}}\sqrt{G(-jw)G(jw)}$.
+
+Suppose: $|\Phi(t,e_2)|\le\gamma_2|e_2|$, $\forall t\ge0$, $\forall e_2\in\mathbb{R}$
+$\Rightarrow$ $H_2$ has $L_2$ gain $\le\gamma_2$.
+
+Passivity framework ($p=2$)
+
+\begin{Definition}
+ $H:L_p^e\rightarrow L_p^e$ is
+
+ {\it passive} if there exist $B\in\mathbb{R}$ s.t. $\forall u\in L_p^e$, $\forall T\ge0$,
+ $<u_T,y^T>\ \ge -B$
+
+ {\it output-strictly passive} if there exists $B\in\mathbb{R}$ and $\epsilon>0$ s.t.
+ $\forall u\in L_p^e$, $\forall T\ge0$ follows  $<u_T,y^T>\ \ge -B+\epsilon ||y_T||_{L_2}^2$
+\end{Definition}
+
+\begin{Lemma}
+ Let $H:L_p^e\rightarrow L_p^e$ be output strictly passive with excess $\epsilon$. Then $H$
+ has $L_2$-gain $\le\frac{1}{\epsilon}$.
+ \begin{proof}
+	TODO
+\end{proof}	
+\end{Lemma}
+
+\begin{Theorem}[Feedback theorem for passive system in I/O
+
+\end{Theorem}
