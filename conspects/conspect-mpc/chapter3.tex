@@ -114,7 +114,7 @@ For (Assumption 1.3):
 \begin{equation*}
 \frac{d}{dt}x(t)^TPx(t) = f(x,Kx)^TPx + x^TPf(x,Kx)
 \end{equation*}
-[$f(x,Kx) = (A+BK)x+\phi(x), A+BK = A_K$, $K$ is chosen s.t. $A_BK$ is Hurwitz]
+[$f(x,Kx) = (A+BK)x+\phi(x), A+BK = A_K$, $K$ is chosen s.t. $A+BK$ is Hurwitz]
 
 Upper bound for $x^TP\phi(x)$:
 $L_{\phi} := sup\{ \frac{|\phi(x)|}{|x|}, x \in X_{\alpha}^{f}, x \neq 0\}$
@@ -146,7 +146,7 @@ Design procedure
 \begin{enumerate}
 \item Compute $K$ s.t. $(A+BK)$ is Hurwitz 
 \item Choose $k > 0$ s.t. (\ref{k_choice_inequality}) and solve (\ref{lyapunov_equation})
-\item Find largest possible $\alpha_1$ s.t. $Kx \in U, \ \forall x \in X^f_{\alpha}$ 
+\item Find largest possible $\alpha_1$ s.t. $Kx \in U, \ \forall x \in X^f_{\alpha_1}$ 
 \item Find the largest $\alpha \in (0,\alpha_1]$ s.t. (\ref{alpha_choice}) holds
 \end{enumerate}
 
@@ -154,7 +154,7 @@ Alternative to the (4) step
 
 Solve optimization problem 
 \begin{equation}
-\max_{x} x^TP\phi(x) - kx^TPx s.t. \ x^TPx \leq \alpha
+\max_{x} x^TP\phi(x) - kx^TPx \ s.t. \ x^TPx \leq \alpha
 \end{equation}
 
 Iterate this by reducing $\alpha$ from $\alpha_1$ until optimal value of (4) is nonpositive
