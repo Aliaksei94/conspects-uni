@@ -15,7 +15,7 @@ $J_{\infty}(x_0, \bar{u}(\cdot; 0)) = \int_{0}^{\infty}L(\bar x(\tau;0), \bar u(
 Assumption: $J^{*}_{\infty}(x_0) < \infty, \forall x_0 \Rightarrow$ system is asymptotically stabilizable
 
 Finite-horizon cost function:
-$J_{\infty}(x(t), \bar{u}(\cdot; t)) = \int_{0}^{\infty}L(\bar x(\tau;t), \bar u(\tau;t))d\tau$
+$J_{T}(x(t), \bar{u}(\cdot; t)) = \int_{0}^{T}L(\bar x(\tau;t), \bar u(\tau;t))d\tau$
 
 Infinite-horizon performance resulting from application of MPC controller:
 $J_{\infty}^{MPC}(x_0) = \int_{0}^{\infty}L(\bar x_{MPC}(\tau), \bar u_{MPC}(\tau))d\tau$
@@ -37,7 +37,7 @@ Assume $\exists \alpha \in (0,1] s.t. \forall x \in \mathbb{R}^n$
 $J_{T}^{*}(x(t+\delta)) \leq J_T^*(x(t)) - \alpha\int_{t}^{t+\delta}L(\bar x^*(\tau;t),\bar u^*(\tau;t))d\tau (*)$
 
 Then the estimate 
-\begin{equation}
+\begin{equation}\label{main_inequility}
 \alpha J_{\infty}^*(x(t)) \leq \alpha J_{\infty}^{MPC}(x(t)) \leq J_T^*(x(t)) \leq J_{\infty}^*(x(t))
 \end{equation}
 
@@ -69,14 +69,14 @@ $L^*(t;t) = L(\bar x^*(\tau;t), \bar u^*(\tau;t))$
 
 \begin{Theorem}
 
-Assume $\exists c \in (0;1]$ and $\gamma > 0$ s.t. \ref{c_b_inequality} - \ref{b_a_inequality} holds. Then (*) holds with $\alpha =1 - \gamma \frac{1-\epsilon}{\epsilon}$
+Assume $\exists \epsilon \in (0;1]$ and $\gamma > 0$ s.t. \ref{c_b_inequality} - \ref{b_a_inequality} holds. Then (\ref{main_inequility}) holds with $\alpha =1 - \gamma \frac{1-\epsilon}{\epsilon}$
 
 \begin{proof}
 \begin{equation*}
-J_T^*(x(t+\delta)) - J_T^*(x(t)) = J_T^*(x(t+\delta)) - \int_{t}^{t+T}L^*(\tau;t)d\tau \leq^{(1)}
+J_T^*(x(t+\delta)) - J_T^*(x(t)) = J_T^*(x(t+\delta)) - \int_{t}^{t+T}L^*(\tau;t)d\tau \leq^{(\ref{c_b_inequality})}
 \end{equation*}
 \begin{equation*}
-\leq \frac{1-\epsilon}{\epsilon} \int_{t+\delta}^{t+T}L^*(\tau;t)d\tau - \int_t^{t+\delta}L^*(\tau;t)d\tau \leq^{(2)}
+\leq \frac{1-\epsilon}{\epsilon} \int_{t+\delta}^{t+T}L^*(\tau;t)d\tau - \int_t^{t+\delta}L^*(\tau;t)d\tau \leq^{(\ref{b_a_inequality})}
 \end{equation*}
 \begin{equation*}
 \leq (\gamma \frac{1-\epsilon}{\epsilon} - 1) \int_t^{t+\delta}L^*(\tau;t)d\tau
@@ -90,7 +90,7 @@ Assumption 1: Asymptotic Controlability
 For all x, $\exists$ some input trajectory $\hat u_x(\cdot)$
 with $\hat u_x(t) \in \mathbb{U}, \forall t \geq 0$ s.t.
 \begin{equation*}
-L(\hat x(t),\hat u(t)) \leq \beta(t) min_u L(x,u), \forall t > 0
+L(\hat x(t),\hat u(t)) \leq \beta(t) \min_u L(x,u), \forall t > 0
 \end{equation*}
 with $\beta: \mathbb{R} \to \mathbb{R}_{\geq 0}$
  - continuous, positive, strictly decreasing with $\lim_{t \to 0} \beta(t) = 0$ $\Rightarrow$
@@ -125,11 +125,11 @@ Consider
 J^*_T(x(t+\delta)) \leq J_T(x(t+\delta), \bar u(\cdot;t+\delta)) =
 \end{equation*}
 \begin{equation*}
-=\int^{t+t'}_{t+\delta}L^*(\delta;t)d\delta + \int_{t+t'}^{t+\delta+T}L(\hat x(\tau - t - t'), \hat (\tau - t - t'))d\tau \leq
+=\int^{t+t'}_{t+\delta}L^*(\delta;t)d\delta + \int_{t+t'}^{t+\delta+T}L(\hat x(\tau - t - t'), \hat u (\tau - t - t'))d\tau \leq
 \end{equation*} 
 by Assumption 1
 \begin{equation*}
-\int_{t+t'}^{t+\delta+T}L(\hat x(\tau - t - t'), \hat (\tau - t - t'))d\tau \leq L^*(t+t';t) \int_0^{T+\delta-t'}\beta(\tau)d\tau
+\int_{t+t'}^{t+\delta+T}L(\hat x(\tau - t - t'), \hat u (\tau - t - t'))d\tau \leq L^*(t+t';t) \int_0^{T+\delta-t'}\beta(\tau)d\tau
 \end{equation*}
 as far as $B(t) = \int_0^t\beta(\tau)d\tau$
 \begin{equation*}
@@ -224,7 +224,7 @@ Solution:
 \end{equation*}
 Have to show: $\bar L_t$ is a minimizer of (\ref{minimizer_eps})
 \begin{equation*}
-\int_{\delta}^{T} \bar L_t(\tau)d\tau \leq \int_{delta}^{T} L_t(\tau)d\tau 
+\int_{\delta}^{T} \bar L_t(\tau)d\tau \leq \int_{\delta}^{T} L_t(\tau)d\tau 
 \end{equation*}
 for all feasible $L_t$
 
