@@ -18,6 +18,7 @@ Finite-horizon cost function:
 $J_{T}(x(t), \bar{u}(\cdot; t)) = \int_{0}^{T}L(\bar x(\tau;t), \bar u(\tau;t))d\tau$
 
 Infinite-horizon performance resulting from application of MPC controller:
+
 $J_{\infty}^{MPC}(x_0) = \int_{0}^{\infty}L(\bar x_{MPC}(\tau), \bar u_{MPC}(\tau))d\tau$
 
 \begin{Definition}
@@ -34,7 +35,7 @@ Proposition 1: Relaxed dynamic programming
  
 Assume $\exists \alpha \in (0,1] s.t. \forall x \in \mathbb{R}^n$
 
-$J_{T}^{*}(x(t+\delta)) \leq J_T^*(x(t)) - \alpha\int_{t}^{t+\delta}L(\bar x^*(\tau;t),\bar u^*(\tau;t))d\tau (*)$
+$J_{T}^{*}(x(t+\delta)) \leq J_T^*(x(t)) - \alpha\int_{t}^{t+\delta}L(\bar x^*(\tau;t),\bar u^*(\tau;t))d\tau \ \ \ (*)$
 
 Then the estimate 
 \begin{equation}\label{main_inequility}
@@ -48,7 +49,7 @@ holds for all $x \in \mathbb{R}^n$
 \item 1 and 3 inequalities follow from optimality (by definition)
 \item 2 inequality follows from summing up (*) over all sampling instances
 \begin{equation}
-J^*_T(x(N\delta)) \leq J_T^*(x_0) - \alpha \int_0^{N\delta}L(x_{MPC}(t), u_{MPC}(t))dt
+J^*_T(x(N\delta)) \leq J_T^*(x_0) - \alpha \int_0^{N\delta}L(\bar x_{MPC}(t), \bar u_{MPC}(t))dt
 \end{equation}
 \begin{equation}
 N \to \infty : J_T^*(x_0) \geq \alpha J_{\infty}^{MPC}(x_0) 
@@ -69,7 +70,7 @@ $L^*(t;t) = L(\bar x^*(\tau;t), \bar u^*(\tau;t))$
 
 \begin{Theorem}
 
-Assume $\exists \epsilon \in (0;1]$ and $\gamma > 0$ s.t. \ref{c_b_inequality} - \ref{b_a_inequality} holds. Then (\ref{main_inequility}) holds with $\alpha =1 - \gamma \frac{1-\epsilon}{\epsilon}$
+Assume $\exists \epsilon \in (0;1]$ and $\gamma > 0$ s.t. \ref{c_b_inequality} - \ref{b_a_inequality} holds. Then (*) holds with $\alpha =1 - \gamma \frac{1-\epsilon}{\epsilon}$
 
 \begin{proof}
 \begin{equation*}
@@ -160,7 +161,7 @@ $(1+\frac{B(T)}{T-\delta}) = \frac{1}{\epsilon}$
 \end{equation*}
 
 \begin{proof}
-Analogues to lemma 1.
+Analogues to lemma 2.
 
 Calculation of $\gamma$:
 
@@ -213,14 +214,14 @@ as far as $\frac{dB(T+\delta-t')}{dt'} = \beta(T+\delta - t')$
 \left \{
   \begin{tabular}{c}
   $\dot L_t(t') = \frac{\beta(T+\delta - t') -1}{B(T+\delta - t')}L_t(t')$ \\
- initial condition $L_t(t)=\frac{1}{B(\tau)}$
+ initial condition $L_t(t)=\frac{1}{B(t)}$
   \end{tabular}
 \right .
 \end{equation*}
 
 Solution:
 \begin{equation*}
-\bar L_t(t') = \frac{1}{B(T+\delta-t')}e^{-\int_{\delta}^{t'}\frac{1}{B(T+\delta-\tau)}d\tau}
+\bar L_t(t') = \frac{1}{B(T+\delta-t')}e^{-\int_{\delta}^{t'}\frac{1}{\beta (T+\delta-\tau)}d\tau}
 \end{equation*}
 Have to show: $\bar L_t$ is a minimizer of (\ref{minimizer_eps})
 \begin{equation*}
@@ -242,7 +243,6 @@ But then
 \end{equation}
 
 the sign equality from (\ref{minimizer_eps}) with equality.
-\end{proof}
 
 Contradiction:
 
@@ -251,6 +251,7 @@ $\Rightarrow$
 \begin{equation*}
 \epsilon = \int_{\delta}^{T}\bar L_t(\tau)d\tau = 1 - e^{-\int_0^{T-\delta}\frac{1}{B(T-\tau)}d\tau}
 \end{equation*}
+\end{proof}
 Similarly, better estimate for $\gamma$ can be obtained
 
 $\alpha = 1 - \gamma\frac{1-\epsilon}{\epsilon}$

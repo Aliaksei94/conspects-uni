@@ -7,12 +7,13 @@ in short $x^+=Ax+Bu+w$
 Constraints: $x(t) \in X, u(t) \in U, \forall t = 0,1...$
 
 Bound on $w$:
-$W$ is a compact,convex set which contains $0$. $w(t) \in W \forall t =0,1,...$
+$W$ is a compact,convex set which contains $0$. $w(t) \in W \ \forall t =0,1,...$
 
 Main idea:
 Use additional error feeedback s.t. real systems state contained in a "tube" around some nominal system state.
 
 Repetition of QI-MPC in discrete time:
+
 Nominal system:
 \begin{equation*}
 z^+ = Az+Bv
@@ -43,7 +44,7 @@ Assumption 1:
 \begin{enumerate}
 \item $Z^f$ is invariant with $Z^+=(A+BK)z$, $A_k = A+BK$, i.e. $A_kZ^f \subseteq Z^f$
 \item $Kz \in V \forall z \in Z^f$
-\item $F(A_kz)-F(z) \leq - L(z,Kz) \forall z \ in Z^f$
+\item $F(A_kz)-F(z) \leq - L(z,Kz) \forall z \in Z^f$
 \end{enumerate}
 \end{itemize}
 
@@ -72,7 +73,7 @@ N times apply Assumption 1.3
 
 Influence of disturbance:
 \begin{Definition}
-Mainkowski set addition: 
+Minkowski set addition: 
 \begin{equation*}
 A,B \subseteq \mathbb{R}^n A \oplus B = \{ a+b | a \in A, b\in B\}
 \end{equation*}
@@ -111,7 +112,7 @@ Current state at time $t$ is $x$,
 
 possible states at time $t+1$: $Ax \oplus W$
                         
-$t+2$: $A(Ax \oplus W) \oplus W = A^2x \oplus AW + w$
+$t+2$: $A(Ax \oplus W) \oplus W = A^2x \oplus AW \oplus W$
   
        ........
         
@@ -160,13 +161,13 @@ image to be inserted
 
 \begin{proof}
 
-Let $e(t) := x(t) - x(t) \rightarrow$
+Let $e(t) := x(t) - z(t) \rightarrow$
 \begin{equation*}
 e^+ = x^+ - z^+ = Ax + B(v + K(x-z)) + w - Az - Bv = (A+BK)e + w
 \end{equation*}
-As $S$ is RPI for $e^+ = A_ke + w$, we obtain $e \in S \Rightarrow e \ in S \forall w \in W$
+As $S$ is RPI for $e^+ = A_ke + w$, we obtain $e \in S \Rightarrow e \in S \ \forall w \in W$
 
-Hence $x \in Z \oplus S \Rightarrow x^+ \in Z^+ \oplus S \forall w \in W$
+Hence $x \in Z \oplus S \Rightarrow x^+ \in Z^+ \oplus S \ \forall w \in W$
 
 \end{proof}
 
@@ -184,13 +185,13 @@ s.t. z(i+1|t) = Az(i|t) + Bv(i|t)
 z(i|t) \in Z = X \ominus S 
 \end{equation*}
 \begin{equation*}
-v(i|t) \ in V = U \ominus KS
+v(i|t) \ \in V = U \ominus KS
 \end{equation*}
 \begin{equation*}
 t \leq i \leq t + N -1
 \end{equation*}
 \begin{equation*}
-z(t+N|t) \in Z^+ \subseteq Z 
+z(t+N|t) \in Z_N \subseteq Z 
 \end{equation*}
 Initial condition $x(t) \in z(t|t) \oplus S$
 
@@ -260,7 +261,7 @@ $J^*(x) = \hat{J^*}(z^*(x))$
 we obtain the following $\forall x \in X_N$
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item $J^*(x) = \hat{J^*}(z^*(x)) \leq^{(1)} |z^*(x)|^2$
+\item $J^*(x) = \hat{J^*}(z^*(x)) \geq^{(1)} c_1|z^*(x)|^2$
 \item $J^*(x) = \hat{J^*}(z^*(x)) \leq^{(3)} c_2|z^*(x)|^2$
 \end{enumerate}
 
@@ -319,7 +320,7 @@ Note. $co$- convex
 
 Define: $\bar{A} := \frac{1}{J}\sum_{i=0}^{J}A_i$, $\bar{B} := \frac{1}{J}\sum_{i=0}^{J}B_i$
 \begin{equation*}
-x(t+1) = \bar{A}x(t) + \bar{B}(t) + w(t)
+x(t+1) = \bar{A}x(t) + \bar{B}u(t) + w(t)
 \end{equation*}
 \begin{equation*}
 w(t) \in W := {(A-\bar{A})x + (B-\bar{B})u | (A,B) \in \rho, x \in X, u \in U}
@@ -362,7 +363,7 @@ is an RPI set for the system $x^+ = Ax + w$
 i)(\ref{RPI_set_subset_with_alpha}) is a direct consequence of our assumptions
 ii) want to show that $AS(\alpha,k) \oplus W \subseteq S(\alpha,k)$
 \begin{equation*}
-AS(\alpha,k) \oplus W = (1-\alpha)^(-1) \sum_{i=1}^{k} A^iW \oplus W= 
+AS(\alpha,k) \oplus W = (1-\alpha)^{-1} \sum_{i=1}^{k} A^iW \oplus W= 
 \end{equation*}
 \begin{equation*}
 = (1 - \alpha)^{-1} A^kW \oplus \sum_{i=1}^{k-1}A^iW(1-\alpha)^{-1} \oplus W

@@ -4,7 +4,7 @@ Idea: Compute an "explicit MPC control law" by solving the optimization problem 
 
 Linear discrete-time systems $x^+=Ax+Bu$
 
-Polytopic inout+state constraints $C_xx \leq d_x, \ С_u \leq d_u$
+Polytopic input+state constraints $C_xx \leq d_x$,  $C_uu \leq d_u$
 
 MPC problem. At time $t$, given $x(t)$, solve
 \begin{equation*}
@@ -41,13 +41,14 @@ U:= [u^T(t+1|t), \dots, u^T(t+N-1|t)]^T
 \begin{itemize}
 \item rewrite cost function
 \begin{equation}\label{cost_function}
-F(x(t),U) = x^T(t)Qx(t) + x^T\tilde{Q}x + u^T\tilde{R}u
+F(x(t),U) = x^T(t)Qx(t) + X^T\tilde{Q}X + U^T\tilde{R}U
 \end{equation}
 with $\tilde{Q} = 
 \begin{bmatrix}
     Q  & \  & \ \\
     \  &\ddots & \\
-     \  & \ & Q_P     
+     \  & \ & Q \\
+     \ & \ & \ & P     
 \end{bmatrix} $, 
 $\tilde{R} = 
 \begin{bmatrix}
@@ -99,7 +100,7 @@ F = 2\Omega^T \tilde{Q} \Gamma
     C_x  & \  & \ \\
     \  &\ddots & \\
      \  & \ & C_x     
-\end{bmatrix} (\Omega_x(t) + \Gamma U) \leq \begin{bmatrix}
+\end{bmatrix} (\Omega x(t) + \Gamma U) \leq \begin{bmatrix}
    d_x \\
    \vdots \\
    d_x   
@@ -118,12 +119,12 @@ s.t. $GU \leq W + Ex$
 
 multiparametric quadratic program (MPQP)
 
-Last step: definite $z:=U+H^{-1}F^Tx$, $H^{-1}$ - pos.definite 
+Last step: define $z:=U+H^{-1}F^Tx$, $H^{-1}$ - pos.definite 
 
 \begin{equation}\label{rewritten_problem}
 \min_{z} \frac{1}{2}z^THz + \frac{1}{2}x^T \tilde{Y}x
 \end{equation}
-s.t. $GZ \leq W + Sx$
+s.t. $Gz \leq W + Sx$
 \begin{equation*}
 \tilde{Y} := Y - FH^{-1}F^T
 \end{equation*}
@@ -171,15 +172,15 @@ From (\ref{condition_a})
 \leadsto z^*(x) = -H^{-1}G^T\lambda = -H^{-1}(G^A)^T\lambda^A
 \end{equation}
 
-For all active constraints, we have $G^Az^(x) = W^A + S^Ax \to^{(\ref{active_constraint})} - G^AH^-1(G^A)^T\lambda^A = W^A+S^Ax$
+For all active constraints, we have $G^Az(x) = W^A + S^Ax \to^{(\ref{active_constraint})} - G^AH^{-1}(G^A)^T\lambda^A = W^A+S^Ax$
 
 \begin{equation}\label{lambda_equation}
-\lambda^A = - (G^AH^(-1)(G^A)^T)^(-1)(W^A+S^Ax)
+\lambda^A = - (G^AH^{-1}(G^A)^T)^{-1}(W^A+S^Ax)
 \end{equation} 
 
 Plug (\ref{lambda_equation}) into (\ref{active_constraint}):
 \begin{equation}\label{optimal_z}
-z^*(x) = H^(-1)(G^A)^T(G^AH^(-1)(G^A)^T)^(-1)(W^A + S^Ax)
+z^*(x) = H^{-1}(G^A)^T(G^AH^{-1}(G^A)^T)^{-1}(W^A + S^Ax)
 \end{equation}
 
 For a given active constraint set, optimal solution is an affine function of $x$.
@@ -188,7 +189,7 @@ Characterization of the set where $A$ is an optimal active set (critical region 
 
 Use (\ref{condition_c}), (\ref{condition_d}): Plug (\ref{optimal_z}) into (\ref{condition_d})
 \begin{equation}\label{inequality_with_z}
-GH^(-1)(G^A)^T(G^AH^{-1}(G^A)^T)^{-1}(W^A+S^Ax) \leq W + Sx
+GH^{-1}(G^A)^T(G^AH^{-1}(G^A)^T)^{-1}(W^A+S^Ax) \leq W + Sx
 \end{equation}
 
 Plug (\ref{lambda_equation}) into (\ref{condition_c})
@@ -196,7 +197,7 @@ Plug (\ref{lambda_equation}) into (\ref{condition_c})
 -(G^AH^{-1}(G^A)^T)^{-1}(W^A+S^Ax) \geq 0
 \end{equation}
 
-(\ref{inequality_with_z}) + (\ref{rewritten_problem}) describe critical region $CR^A$, on which the optimal solution is given by (\ref{lambda_equation}) -(\ref{optimal_z})
+(\ref{inequality_with_z}) + (\ref{c_condition_with_lambda}) describe critical region $CR^A$, on which the optimal solution is given by (\ref{lambda_equation}) -(\ref{optimal_z})
 
 image to be inserted
 
@@ -214,7 +215,7 @@ What happens if more than two critical regions are adjacent to a critical region
 
 Procedure needs to be suitably adapted in case of degenerate problems (LICQ assumption cost satisfied)
 
-Can merge critical regions if union is convex and the resulting control la is the same
+Can merge critical regions if union is convex and the resulting control is the same
 
 Main bottleneck: number of regions can grow very quickly
 \begin{itemize}
