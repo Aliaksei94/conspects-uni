@@ -6,7 +6,7 @@ without stabilizing terminal constraint + cost
 Setup: 
 \begin{itemize}
 \item $\dot x = f(x,u), x(0)=x_0$
-\item input constraints $u(t) \in \mathbb{U} \subseteq \mathbb{R}^m \forall t \geq 0$
+\item input constraints $u(t) \in \mathbb{U} \subseteq \mathbb{R}^m \ \forall t \geq 0$
 \end{itemize}
 
 Infinite-horizon cost function:
@@ -208,7 +208,7 @@ Differentiate (\ref{lemma_1_inequality}) with relation to $t'$
 \begin{equation*}
 0 = L_t(t') + \frac{dB(T+\delta-t')}{dt'}L_t(t') + B(\tau + \delta - t') \dot L_t(t')
 \end{equation*} 
-as far as $\frac{dB(T+\delta-t')}{dt'} = \beta(T+\delta - t')$
+as far as $\frac{dB(T+\delta-t')}{dt'} = -\beta(T+\delta - t')$
 
 \begin{equation*}
 \left \{
@@ -221,7 +221,7 @@ as far as $\frac{dB(T+\delta-t')}{dt'} = \beta(T+\delta - t')$
 
 Solution:
 \begin{equation*}
-\bar L_t(t') = \frac{1}{B(T+\delta-t')}e^{-\int_{\delta}^{t'}\frac{1}{\beta (T+\delta-\tau)}d\tau}
+\bar L_t(t') = \frac{1}{B(T+\delta-t')}e^{-\int_{\delta}^{t'}\frac{1}{B (T+\delta-\tau)}d\tau}
 \end{equation*}
 Have to show: $\bar L_t$ is a minimizer of (\ref{minimizer_eps})
 \begin{equation*}

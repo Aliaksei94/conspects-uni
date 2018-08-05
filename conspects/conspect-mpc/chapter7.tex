@@ -1,6 +1,6 @@
 \section{Economic MPC}
 
-Motivation: (setpoin) stabilization is often not primary control objective 
+Motivation: (setpoi stabilization is often not primary control objective 
 $\Rightarrow$ "general" cost function $L$.
 
 Assumption: $L:\mathbb{R}^n\rightarrow\mathbb{R}^n$ is continuous (need not
@@ -26,7 +26,7 @@ be positive defined) $X,U$ is compact.
  \begin{equation*}
   \begin{split}
    &x=(-1;+1;-1;\dots) \\
-   &u=(-1;+1;-1;\dots)
+   &u=(-1;-1;-1;\dots)
   \end{split}
  \end{equation*}
 \end{Example}
@@ -36,7 +36,7 @@ Economic MPC problem
 
 At each time $t$, given $x(t)$, we should minimize $J(x(t),u(\cdot|t)$ s.t.
 
-$$J(x(t),u(\cdot|t)\sum_{k=t}^{t+N-1}L(x(k|t),u(k|t))$$
+$$J(x(t),u(\cdot|t) = \sum_{k=t}^{t+N-1}L(x(k|t),u(k|t))$$
 
 With conditions:
 
@@ -52,16 +52,16 @@ With conditions:
 
 Remark: this can be extended to terminal region/cost framework.
 
-Closed-loop average perfomance
+Closed-loop average performance
 
 \begin{Theorem}
- The closed-loop asymptatic average perfomance is at least as good as the
+ The closed-loop asymptotic average performance is at least as good as the
  optimal steady-state cost i.e.,
 
  $$\lim_{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}(x(k),u(k)}{T}\le L(x_s,u_s)$$
 
  \begin{proof}
-  Lets present Imagine a completely new way of proving that we have not used before 
+  Lets present a completely new way of proving that we have not used before 
   in this course.
 
   Joke. We again consider difference $J^*(x(t+1))-J^*(x(t))$.
@@ -70,13 +70,13 @@ Closed-loop average perfomance
 
   From this equation we can get:
 
-  $$\frac{\sum_{k=0}^{T-1}\left(J^*(x(k+1))-J^*(x(t))\right)}{T}\le\frac{\sum_{k=0}^{T-1}\left(L(x_s,u_s)+-L(x(t),u(t))\right)}{T}$$
+  $$\frac{\sum_{k=0}^{T-1}\left(J^*(x(k+1))-J^*(x(k))\right)}{T}\le\frac{\sum_{k=0}^{T-1}\left(L(x_s,u_s)+-L(x(t),u(t))\right)}{T}$$
 
   \begin{equation}\label{eq:EMPC1}
    \begin{split}
     \lim_{T\rightarrow\infty}\inf LHS \le &\lim_{T\rightarrow\infty}\inf RHS = \\
-    &= L(x_s,u_s)+\lim{T\rightarrow\infty}\inf\frac{\sum_{k=0}^{T-1}-L(x(k),u(k))}{T} = \\
-    &= L(x_s,u_s)-\lim{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} 
+    &= L(x_s,u_s)+\lim_{T\rightarrow\infty}\inf\frac{\sum_{k=0}^{T-1}-L(x(k),u(k))}{T} = \\
+    &= L(x_s,u_s)-\lim_{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} 
    \end{split}
   \end{equation}
 
@@ -84,14 +84,14 @@ Closed-loop average perfomance
 
   \begin{equation}\label{eq:EMPC2}
    \begin{split}
-    \frac{\sum_{k=0}^{T-1}\left(J^*(x(k+1))-J^*(x(t))\right)}{T}=&\lim{T\rightarrow\infty}\inf\frac{J^*(x(T))-J^*(x(0))}{T} \ge \\
-                       &\ge\lim{T\rightarrow\infty}\inf\frac{-J^*(x(0))}{T} \ge 0
+    \frac{\sum_{k=0}^{T-1}\left(J^*(x(k+1))-J^*(x(k))\right)}{T}=&\lim_{T\rightarrow\infty}\inf\frac{J^*(x(T))-J^*(x(0))}{T} \ge \\
+                       &\ge\lim_{T\rightarrow\infty}\inf\frac{-J^*(x(0))}{T} = 0
    \end{split}
   \end{equation}
 
   Now combine (\ref{eq:EMPC1}) and (\ref{eq:EMPC2}) and we get
 
-  $$\lim{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} \le L(x_s,u_s)$$
+  $$\lim_{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} \le L(x_s,u_s)$$
  \end{proof}
 \end{Theorem}
 
@@ -100,17 +100,17 @@ Classify optimal operating condition
 
 \begin{Definition}
  A system is optimaly operated at steady-state if
- $$\lim{T\rightarrow\infty}\inf\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} \ge L(x_s,u_s)$$
+ $$\lim_{T\rightarrow\infty}\inf\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} \ge L(x_s,u_s)$$
 
- for all faesible sequences $(x(\cdot), u(\cdot))$.
+ for all feasible sequences $(x(\cdot), u(\cdot))$.
 \end{Definition}
 
 \begin{Definition}
- A system is istrictly dissipative w.r.t. supply rate $s(x,u)$ if there exists a storage 
+ A system is strictly dissipative w.r.t. supply rate $s(x,u)$ if there exists a storage 
  function $\lambda:X\rightarrow\mathbb{R}_{\ge 0}$ s.t.
  $$\lambda(f(x,u))-\lambda(x)\le s(x,u)$$
 
- For strictlly dissipativity RHS=$s(x,u)-\rho((x-x_0))$, where $\rho$ positive defined.
+ For strictly dissipativity RHS=$s(x,u)-\rho((x-x_0))$, where $\rho$ positive defined.
 \end{Definition}
 
 \begin{Theorem}
@@ -140,7 +140,7 @@ Classify optimal operating condition
   \end{split}
  \end{equation}
 
- Set of all feasible steady-states ${(x,u)|x=0\ \ or \ \ u=1}$. Let $(x_s,u_s)=(1,1)$, then
+ Set of all feasible steady-states $\{(x,u)|x=0\ \ or \ \ u=1 \}$. Let $(x_s,u_s)=(1,1)$, then
  $L(x_s,u_s)=\delta$.
 
  $s(x,u)=L(x,u)-L(x_s,u_s)=(x-1)^2+\delta(u-2)^2-\delta$, we will search $\lambda(x)$ in form
@@ -153,7 +153,7 @@ Classify optimal operating condition
  that $g(x,u)\ge0$, $\forall x\in X,\ \ u\in U$. And minimum in point $(x_s,u_s)=(1,1)$
  $$\triangledown g(x,u)=\left[
   \begin{tabular}{l}
-   $2(x+1)-au+a$ \\ 
+   $2(x-1)-au+a$ \\ 
    $2\delta(u-2) -a x$ 
   \end{tabular} 
  \right]$$
@@ -162,13 +162,13 @@ Classify optimal operating condition
 
  $$\left[
   \begin{tabular}{l}
-   $2(x+1)-au+a$ \\ 
+   $2(x-1)-au+a$ \\ 
    $2\delta(u-2) -a x$ 
   \end{tabular} 
  \right]_{(1,1)} = 0$$ 
 
  Thus $a = -2\delta$, and from requrements, that $\lambda(x)=ax+c\ge 0\ \ \forall x\in X=[-5,5]$
- we have $c\ge -ax = -2\delta x \ge [x=5] \ge -10\delta$.\
+ we have $c\ge -ax = 2\delta x \ge [x=5] \ge 10\delta$.\
 
  And now we can use previous theorem to prove, that system is optimaly operated at
  steady state $(x_s,u_s)=(1,1)$.
@@ -188,7 +188,7 @@ Classify optimal operating condition
  With this orbits
 
  $$\lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}L(x(t),u(t))}{T}=\frac{L(1,-\frac{1}{3})+L(-\frac{1}{3},-3)}{2}=
-  = \frac{\frac{4}{3}^2}{2}+\delta\frac{\frac{-7}{3}+(-3)^2}{2}$$
+  = \frac{(\frac{4}{3})^2}{2}+\delta\frac{\frac{-7}{3}+(-3)^2}{2}$$
 
   And for small enough $\delta$ this less then $L(0,0)$. That mean, that system is not optimal 
   operated at steady state and not dissipative w.r.t. chosen $s(x,u)$. 
@@ -218,7 +218,11 @@ s.t. some constraints as in original MPC problem
 Claim: $P$ and $\tilde{P}$ have the same minimizer. 
 Proof of claim: feasible sets coincide 
 \begin{equation*}
-\tilde{J}(x(t),u(t)) = \sum_{k=t}^{t+N-1} [L(x(k|t),u(k|t)) + \lambda(x(k|t)) - \lambda(f(x(k|t),u(k|t))) - L(x_s,u_s)] = \lambda(x(t|t)) - \lambda(x(t+N|t)) - NL(x_s,u_s) + \sum_{k=1}^{t+N-1}L(x(k|t),u(k|t)) = \lambda(x(t)) - \lambda(x_s) - NL(x_s,u_s) + J(x(t),u(\cdot | t))
+\begin{split}
+\tilde{J}(x(t),u(t)) &= \sum_{k=t}^{t+N-1} [L(x(k|t),u(k|t)) + \lambda(x(k|t)) - \lambda(f(x(k|t),u(k|t))) - L(x_s,u_s)]= \\
+&= \lambda(x(t|t)) - \lambda(x(t+N|t)) - NL(x_s,u_s) + \sum_{k=1}^{t+N-1}L(x(k|t),u(k|t))= \\
+&= \lambda(x(t)) - \lambda(x_s) - NL(x_s,u_s) + J(x(t),u(\cdot | t))
+\end{split}
 \end{equation*}
 $\Rightarrow \tilde{J}$ and $J$ only differ by a constant $\Rightarrow P$ and $\tilde{P}$ have the same minimizer.
 
@@ -235,7 +239,7 @@ Asymptotic average constraints $h: \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{
 Assumption: $h$ is continuous
 \begin{itemize}
 \item $Av[h(x,u)] \in Y$
-\item $Av[h(x,u)] := {\bar{h}: \exists {t_k} \to \infty \ s.t. \ \lim_{n \to \infty} \frac{\sum_{t=0}^{t_n - 1}h(x(t),u(t))}{t_n}} = \bar{h}$
+\item $Av[h(x,u)] := \{ \bar{h}: \exists {t_k} \to \infty \ s.t. \ \lim_{n \to \infty} \frac{\sum_{t=0}^{t_n - 1}h(x(t),u(t))}{t_n}  = \bar{h}\}$
 
 $Av[h(x,u)]$ "set of asymptotic average values of $h$".
 \end{itemize}
@@ -244,14 +248,14 @@ How to modify the MPC problem accordingly?
 
 Adaptation of optimal steady state computation
 \begin{equation*}
-(x_s,u_s) = argmin_{x = f(x,u), x \in X, u \in U, h(x,u) \in Y} L(x,u)
+(x_s,u_s) = arg\,min_{x = f(x,u), x \in X, u \in U, h(x,u) \in Y} L(x,u)
 \end{equation*}
 
 Additional constraint:
 \begin{equation*}
 \sum_{k=t}^{t+N-1}h(x(k|t),u(k|t)) \in Y_t
 \end{equation*}
-with $Y_{t+1} := Y_t \oplus Y \oplus {-h(x(t),u(t))}$, $Y_0 = NY \oplus Y_{\infty}$, $Y_{\infty}$ - arbitrary compact set.
+with $Y_{t+1} := Y_t \oplus Y \oplus {-h(x(t),u(t))}$, $Y_0 = NY \oplus Y_{00}$, $Y_{00}$ - arbitrary compact set.
 
 \begin{enumerate}
 \item How to guarantee recursive feasibility?
@@ -266,46 +270,42 @@ Candidate solution at time $t+1$
 \right .
 \end{equation*}
 \begin{equation*}
-\sum_{k=t+1}^{t+N}h(\tilde{x}(k|t+1), \tilde{u}(k|t+1)) = \sum_{k=t}^{t+k-1}h(x^*(k|t), u^*(k|t))[\in Y_t] - h(x(t),u(t)) + h(x_s,u_s)[\in Y]
+\sum_{k=t+1}^{t+N}h(\tilde{x}(k|t+1), \tilde{u}(k|t+1)) = \sum_{k=t}^{t+N-1}h(x^*(k|t), u^*(k|t))[\in Y_t] - h(x(t),u(t)) + h(x_s,u_s)[\in Y]
 \end{equation*}
 $\in Y_t \oplus Y \oplus {-h(x(t),u(t))} = Y_{t+1}$
 \item Satisfaction of average constraint for the resulting closed loop:
 
 Assumption: $Y$ is convex. Solve the recursion for $Y_t$ to obtain 
 \begin{equation*}
-Y_t = Y_{\infty} \oplus (t+N)Y \oplus {- \sum_{k=0}^{t-1}h(x(k),u(k))}
+Y_t = Y_{00} \oplus (t+N)Y \oplus {- \sum_{k=0}^{t-1}h(x(k),u(k))}
 \end{equation*}
 the last item is closed loop sequence.
 
 From the additional constraint in optimal problem:
 \begin{equation*}
-\sum_{k=0}^{t-1}h(x(k),u(k)) + \sum_{k=t}^{t+N-1}h(x(k|t), u(k|t)) \in Y_{\infty} \oplus (t+N)Y
+\sum_{k=0}^{t-1}h(x(k),u(k)) + \sum_{k=t}^{t+N-1}h(x(k|t), u(k|t)) \in Y_{00} \oplus (t+N)Y
 \end{equation*}
 
 For each sequence {$t_n$} s.t. $\lim_{n \to \infty} \sum_{k=0}^{t_n -1}\frac{h(x(k),u(k))}{t_n} $ exists, we obtain 
 \begin{equation*}
-\lim_{n \to \infty} \frac{\sum_{k=0}^{t_n-1}h(x(k),u(k))}{t_n} \in \lim_{n \to \infty} \frac{Y_{\infty} \oplus (t_n + N)Y}{t_n} = Y
+\lim_{n \to \infty} \frac{\sum_{k=0}^{t_n-1}h(x(k),u(k))}{t_n} \in \lim_{n \to \infty} \frac{Y_{00} \oplus (t_n + N)Y}{t_n} = Y
 \end{equation*}
 $\Rightarrow$ closed-loop system satisfies average constraints.
 \end{enumerate}
 
-Transient average constraint:
+Now lets consider additional constraint (Transient average constraint):
 \begin{equation*}
 \sum_{k=t}^{t+T-1}\frac{h(x(k),u(k))}{T} \in Y, \ \forall t \geq 0
 \end{equation*}
 for $T=1$, standard pointwise-in-time 
 
-Constraints are recovered
+This constraint add some additional constraints for $h(x,u)$. Lets assume, that: $Y= \mathbb{R}^p_{\leq 0}$, now we can 
+$T+N-1$ constraints in total,described below:
 
-Assumption: $Y= \mathbb{R}^p_{\leq 0}$
-
-%TODO picture
-
-$T+N-1$ constraints in total,described below
 \begin{equation*}
 \left \{
-\begin{tabular}{c} 
-$\sum_{t-T+\tau}^{t-1} h(x(k),u(k)) + \sum_{i=t}^{t+\tau -1}h(x(i|t), u(i|t)) \geq 0 \ \tau = 1, ..., T$ \\
+\begin{tabular}{l} 
+$\sum_{t-T+\tau}^{t-1} h(x(k),u(k)) + \sum_{i=t}^{t+\tau -1}h(x(i|t), u(i|t)) \le 0 \ \tau = 1, ..., T$ \\
 $\sum_{i=t+j+1}^{t+T+j}h(x(i|t),u(i|t)) \leq 0, \ j =0, ..., N-2$ \\
 $u(i|t) = u_s \ i = t+N, ... , t+N-2+T$ 
 \end{tabular} 
