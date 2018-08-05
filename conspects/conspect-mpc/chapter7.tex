@@ -1,0 +1,197 @@
+\section{Economic MPC}
+
+Motivation: (setpoin) stabilization is often not primary control objective 
+$\Rightarrow$ "general" cost function $L$.
+
+Assumption: $L:\mathbb{R}^n\rightarrow\mathbb{R}^n$ is continuous (need not
+be positive defined) $X,U$ is compact.
+
+\begin{Definition}
+ Optimal steady-state $(x_s,u_s)=\arg\min_{x^+=f(x,u);\ x\in X;\ u\in U}L(x,u)$
+\end{Definition}
+
+\begin{Example}
+ \begin{equation*}
+  \begin{split}
+   &x^+=xu \\
+   &X=U=[-\delta,\delta] \\
+   &L(x,u)=g(x)+(u+1)^2
+  \end{split}
+ \end{equation*}
+
+ Optimal steady state is $(x_s,u_s)=(0,-1)$
+
+ Optimal operating condition:
+
+ \begin{equation*}
+  \begin{split}
+   &x=(-1;+1;-1;\dots) \\
+   &u=(-1;+1;-1;\dots)
+  \end{split}
+ \end{equation*}
+\end{Example}
+
+
+Economic MPC problem
+
+At each time $t$, given $x(t)$, we should minimize $J(x(t),u(\cdot|t)$ s.t.
+
+$$J(x(t),u(\cdot|t)\sum_{k=t}^{t+N-1}L(x(k|t),u(k|t))$$
+
+With conditions:
+
+\begin{equation*}
+ \begin{split}
+  &x(k+1|t) = f(x(k|t),u(k|t)) \\
+  &x(t|t) = x(t) \\
+  &x(k|t)\in X \\
+  &u(k|t)\in U \\
+  &x(t+N|t) = x_s
+ \end{split}
+\end{equation*}
+
+Remark: this can be extended to terminal region/cost framework.
+
+Closed-loop average perfomance
+
+\begin{Theorem}
+ The closed-loop asymptatic average perfomance is at least as good as the
+ optimal steady-state cost i.e.,
+
+ $$\lim_{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}(x(k),u(k)}{T}\le L(x_s,u_s)$$
+
+ \begin{proof}
+  Lets present Imagine a completely new way of proving that we have not used before 
+  in this course.
+
+  Joke. We again consider difference $J^*(x(t+1))-J^*(x(t))$.
+
+  $$J^*(x(t+1))-J^*(x(t))\le -L(x(t),u(t)) + L(x_s,u_s)$$
+
+  From this equation we can get:
+
+  $$\frac{\sum_{k=0}^{T-1}\left(J^*(x(k+1))-J^*(x(t))\right)}{T}\le\frac{\sum_{k=0}^{T-1}\left(L(x_s,u_s)+-L(x(t),u(t))\right)}{T}$$
+
+  \begin{equation}\label{eq:EMPC1}
+   \begin{split}
+    \lim_{T\rightarrow\infty}\inf LHS \le &\lim_{T\rightarrow\infty}\inf RHS = \\
+    &= L(x_s,u_s)+\lim{T\rightarrow\infty}\inf\frac{\sum_{k=0}^{T-1}-L(x(k),u(k))}{T} = \\
+    &= L(x_s,u_s)-\lim{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} 
+   \end{split}
+  \end{equation}
+
+  Also, we can rewrite
+
+  \begin{equation}\label{eq:EMPC2}
+   \begin{split}
+    \frac{\sum_{k=0}^{T-1}\left(J^*(x(k+1))-J^*(x(t))\right)}{T}=&\lim{T\rightarrow\infty}\inf\frac{J^*(x(T))-J^*(x(0))}{T} \ge \\
+                       &\ge\lim{T\rightarrow\infty}\inf\frac{-J^*(x(0))}{T} \ge 0
+   \end{split}
+  \end{equation}
+
+  Now combine (\ref{eq:EMPC1}) and (\ref{eq:EMPC2}) and we get
+
+  $$\lim{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} \le L(x_s,u_s)$$
+ \end{proof}
+\end{Theorem}
+
+
+Classify optimal operating condition
+
+\begin{Definition}
+ A system is optimaly operated at steady-state if
+ $$\lim{T\rightarrow\infty}\inf\frac{\sum_{k=0}^{T-1}L(x(k),u(k))}{T} \ge L(x_s,u_s)$$
+
+ for all faesible sequences $(x(\cdot), u(\cdot))$.
+\end{Definition}
+
+\begin{Definition}
+ A system is istrictly dissipative w.r.t. supply rate $s(x,u)$ if there exists a storage 
+ function $\lambda:X\rightarrow\mathbb{R}_{\ge 0}$ s.t.
+ $$\lambda(f(x,u))-\lambda(x)\le s(x,u)$$
+
+ For strictlly dissipativity RHS=$s(x,u)-\rho((x-x_0))$, where $\rho$ positive defined.
+\end{Definition}
+
+\begin{Theorem}
+ A system is optimally operated at steady state if it is dissipative w.r.t.
+ $s(x,u)=L(x,u)-L(x_s,u_s)$.
+ \begin{proof}
+  \begin{equation}
+   \begin{split}
+    \lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}\lambda(x(t+1))-\lambda(x(t))}{T} &\le
+           \lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}s(x(t),u(t))}{T}= \\
+           &=\lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}L(x(t),u(t))}{T}-L(x_s,u_s)
+   \end{split}
+  \end{equation}
+
+  Note, that $\lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}\lambda(x(t+1))-\lambda(x(t))}{T} \ge 0$
+ \end{proof}
+\end{Theorem}
+
+
+\begin{Example}
+ Consider system
+ \begin{equation}
+  \begin{split}
+   &x(t+1)=x(t)u(t) \\
+   &X=U=[-5,5] \\
+   &L(x,u)=(x-1)^2+\delta(u-2)^2,\ \ 0<\delta<1
+  \end{split}
+ \end{equation}
+
+ Set of all feasible steady-states ${(x,u)|x=0\ \ or \ \ u=1}$. Let $(x_s,u_s)=(1,1)$, then
+ $L(x_s,u_s)=\delta$.
+
+ $s(x,u)=L(x,u)-L(x_s,u_s)=(x-1)^2+\delta(u-2)^2-\delta$, we will search $\lambda(x)$ in form
+ $$\lambda(x)=ax+c$$
+
+ From dissipativity enequation we shooud have $\lambda(f(x,u))-\lambda(x)\le s(x,u)$, then
+ compare $\lambda(f(x,u))-\lambda(x)=axu-ax$ with $s(x,u)=(x-1)^2+\delta(u-2)^2-\delta$.
+
+ Consider $s(x,u)-(\lambda(f(x,u))-\lambda(x))=g(x,u)$ as function, and find parameters $a$ such
+ that $g(x,u)\ge0$, $\forall x\in X,\ \ u\in U$. And minimum in point $(x_s,u_s)=(1,1)$
+ $$\triangledown g(x,u)=\left[
+  \begin{tabular}{l}
+   $2(x+1)-au+a$ \\ 
+   $2\delta(u-2) -a x$ 
+  \end{tabular} 
+ \right]$$
+
+ Function $g$ is convex.
+
+ $$\left[
+  \begin{tabular}{l}
+   $2(x+1)-au+a$ \\ 
+   $2\delta(u-2) -a x$ 
+  \end{tabular} 
+ \right]_{(1,1)} = 0$$ 
+
+ Thus $a = -2\delta$, and from requrements, that $\lambda(x)=ax+c\ge 0\ \ \forall x\in X=[-5,5]$
+ we have $c\ge -ax = -2\delta x \ge [x=5] \ge -10\delta$.\
+
+ And now we can use previous theorem to prove, that system is optimaly operated at
+ steady state $(x_s,u_s)=(1,1)$.
+
+ Consider case, when system is not dissipative. Change previous constraint for $u$, let $u\le 0$:
+ then new optimal steady-state $(x_s,u_s)=(0,0)$ and $L(x_s,u_s)=4\delta+1$.
+
+ Consider 2-period orbits:
+
+ \begin{equation}
+  \begin{split}
+   &x(\cdot) = (1,-\frac{1}{3},1,-\frac{1}{3},\dots)\\
+   &u(\cdot) = (-\frac{1}{3},-3,-\frac{1}{3},-3,\dots)
+  \end{split}
+ \end{equation}
+
+ With this orbits
+
+ $$\lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}L(x(t),u(t))}{T}=\frac{L(1,-\frac{1}{3})+L(-\frac{1}{3},-3)}{2}=
+  = \frac{\frac{4}{3}^2}{2}+\delta\frac{\frac{-7}{3}+(-3)^2}{2}$$
+
+  And for small enough $\delta$ this less then $L(0,0)$. That mean, that system is not optimal 
+  operated at steady state and not dissipative w.r.t. chosen $s(x,u)$. 
+
+
+\end{Example}
