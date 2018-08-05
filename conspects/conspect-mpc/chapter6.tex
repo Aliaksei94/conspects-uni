@@ -247,3 +247,125 @@ F & H
 \end{itemize}
 \end{proof}
 \end{Theorem}
+
+\section{part of economic mpc}
+Closed-loop convergence to the optimal steady state
+
+\begin{Theorem}
+Suppose the system is strictly dissipative w.r.t. the supply rate $s(x,u) = L(x,u) - L(x_s, u_s)$. Then the closed-loop system asymptotically converge to the optimal steady state $x_s$.
+
+Remark: $x_s$ is asymptotically stable if $J^*(x)$ and $\lambda(x)$ are continuous at $x_s$.
+\begin{proof}
+Define "rotated" cost function
+\begin{equation*}
+\tilde{L}(x,u) =L(x,u) - L(x_s, u_s) + \lambda(x) - \lambda(f(x,u))
+\end{equation*}
+
+Auxiliary optimization problem $\tilde{P}$
+\begin{equation*}
+\min_{u(\cdot| t)} \tilde{J}(x(t),u(t)) = \sum_{k=t}^{t+N-1}\tilde{L}(x(k|t),u(k|t))
+\end{equation*}
+
+s.t. some constraints as in original MPC problem
+
+Claim: $P$ and $\tilde{P}$ have the same minimizer. 
+Proof of claim: feasible sets coincide 
+\begin{equation*}
+\tilde{J}(x(t),u(t)) = \sum_{k=t}^{t+N-1} [L(x(k|t),u(k|t)) + \lambda(x(k|t)) - \lambda(f(x(k|t),u(k|t))) - L(x_s,u_s)] = \lambda(x(t|t)) - \lambda(x(t+N|t)) - NL(x_s,u_s) + \sum_{k=1}^{t+N-1}L(x(k|t),u(k|t)) = \lambda(x(t)) - \lambda(x_s) - NL(x_s,u_s) + J(x(t),u(\cdot | t))
+\end{equation*}
+$\Rightarrow \tilde{J}$ and $J$ only differ by a constant $\Rightarrow P$ and $\tilde{P}$ have the same minimizer.
+
+$\Rightarrow$ we can use $\tilde{P}$ to analyze stability of the closed loop. $\tilde{L}(x,u) \geq \rho (|x - x_s|)$, $\tilde{L}$ is positive definite (from strictly dissipative) $\Rightarrow$ can apply standard MPC stability results.  
+\end{proof}
+\end{Theorem}
+
+Average constraints:
+
+\begin{Definition}
+Asymptotic average constraints $h: \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{R}^p$ - (auxiliary) output specifying average constraints.
+\end{Definition}
+
+Assumption: $h$ is continuous
+\begin{itemize}
+\item $Av[h(x,u)] \in Y$
+\item $Av[h(x,u)] := {\bar{h}: \exists {t_k} \to \infty \ s.t. \ \lim_{n \to \infty} \frac{\sum_{t=0}^{t_n - 1}h(x(t),u(t))}{t_n}} = \bar{h}$
+
+$Av[h(x,u)]$ "set of asymptotic average values of $h$".
+\end{itemize}
+
+How to modify the MPC problem accordingly?
+
+Adaptation of optimal steady state computation
+\begin{equation*}
+(x_s,u_s) = argmin_{x = f(x,u), x \in X, u \in U, h(x,u) \in Y} L(x,u)
+\end{equation*}
+
+Additional constraint:
+\begin{equation*}
+\sum_{k=t}^{t+N-1}h(x(k|t),u(k|t)) \in Y_t
+\end{equation*}
+with $Y_{t+1} := Y_t \oplus Y \oplus {-h(x(t),u(t))}$, $Y_0 = NY \oplus Y_{\infty}$, $Y_{\infty}$ - arbitrary compact set.
+
+\begin{enumerate}
+\item How to guarantee recursive feasibility?
+
+Candidate solution at time $t+1$ 
+\begin{equation*}
+\tilde{u}(k|t+1) = \left \{
+  \begin{tabular}{ll}
+  $u^*(k|t)$ & $\ t+1 \leq k \leq t+N+1$ \\
+  $u_s$ & $\ k = t + N$
+  \end{tabular}
+\right .
+\end{equation*}
+\begin{equation*}
+\sum_{k=t+1}^{t+N}h(\tilde{x}(k|t+1), \tilde{u}(k|t+1)) = \sum_{k=t}^{t+k-1}h(x^*(k|t), u^*(k|t))[\in Y_t] - h(x(t),u(t)) + h(x_s,u_s)[\in Y]
+\end{equation*}
+$\in Y_t \oplus Y \oplus {-h(x(t),u(t))} = Y_{t+1}$
+\item Satisfaction of average constraint for the resulting closed loop:
+
+Assumption: $Y$ is convex. Solve the recursion for $Y_t$ to obtain 
+\begin{equation*}
+Y_t = Y_{\infty} \oplus (t+N)Y \oplus {- \sum_{k=0}^{t-1}h(x(k),u(k))}
+\end{equation*}
+the last item is closed loop sequence.
+
+From the additional constraint in optimal problem:
+\begin{equation*}
+\sum_{k=0}^{t-1}h(x(k),u(k)) + \sum_{k=t}^{t+N-1}h(x(k|t), u(k|t)) \in Y_{\infty} \oplus (t+N)Y
+\end{equation*}
+
+For each sequence {$t_n$} s.t. $\lim_{n \to \infty} \sum_{k=0}^{t_n -1}\frac{h(x(k),u(k))}{t_n} $ exists, we obtain 
+\begin{equation*}
+\lim_{n \to \infty} \frac{\sum_{k=0}^{t_n-1}h(x(k),u(k))}{t_n} \in \lim_{n \to \infty} \frac{Y_{\infty} \oplus (t_n + N)Y}{t_n} = Y
+\end{equation*}
+$\Rightarrow$ closed-loop system satisfies average constraints.
+\end{enumerate}
+
+Transient average constraint:
+\begin{equation*}
+\sum_{k=t}^{t+T-1}\frac{h(x(k),u(k))}{T} \in Y, \ \forall t \geq 0
+\end{equation*}
+for $T=1$, standard pointwise-in-time 
+
+Constraints are recovered
+
+Assumption: $Y= \mathbb{R}^p_{\leq 0}$
+
+%TODO picture
+
+$T+N-1$ constraints in total,described below
+\begin{equation*}
+\left \{
+\begin{tabular}{c} 
+$\sum_{t-T+\tau}^{t-1} h(x(k),u(k)) + \sum_{i=t}^{t+\tau -1}h(x(i|t), u(i|t)) \geq 0 \ \tau = 1, ..., T$ \\
+$\sum_{i=t+j+1}^{t+T+j}h(x(i|t),u(i|t)) \leq 0, \ j =0, ..., N-2$ \\
+$u(i|t) = u_s \ i = t+N, ... , t+N-2+T$ 
+\end{tabular} 
+\right .  
+\end{equation*}
+
+\begin{itemize}
+\item recursive feasibility can be shown using standard candidate sequence
+\item closed-loop transient average constraint satisfaction directly follows from first additional constraint
+\end{itemize}
