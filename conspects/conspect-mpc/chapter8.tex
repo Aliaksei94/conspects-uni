@@ -1,0 +1,212 @@
+\section{Distributed MPC}
+
+\begin{itemize}
+    \item $M$ systems $\Sigma_i$;
+    \item different types of couplings between systems:
+    \begin{itemize}
+        \item in dynamics, e.g., $x_1^+ = f_1(x_1,x_2,x_3,u_1)$;
+        \item in constraints, e.g., $x_1+x_2 \le 0$;
+        \item in cost function, e.g., $L_1(x_1,x_2,x_3,u_1)$ (common objective).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Iterative distributed MPC scheme}
+
+Setup: \begin{itemize}
+    \item M systems: $x_i^+ = \sum_{j=1}^M A_{ij}x_j+B_{ij}u_j, \ i=1,...,M;$
+    \item local input constraints: $u_i \in U_i \in R^m$ - convex;
+    \item local cost functions: $L_i(x_i,u_i) = x_i^TQ_ix_i+u_i^TR_iu_i, \ Q_i,R_i > 0$;
+\end{itemize}
+
+$\implies$ overall system:
+$$x^+ = Ax+Bu$$
+$$A = \begin{pmatrix}
+    A_{11} & A_{12} & \dots & A_{1M} \\
+    \dots & \dots & \dots & \dots \\
+    A_{M1} & A_{M2} & \dots & A_{MM}
+    \end{pmatrix}; \ 
+B = \begin{pmatrix}
+    B_{11} & \dots & B_{1M} \\
+    \dots & \dots & \dots \\
+    B_{M1} & \dots & B_{MM}
+    \end{pmatrix};$$
+$$x = \begin{pmatrix}
+    x_1 \\
+    \dots \\
+    x_M
+    \end{pmatrix} \in R^{\Sigma n_i}; \ 
+u = \begin{pmatrix}
+    u_1 \\
+    \dots \\
+    u_M
+    \end{pmatrix} \in R^{\Sigma m_i}.$$\\
+    
+    
+    Decentrilized MPC:\\
+    At each time $t$, each system $\Sigma_i$ solves
+    $$ \min_{u_i(\cdot|t)} \sum_{k=t}^{t+N-1} L_i(x_i(k|t), u_i(k|t))$$
+    s.t. 
+    $$x_i(k+1|t) = A_{ii}x_i(k|t)+B_{ii}u_i(k|t), \ t \le k \le t+N-1$$
+    $$x_i(t|t) = x_i(t)$$
+    $$u_i(k|t) \in U_i$$
+    $$x_i(t+N|t) = 0$$
+    $\implies$ influence of neighboring systems is neglected $\implies$ easy implementation, but stability in general not guaranteed! (works only for weak couplings)\\
+    
+    
+    Distributed MPC:\\
+    \begin{equation} \label{distributed_MPC}
+        \min_{u_i(\cdot|t)} \rho_1J_1(x_1(t),u(\cdot|t)+\dots+\rho_MJ_M(x_M(t),u(\cdot|t)
+    \end{equation}
+    s.t. 
+    $$x(k+1|t) = Ax(k|t)+Bu(k|t), \ t \le k \le t+N-1$$
+    $$u_i(k|t) \in U_i$$
+    $$x(t+N|t) = 0$$
+    $$u_j(k|t) = u_j^p(k|t), \ j \neq i$$
+    $u_j^p$ - previous prediction.\\
+    
+    Distributed MPC algorithm:\\
+    \begin{enumerate}
+        \item At $t=0$, initialization. Determine feasible sequance $u_i^0(\cdot|0)$ for all systems; set $p=0$;
+        \item At time $t$, while $p \le p_{max} - 1$, each system $i$
+        \begin{itemize}
+            \item solves (\ref{distributed_MPC}) with $u_j(\cdot|k) = u_j^p$ for $j \neq i$;
+            \item set $u_j^{p+1}(\cdot|t) = w_i u_i^{*p}(\cdot|t)+(1-w_i)u_i^p(\cdot|t)$ ($w_i$ - convex combination, $w_1 + \dots + w_M = 1$);
+            \item transmit $u_i^{p+1}(\cdot|t)$ to other systems;
+            \item $p=p+1$.
+        \end{itemize}
+        \item Each system applies $u_i^{p_{max}}(t|t)$, defines
+        $$u^0(k|t+1) = \left \{ \begin{array}{ll} 
+        u^{p_{max}}(k|t), \ t+1 \le k \le t+N-1 \\ 
+        0, \ k = t+N 
+        \end{array} \right.$$
+    \end{enumerate}
+    Set $t = t+1, \ p = 0$ and go to step 2.\\
+    
+    Proposition 1:\\
+    If $u_i^0(\cdot|t)$ are feasible, then the iterations $u_i^p(\cdot|t)$ are feasible for all $p \ge 0$. \\
+    Furthermore, $J(x(t),u^p(\cdot|t))$ is nonincreasing in $p$ and converges for $p \rightarrow \infty$.\\
+    
+    Remark: one can show: for $p \rightarrow \infty, \ u^p(\cdot|t)$ converges to the centralized solution (crucial requirement - input constraints are decoupled) \\
+    
+    Theorem:\\
+    Overall closed loop system resulting from application of iterative distributed MPC algorithm asymptotically converges to 0.\\
+    
+    Proof:\\
+    $J(x(t+1),u^{p_{max}}(\cdot|t+1)) \le J(x(t+1),u^0(\cdot|t+1)) = $[by def.] $= J(x(t),u^{p_{max}}(\cdot|t)) - \sum_{i=1}^M \rho_i L_i (x_i(t),u_i^{p_{max}}(\cdot|t))$.\\
+    From here, can use standard arguments to show convergence.\\
+    
+    Remark:\\
+    Lyapunov stability can also be shown if initialization (in step 1) is suitably chosen.\\
+    
+\subsection{Sequential Distributed MPC}
+
+    Setup: \begin{itemize}
+        \item $M$ dynamically decouples systems $x_i^+=f_i(x_i,u_i), \ i=1,\dots, M$;
+        \item neighbours of system $i: N_i$ - all systems to which system $i$ is coupled by constraints or common objective.
+    $\implies x_{-i} = \begin{pmatrix}
+    x_{i_1} \\
+    \dots \\
+    x_{i_{d_i}}
+    \end{pmatrix}$,\\
+    $i_1, \dots, i_{d_i}$ - neighbours of $i$;
+    \item $r$ coupling constraints $c_r(x) \in c_r$;
+    \item cost function of system $i: L_i(x_i,x_{-i},u_i) = L_{ii}(x_i,u_i)+\sum_{j \in N_i} L_{ij}(x_i,x_j)$.\\
+    \end{itemize}
+    
+    Assumption: $\sum_{i=1}^M L_i(x_i,x_{-i},u_i)$ is pos. def. w.r.t. $x=0$.\\
+    
+    Defenition:
+    \begin{itemize}
+        \item    $$J_i(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) := \sum_{k=t}^{t+N-1} L_i(x_i(k|t),x_{-i}(k|t), u_i(k|t))$$
+        \item 
+            \begin{multline*} 
+            \overline{J_i}(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) := J_i(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) + \\ + \sum_{k=t}^{t+N-1} \sum_{j \in N_i} L_{ji}(x_j(k|t),x_i(k|t))
+            \end{multline*}
+        \item 
+            \begin{multline*}
+            J_i^{l_i}(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) := J_i(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) - \\ - \sum_{k=t}^{t+N-1}L_{ih}(x_i(l_i|t),x_h(k|t))
+            \end{multline*}
+            for some neighbour $l_i \in N_i$.
+    \end{itemize}
+    
+    Optimization problem for system $i$:\\
+    Given $x_i(t)$ and $x_{-i}(\cdot|t)$ \\
+    \begin{equation}
+        \min_{u_i(\cdot|t)} \overline{J_i}(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t))
+    \end{equation}
+    s.t. 
+    $$x_i(k+1|t) = f_i(x_i(k|t),u_i(k|t)), \ t \le k \le t+N-1$$
+    $$u_i(k|t) \in U_i$$
+    $$x_i(k|t) \in X_i$$
+    $$x_i(t+N|t) = 0$$
+    $$c_r(x_i(k|t),x_{-i}(k|t)) \le c_r$$
+    for all $r: c_r$ depends on $x_i$.\\
+    
+    Sequential Distributed MPC algorithm:
+    \begin{enumerate}
+        \item At time $t=0$: Initialization - determines feasible sequances $\hat u_i(\cdot|0), \hat x_i(\cdot|0)$ fpr all systems.\\
+        Go to step 3.
+        \item Each time t, each system determines
+        $$u_i(k|t) = \left \{ \begin{array}{ll} u_i^*(k|t-1), \ t \le k \le t+N-2 \\ 0, \ t = t+N-1 \end{array} \right.$$
+        $$x_j(k|t) = \left \{ \begin{array}{ll} x_j^*(k|t-1), \ t \le k \le t+N-2 \\ 0, \ t = t+N-1 \end{array} \right.$$
+        for all $j \in N_i$;
+        \item Each system sets
+         $$x_{-i}(\cdot|t) = \begin{pmatrix} \hat x_{i_1}(\cdot|t) \\ \dots \\ \hat x_{i_{d_i}}(\cdot|t) \end{pmatrix} =: \hat x_{-i}(\cdot|t)$$
+         \item For each $i=1, \dots, M$, system $i$:
+         \begin{itemize}
+             \item solves problem $P_i \implies u_i^*(\cdot|t),x_i^*(\cdot|t))$;
+             \item transmits optimal state sequance $x_i^*(\cdot|t)$ to all neighbours, which update $x_{-i}(\cdot|t)$ by replacing $\hat x_i(\cdot|t)$ with $x_i^*(\cdot|t)$.
+         \end{itemize}
+         \item Each system applies $u_i^*(\cdot|t)$;
+         \item Set $t=t+1$ and go to step 2.
+    \end{enumerate}
+    
+    Theorem: \\
+    Suppose that step 1 is feasible. Then, the sequential distributed MPC algorithm is recursively feasible and the resulting (overall) close loop asymptotically converges to 0.\\
+    
+    Proof:
+    \begin{itemize}
+        \item recursive feasibility:
+        \begin{itemize}
+            \item $\hat u_i(\cdot|t+1)$ of step 2 are feasible candidate sequences (also for coupling constraints);
+            \item sequential nature of algorithm retains feasibility of coupling constraint.
+        \end{itemize}
+        \item Consider $V_i(t) := J_i(x_i(t),x_{-i}^*(\cdot|t),u_i^*(\cdot|t))$ and $V(t) := \sum_{i=1}^M V_i(t)$.
+        \begin{multline*}
+        V(t) = \sum_{i \notin \{N_M \cup \{M\}\}} V_i(t) + \sum_{i \in N_M} V_i(t) + V_M(t) = \sum_{i \notin \{N_M \cup \{M\}\}} V_i(t) + \\ + \sum_{i \in N_M} J_i^M(x_i(t),x_{-i}^*(\cdot|t),u_i^*(\cdot|t)) + \overline{J_M}(x_M(t),x_{-M}^*(\cdot|t),u_M^*(\cdot|t)) \le \\ \le \sum_{i \notin \{N_M \cup \{M\}\}} V_i(t) + \sum_{i \in N_M} J_i(x_i(t),\begin{pmatrix} x_1^*(\cdot|t) \\ \dots \\ \hat x_M(\cdot|t) \end{pmatrix},u_i^*(\cdot|t)) + \\ + J_M(x_M(t),x_{-M}^*(\cdot|t),\hat u_M(\cdot|t))
+        \end{multline*}
+        Applying this same argument from $M$ down to 1, we obtain:
+        \begin{multline*}
+        V(t) \le \sum_{i=1}^M J_i(x_i(t),\hat x_{-i}(\cdot|t),\hat u_i(\cdot|t)) \le \\ \le V(t-1) - \sum_{i=1}^ML_i(x_i(t-1),x_{-i}^*(\cdot|t-1),u_i^*(\cdot|t-1))
+        \end{multline*}
+        From here, we can use standard Lyapunov arguments to show convergence to 0.\\
+    \end{itemize}
+    
+    Remarks:
+    \begin{itemize}
+        \item Lyapunov stability depends on suitable initialization in step 1;
+        \item Can be extended to goal of stabilizing sets';
+        \item Can be extended to a terminal region/cost functional (terminal constraints and cost have to be implemented in a distributed fashion!)\\
+    \end{itemize}
+    
+    Comparison between iterative and sequential distributed MPC:\\
+    \begin{enumerate}
+        \item Iterative DMPC
+        \begin{itemize}
+            \item - Initialization is crucial and potentially difficult;
+            \item + all systems optimize in parallel;
+            \item - global information is needed for each system (at least not only for neighbours);
+            \item + centralized performance is possible
+            \item - but only for infinite number of iterations;
+            \item System classes: linear systems, couplings in dynamics.
+        \end{itemize}
+        \item Sequential DMPC
+        \begin{itemize}
+            \item - Initialization is crucial and potentially difficult;
+            \item + systems optimize sequentially which is not scalable;
+            \item (Remark: + non-neighbouring systems can optimize in parallel);
+            \item + only neighbouring system information needed;
+            \item - no statement about centralized performance;
+            \item System classes: nonlinear systems, no couplings in dynamics.
+        \end{itemize}
+    \end{enumerate}

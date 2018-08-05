@@ -8,7 +8,7 @@ Polytopic input+state constraints $C_xx \leq d_x$,  $C_uu \leq d_u$
 
 MPC problem. At time $t$, given $x(t)$, solve
 \begin{equation*}
-\min_{u(\cdot|t)} = \sum_{k=t}^{t+N-1}L(x(k|t),u(k|t)) + F(x(t+N|t))
+\min_{u(\cdot|t)}J(x,u) = \sum_{k=t}^{t+N-1}L(x(k|t),u(k|t)) + F(x(t+N|t))
 \end{equation*}
 s.t.
 \begin{equation*}
@@ -39,25 +39,25 @@ X:= [x^T(t+1|t), \dots, x^T(t+N|t)]^T
 U:= [u^T(t+1|t), \dots, u^T(t+N-1|t)]^T
 \end{equation}
 \begin{itemize}
-\item rewrite cost function
-\begin{equation}\label{cost_function}
-F(x(t),U) = x^T(t)Qx(t) + X^T\tilde{Q}X + U^T\tilde{R}U
-\end{equation}
-with $\tilde{Q} = 
-\begin{bmatrix}
+	\item rewrite cost function
+	\begin{equation}\label{cost_function}
+	F(x(t),U) = x^T(t)Qx(t) + X^T\tilde{Q}X + U^T\tilde{R}U
+	\end{equation}
+	with $\tilde{Q} = 
+	\begin{bmatrix}
     Q  & \  & \ \\
     \  &\ddots & \\
      \  & \ & Q \\
      \ & \ & \ & P     
-\end{bmatrix} $, 
-$\tilde{R} = 
-\begin{bmatrix}
+	\end{bmatrix} $, 
+	$\tilde{R} = 
+	\begin{bmatrix}
     R  & \  & \ \\
     \  &\ddots & \\
      \  & \ & R     
-\end{bmatrix} $
-\item rewrite predicted states: $x(t+k|t) = A^kx(t) + \sum_{j=0}^{k-1}A^jBu(t+k-j-1|t), \ k=1,..,N$
-\begin{equation}\label{rewritten_state_input}
+	\end{bmatrix} $
+	\item rewrite predicted states: $x(t+k|t) = A^kx(t) + 		\sum_{j=0}^{k-1}A^jBu(t+k-j-1|t), \ k=1,..,N$
+	\begin{equation}\label{rewritten_state_input}
 \Rightarrow X=\begin{bmatrix}
    A \\
    A^2 \\
