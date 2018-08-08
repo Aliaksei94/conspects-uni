@@ -7,7 +7,7 @@ Assumption: $L:\mathbb{R}^n\rightarrow\mathbb{R}^n$ is continuous (need not
 be positive defined) $X,U$ is compact.
 
 \begin{Definition}
- Optimal steady-state $(x_s,u_s)=\arg\min_{x^+=f(x,u);\ x\in X;\ u\in U}L(x,u)$
+ Optimal steady-state $(x_s,u_s)=\arg\min_{x=f(x,u);\ x\in X;\ u\in U}L(x,u)$
 \end{Definition}
 
 \begin{Example}
@@ -34,7 +34,7 @@ be positive defined) $X,U$ is compact.
 
 Economic MPC problem
 
-At each time $t$, given $x(t)$, we should minimize $J(x(t),u(\cdot|t)$ s.t.
+At each time $t$, given $x(t)$, we should minimize $J(x(t),u(\cdot|t))$ s.t.
 
 $$J(x(t),u(\cdot|t) = \sum_{k=t}^{t+N-1}L(x(k|t),u(k|t))$$
 
@@ -58,7 +58,7 @@ Closed-loop average performance
  The closed-loop asymptotic average performance is at least as good as the
  optimal steady-state cost i.e.,
 
- $$\lim_{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}(x(k),u(k)}{T}\le L(x_s,u_s)$$
+ $$\lim_{T\rightarrow\infty}\sup\frac{\sum_{k=0}^{T-1}L(x(k),u(k)}{T}\le L(x_s,u_s)$$
 
  \begin{proof}
   Lets present a completely new way of proving that we have not used before 
@@ -106,7 +106,7 @@ Classify optimal operating condition
 \end{Definition}
 
 \begin{Definition}
- A system is strictly dissipative w.r.t. supply rate $s(x,u)$ if there exists a storage 
+ A system is dissipative w.r.t. supply rate $s(x,u)$ if there exists a storage 
  function $\lambda:X\rightarrow\mathbb{R}_{\ge 0}$ s.t.
  $$\lambda(f(x,u))-\lambda(x)\le s(x,u)$$
 
@@ -188,7 +188,7 @@ Classify optimal operating condition
  With this orbits
 
  $$\lim_{T\rightarrow\infty}\inf\frac{\sum_{t=0}^{T-1}L(x(t),u(t))}{T}=\frac{L(1,-\frac{1}{3})+L(-\frac{1}{3},-3)}{2}=
-  = \frac{(\frac{4}{3})^2}{2}+\delta\frac{\frac{-7}{3}+(-3)^2}{2}$$
+ \frac{(\frac{4}{3})^2}{2}+\delta\frac{\frac{-7}{3}+(-3)^2}{2}$$
 
   And for small enough $\delta$ this less then $L(0,0)$. That mean, that system is not optimal 
   operated at steady state and not dissipative w.r.t. chosen $s(x,u)$. 
@@ -239,7 +239,7 @@ Asymptotic average constraints $h: \mathbb{R}^n \times \mathbb{R}^m \to \mathbb{
 Assumption: $h$ is continuous
 \begin{itemize}
 \item $Av[h(x,u)] \in Y$
-\item $Av[h(x,u)] := \{ \bar{h}: \exists {t_k} \to \infty \ s.t. \ \lim_{n \to \infty} \frac{\sum_{t=0}^{t_n - 1}h(x(t),u(t))}{t_n}  = \bar{h}\}$
+\item $Av[h(x,u)] := \{ \bar{h}: \exists {t_n} \to \infty \ s.t. \ \lim_{n \to \infty} \frac{\sum_{t=0}^{t_n - 1}h(x(t),u(t))}{t_n}  = \bar{h}\}$
 
 $Av[h(x,u)]$ "set of asymptotic average values of $h$".
 \end{itemize}

@@ -55,7 +55,7 @@ u = \begin{pmatrix}
     
     Distributed MPC:\\
     \begin{equation} \label{distributed_MPC}
-        \min_{u_i(\cdot|t)} \rho_1J_1(x_1(t),u(\cdot|t)+\dots+\rho_MJ_M(x_M(t),u(\cdot|t)
+        \min_{u_i(\cdot|t)} \rho_1J_1(x_1(t),u(\cdot|t))+\dots+\rho_MJ_M(x_M(t),u(\cdot|t))
     \end{equation}
     s.t. 
     $$x(k+1|t) = Ax(k|t)+Bu(k|t), \ t \le k \le t+N-1$$
@@ -70,7 +70,7 @@ u = \begin{pmatrix}
         \item At time $t$, while $p \le p_{max} - 1$, each system $i$
         \begin{itemize}
             \item solves (\ref{distributed_MPC}) with $u_j(\cdot|k) = u_j^p$ for $j \neq i$;
-            \item set $u_j^{p+1}(\cdot|t) = w_i u_i^{*p}(\cdot|t)+(1-w_i)u_i^p(\cdot|t)$ ($w_i$ - convex combination, $w_1 + \dots + w_M = 1$);
+            \item set $u_i^{p+1}(\cdot|t) = w_i u_i^{*p}(\cdot|t)+(1-w_i)u_i^p(\cdot|t)$ ($w_i$ - convex combination, $w_1 + \dots + w_M = 1$);
             \item transmit $u_i^{p+1}(\cdot|t)$ to other systems;
             \item $p=p+1$.
         \end{itemize}
@@ -124,7 +124,7 @@ u = \begin{pmatrix}
             \end{multline*}
         \item 
             \begin{multline*}
-            J_i^{l_i}(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) := J_i(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) - \\ - \sum_{k=t}^{t+N-1}L_{ih}(x_i(l_i|t),x_h(k|t))
+            J_i^{l_i}(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) := J_i(x_i(t),x_{-i}(\cdot|t),u_i(\cdot|t)) - \\ - \sum_{k=t}^{t+N-1}L_{il_i}(x_i(l_i|t),x_{l_i}(k|t))
             \end{multline*}
             for some neighbour $l_i \in N_i$.
     \end{itemize}
@@ -144,10 +144,10 @@ u = \begin{pmatrix}
     
     Sequential Distributed MPC algorithm:
     \begin{enumerate}
-        \item At time $t=0$: Initialization - determines feasible sequances $\hat u_i(\cdot|0), \hat x_i(\cdot|0)$ fpr all systems.\\
+        \item At time $t=0$: Initialization - determines feasible sequances $\hat u_i(\cdot|0), \hat x_i(\cdot|0)$ for all systems.\\
         Go to step 3.
         \item Each time t, each system determines
-        $$u_i(k|t) = \left \{ \begin{array}{ll} u_i^*(k|t-1), \ t \le k \le t+N-2 \\ 0, \ t = t+N-1 \end{array} \right.$$
+        $$u_j(k|t) = \left \{ \begin{array}{ll} u_j^*(k|t-1), \ t \le k \le t+N-2 \\ 0, \ t = t+N-1 \end{array} \right.$$
         $$x_j(k|t) = \left \{ \begin{array}{ll} x_j^*(k|t-1), \ t \le k \le t+N-2 \\ 0, \ t = t+N-1 \end{array} \right.$$
         for all $j \in N_i$;
         \item Each system sets
@@ -155,7 +155,7 @@ u = \begin{pmatrix}
          \item For each $i=1, \dots, M$, system $i$:
          \begin{itemize}
              \item solves problem $P_i \implies u_i^*(\cdot|t),x_i^*(\cdot|t))$;
-             \item transmits optimal state sequance $x_i^*(\cdot|t)$ to all neighbours, which update $x_{-i}(\cdot|t)$ by replacing $\hat x_i(\cdot|t)$ with $x_i^*(\cdot|t)$.
+             \item transmits optimal state sequence $x_i^*(\cdot|t)$ to all neighbours, which update $x_{-i}(\cdot|t)$ by replacing $\hat x_i(\cdot|t)$ with $x_i^*(\cdot|t)$.
          \end{itemize}
          \item Each system applies $u_i^*(\cdot|t)$;
          \item Set $t=t+1$ and go to step 2.

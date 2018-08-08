@@ -59,7 +59,7 @@ N \to \infty : J_T^*(x_0) \geq \alpha J_{\infty}^{MPC}(x_0)
 
 Central idea (image to be inserted)
 
-$L^*(t;t) = L(\bar x^*(\tau;t), \bar u^*(\tau;t))$
+$L^*(\tau;t) = L(\bar x^*(\tau;t), \bar u^*(\tau;t))$
 
 \begin{equation}\label{c_b_inequality}
 (c): J_T^*(x(t+\delta)) \leq \frac{1}{\epsilon} \int_{t+\delta}^{t+T}L^*(\tau;t)d\tau :(b)
@@ -88,10 +88,10 @@ $-\alpha := \gamma \frac{1-\epsilon}{\epsilon} - 1$
 
 Assumption 1: Asymptotic Controlability
 
-For all x, $\exists$ some input trajectory $\hat u_x(\cdot)$
+For all $x_0$, $\exists$ some input trajectory $\hat u_x(\cdot)$
 with $\hat u_x(t) \in \mathbb{U}, \forall t \geq 0$ s.t.
 \begin{equation*}
-L(\hat x(t),\hat u(t)) \leq \beta(t) \min_u L(x,u), \forall t > 0
+L(\hat x(t),\hat u(t)) \leq \beta(t) \min_u L(x_0,u), \forall t > 0
 \end{equation*}
 with $\beta: \mathbb{R} \to \mathbb{R}_{\geq 0}$
  - continuous, positive, strictly decreasing with $\lim_{t \to 0} \beta(t) = 0$ $\Rightarrow$
@@ -193,7 +193,7 @@ Idea: Minimize
 \epsilon = \min_{L_t,J^*_T}\frac{\int_{\delta}^{T}L_t(\tau;t)d\tau}{J_T^*(x(t+\delta))}
 \end{equation}
 $J^*_T = 1$ - without loss of generality
-s.t. $0 \leq L_t \forall \tau \in [\delta,T]$
+s.t. $0 \leq L_t \ \forall \tau \in [\delta,T]$
 \begin{equation*}
 J^*_T(x(t+\delta)) \leq \int_{\delta}^{t'}L_t(\tau)d\tau + B(T+\delta-t')L_t(t') \forall t' \in [\delta, T]
 \end{equation*}
@@ -206,7 +206,7 @@ second constraint has to be active for all times
 
 Differentiate (\ref{lemma_1_inequality}) with relation to $t'$ 
 \begin{equation*}
-0 = L_t(t') + \frac{dB(T+\delta-t')}{dt'}L_t(t') + B(\tau + \delta - t') \dot L_t(t')
+0 = L_t(t') + \frac{dB(T+\delta-t')}{dt'}L_t(t') + B(T + \delta - t') \dot L_t(t')
 \end{equation*} 
 as far as $\frac{dB(T+\delta-t')}{dt'} = -\beta(T+\delta - t')$
 
@@ -214,7 +214,7 @@ as far as $\frac{dB(T+\delta-t')}{dt'} = -\beta(T+\delta - t')$
 \left \{
   \begin{tabular}{c}
   $\dot L_t(t') = \frac{\beta(T+\delta - t') -1}{B(T+\delta - t')}L_t(t')$ \\
- initial condition $L_t(t)=\frac{1}{B(t)}$
+ initial condition $L_t(\delta)=\frac{1}{B(T)}$
   \end{tabular}
 \right .
 \end{equation*}

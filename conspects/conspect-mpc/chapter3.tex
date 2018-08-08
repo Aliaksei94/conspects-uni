@@ -17,7 +17,7 @@ s.t.
 \dot{\bar x} = f(\bar x, \bar u), \bar x(t;t) = x(t)
 \end{equation*}
 \begin{equation*}
-\bar x(t;t) \in X \ \bar u(t;t) \in U \ \forall \tau \in [t,t+T]
+\bar x(\tau;t) \in X \ \bar u(\tau;t) \in U \ \forall \tau \in [t,t+T]
 \end{equation*}
 \begin{equation*}
 \bar x(t+T;t) \in X^f
@@ -58,7 +58,7 @@ candidate
 \bar u(\tau; t+\delta) =
 \left \{
   \begin{tabular}{c}
-  $\bar u^*(\tau;t) \ \tau \in [t, t+ T]$ \\
+  $\bar u^*(\tau;t) \ \tau \in [t+\delta, t+ T]$ \\
   $k^{loc}(\bar x(\tau;t+\delta)) \ \tau \in [t+T, t+\delta+T]$ 
   \end{tabular}
   \right.
