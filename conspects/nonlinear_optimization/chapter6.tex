@@ -39,7 +39,7 @@ References: Desoev, Vidyasagar "Feedback Systes Input-output properties"
   \int_0^\infty ||\Phi(t)||^p dt < \infty\}$
 \end{Definition}
 
-Interpretation: "finite energy sygnal" (p=2).
+Interpretation: "finite energy signal" (p=2).
 
 Remark: "measurable" = pointwise limit of a sequence of piecewise constant functions
 (except on a set of measure 0)
@@ -71,7 +71,6 @@ For $p \to \infty$ set of all measurable and (essentially) bounded functions $L_
 \begin{equation*}
 \|\phi\|_{L_{\infty}} = \inf \{ c \in \mathbb{R} | \|\phi(t)\| \leq c\ a.e.\} = \sup_{t > 0} \| \phi(t)\|
 \end{equation*}
-%TODO picture
 
 \begin{Example}
 \begin{equation*}
@@ -110,8 +109,6 @@ $\|\ \phi|_{L_2}^2 = < \phi, \phi>_{L_2}$ "induced norm".
 Particularly useful(Cauchy -Schwarz inequality) $|<\phi_1,\phi_2>_{L_2}| \leq \|\phi_1\|_{L_2}\|\phi_2\|_{L_2}$
 
 Original motivation 
-
-%TODO picture
 
 \begin{Example}
 \begin{equation*}
@@ -154,7 +151,6 @@ The extension $L^e_p$ of $L_p$ is defined as
 \begin{equation*}
 L^e_p = \{ \phi: [0,\infty) \to \mathbb{R}^n | \forall T \geq 0 \ \phi_T \in L_p\}
 \end{equation*}
-%TODO picture
 
 $L^e_p \setminus L_p$ are "unstable" signals
 
@@ -283,12 +279,24 @@ less or equal $j$.
 
 Assumption: Feedback interconnection is well defined.
 
+ \begin{center}
+\includegraphics[scale=0.1]{5}
+\end{center}
+
 \begin{Theorem}
  Suppose that $H_1$ and $H_2$ are finite-gain $L_p$ stable (with gains $\gamma_1$, $\gamma_2$).
  Then the feedback interconnection is finite-gain $L_p$ stable if $\gamma_1\gamma_2<1$.
 
  \begin{proof}
-  TODO
+   \begin{center}
+\includegraphics[scale=0.1]{13}
+\end{center}
+ \begin{center}
+\includegraphics[scale=0.1]{14}
+\end{center}
+ \begin{center}
+\includegraphics[scale=0.1]{15}
+\end{center}
  \end{proof}
 \end{Theorem}
 
@@ -296,6 +304,10 @@ Remark: Small gain theorem implies inherent robastness property: closed loop rem
 for perturbed maps $H_1$, $H_2$ as long as $\gamma_1\gamma_2<1$.
 
 Example:
+
+ \begin{center}
+\includegraphics[scale=0.1]{6}
+\end{center}
 
 \begin{equation}
 H_1:
@@ -332,7 +344,12 @@ Passivity framework ($p=2$)
  Let $H:L_p^e\rightarrow L_p^e$ be output strictly passive with excess $\epsilon$. Then $H$
  has $L_2$-gain $\le\frac{1}{\epsilon}$.
  \begin{proof}
-	TODO
+	 \begin{center}
+\includegraphics[scale=0.1]{7}
+\end{center}
+ \begin{center}
+\includegraphics[scale=0.1]{8}
+\end{center}
 \end{proof}	
 \end{Lemma}
 
@@ -345,6 +362,17 @@ Passivity framework ($p=2$)
  for all $T\ge0, \ e_i\in L_2^e$, $i=1,2$. If $\epsilon_1+\delta_2>0$ and $\epsilon_2+\delta_1>0$
  then the feedback interconnection has finite $L_2$-gain from $(u_1,u_2)\rightarrow(y_1,y_2)$.
  \begin{proof}
-  TODO
+   \begin{center}
+\includegraphics[scale=0.1]{9}
+\end{center}
+ \begin{center}
+\includegraphics[scale=0.1]{10}
+\end{center}
+ \begin{center}
+\includegraphics[scale=0.1]{11}
+\end{center}
+ \begin{center}
+\includegraphics[scale=0.1]{12}
+\end{center}
  \end{proof}
 \end{Theorem}

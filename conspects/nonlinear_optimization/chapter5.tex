@@ -53,7 +53,9 @@ y(t) = \left\{ \begin{array}{ll}
               \right. 
 \end{equation*}
 
-%TODO picture
+\begin{center}
+	\includegraphics[scale=0.1]{1}
+\end{center}
 
 Key property: choose $u$ s.t. $y(t)$ goes to zero in finite time $\Rightarrow x(t)$ tends $S := \{ (x_1, x_2) \in \mathbb{R}^2 | x_1 +x_2 = 0 \}$ in finite time
 
@@ -66,8 +68,6 @@ Consider dynamics on $S$
               \right. 
 \end{equation*} 
 globally as stable
-
-%TODO picture
 
 Two "phases"
 \begin{enumerate}
@@ -103,7 +103,9 @@ Two-step approach:
 \end{itemize}
 \end{enumerate} 
 
-%TODO picture
+\begin{center}
+	\includegraphics[scale=0.1]{2}
+\end{center}
 
 How are 1 + 2 achieved?
 \begin{itemize}
@@ -213,15 +215,11 @@ $L_fs(x) = x_1 +2x_1 +2x_1sinx_2$
 $\leadsto \dot{s} = - \hat{u}sgn(s(x)) + x_2^2(\theta - 2sgn(s(x))) \Rightarrow$ finite -time convergence to $S$.
 \end{Example}
 
-%TODO picture
-
 Remedy: replace sign-function by saturated slope (continuous approximation)
 
 can be extended to multi-input systems $u \in \mathbb{R}^m \to s: \mathbb{R}^n \to \mathbb{R}^m$
 
 \subsection{Dissipativity}
-
-%TODO picture
 
 Dissipativity: Generalization of Lyapunov theory to systems $w$ inputs and outputs
 
@@ -375,8 +373,6 @@ $\Rightarrow$ system has $L_2$ - gain $\gamma$
 
 Classify optional $l(x,u^{\leftarrow x})$ operating conditions $s(u,y) = l(x,u) - l(x^*,u^*)$ 
 
-%TODO picture
-
 \begin{Example}
 \begin{equation*}
 \dot{x} = u, \ y = x 
@@ -469,7 +465,10 @@ Advantage. We have (static) output feedback (no observer needed)
 Passivity of interconnections
 \begin{enumerate}
 \item Parallel interconnections of two passive systems are passive 
-%TODO picture
+
+\begin{center}
+	\includegraphics[scale=0.1]{3}
+\end{center}
 
 Take $S(x_1,x_2) = S_1(x_1) +S_2(x_2)$.
 \begin{equation*}
@@ -477,7 +476,9 @@ Take $S(x_1,x_2) = S_1(x_1) +S_2(x_2)$.
 \end{equation*}
 \item Feedback interconnection of passive systems are passive
 
-%TODO picture
+\begin{center}
+	\includegraphics[scale=0.1]{4}
+\end{center}
 
 Take $S(x_1+x_2) = S_1(x_1) + S_2(x_2)$
 \begin{equation*}
@@ -549,7 +550,7 @@ Extension of output-feedback/input-feedforward passivity:
 
 $$s(u,y)=u^T-\rho(y)^Ty$$
 
-with $\rho(y) = [\rho_1(y_1),\dots,\rho_n(y_n)]^T$ with $\rho_i$ sectionnonliniarities, 
+with $\rho(y) = [\rho_1(y_1),\dots,\rho_n(y_n)]^T$ with $\rho_i$ section non-linearities, 
 $\rho_i: \mathbb{R}\rightarrow\mathbb{R}$
 
 \begin{Example}
